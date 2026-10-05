@@ -14,16 +14,20 @@ interface SessionResultItem {
 interface SessionSummaryProps {
   results: SessionResultItem[];
   streakDays: number;
+  xpEarned?: number;
   onRestartSession: () => void;
   onReviewMissedOnly?: () => void;
+  onChallengeBoss?: () => void;
   onGoToDashboard: () => void;
 }
 
 export const SessionSummary: React.FC<SessionSummaryProps> = ({
   results,
   streakDays,
+  xpEarned,
   onRestartSession,
   onReviewMissedOnly,
+  onChallengeBoss,
   onGoToDashboard,
 }) => {
   const correctCount = results.filter((r) => r.isCorrect).length;
@@ -57,30 +61,37 @@ export const SessionSummary: React.FC<SessionSummaryProps> = ({
       </p>
 
       {/* Score Cards */}
-      <div className="grid grid-cols-3 gap-3 my-6">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 my-6">
         <div className="p-3 bg-indigo-50 rounded-2xl border border-indigo-100">
-          <p className="text-xs font-bold text-indigo-600 uppercase">Score</p>
-          <p className="text-2xl font-black text-indigo-900 mt-0.5">
+          <p className="text-[10px] font-bold text-indigo-600 uppercase">Score</p>
+          <p className="text-xl font-black text-indigo-900 mt-0.5">
             {correctCount}/{totalCount}
           </p>
         </div>
 
         <div className="p-3 bg-emerald-50 rounded-2xl border border-emerald-100">
-          <p className="text-xs font-bold text-emerald-600 uppercase">Accuracy</p>
-          <p className="text-2xl font-black text-emerald-900 mt-0.5">{accuracy}%</p>
+          <p className="text-[10px] font-bold text-emerald-600 uppercase">Accuracy</p>
+          <p className="text-xl font-black text-emerald-900 mt-0.5">{accuracy}%</p>
         </div>
 
         <div className="p-3 bg-amber-50 rounded-2xl border border-amber-100">
-          <p className="text-xs font-bold text-amber-600 uppercase">Streak</p>
+          <p className="text-[10px] font-bold text-amber-600 uppercase">Streak</p>
           <div className="flex items-center justify-center gap-1 mt-0.5">
-            <Flame className="w-5 h-5 text-amber-500 fill-amber-500" />
-            <span className="text-2xl font-black text-amber-900">{streakDays}</span>
+            <Flame className="w-4 h-4 text-amber-500 fill-amber-500" />
+            <span className="text-xl font-black text-amber-900">{streakDays}</span>
           </div>
+        </div>
+
+        <div className="p-3 bg-purple-50 rounded-2xl border border-purple-100">
+          <p className="text-[10px] font-bold text-purple-600 uppercase">XP Earned</p>
+          <p className="text-xl font-black text-purple-900 mt-0.5">
+            +{xpEarned || correctCount * 30}
+          </p>
         </div>
       </div>
 
       {/* Words Recap List */}
-      <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 text-left mb-6 max-h-60 overflow-y-auto">
+      <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 text-left mb-6 max-h-56 overflow-y-auto">
         <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
           Words from this session:
         </h4>
@@ -108,6 +119,15 @@ export const SessionSummary: React.FC<SessionSummaryProps> = ({
 
       {/* Action Buttons */}
       <div className="space-y-3">
+        {onChallengeBoss && (
+          <button
+            onClick={onChallengeBoss}
+            className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-red-600 via-amber-500 to-indigo-600 hover:brightness-110 text-white font-black text-base shadow-lg shadow-amber-200 active:scale-[0.99] transition flex items-center justify-center gap-2"
+          >
+            <span>⚔️ Enter Boss Arena with Your Streak!</span>
+          </button>
+        )}
+
         {missedCount > 0 && onReviewMissedOnly && (
           <button
             onClick={onReviewMissedOnly}

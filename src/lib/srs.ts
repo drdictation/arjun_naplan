@@ -1,4 +1,5 @@
 import { SpellingWord, YEAR_3_NAPLAN_WORDS } from "../data/words";
+import { GamificationState, INITIAL_GAMIFICATION_STATE } from "./gamification";
 
 export interface WordReviewHistory {
   date: string;
@@ -31,6 +32,7 @@ export interface AppState {
   version: number;
   progress: Record<string, WordProgress>;
   stats: UserStats;
+  gamification: GamificationState;
 }
 
 export const INITIAL_STATS: UserStats = {
@@ -45,6 +47,7 @@ export const INITIAL_STATE: AppState = {
   version: 1,
   progress: {},
   stats: INITIAL_STATS,
+  gamification: INITIAL_GAMIFICATION_STATE,
 };
 
 export function getTodayDateString(): string {
@@ -216,4 +219,63 @@ export function buildSessionQueue(
       isReview: item.isReview,
     };
   });
+}
+
+/**
+ * Builds a curated session queue specifically for a Boss Battle
+ * Boss Level 1: Starter & core words (diff 1-2)
+ * Boss Level 2: Core words & tricky/due reviews (diff 2)
+ * Boss Level 3: Band 6 challenge words & tricky mistakes (diff 2-3)
+ */
+export function buildBossSessionQueue(
+  allWords: SpellingWord[],
+  progressMap: Record<string, WordProgress>,
+  bossHp: number,
+  bossLevel: 1 | 2 | 3
+): SessionQueueItem[] {
+  const shuffle = <T>(arr: T[]): T[] => [...arr].sort(() => Math.random() - 0.5);
+
+  // 1. Tricky words child previously struggled with
+  const trickyWords = allWords.filter(
+    (w) => progressMap[w.id] && progressMap[w.id].mistakeCount > 0 && progressMap[w.id].status !== "mastered"
+  );
+
+  // 2. Filter words matching boss level difficulty
+  const targetDifficultyWords = allWords.filter((w) => {
+    if (bossLevel === 1) return w.difficulty <= 2;
+    if (bossLevel === 2) return w.difficulty === 2 || w.difficulty === 3;
+    return w.difficulty >= 2;
+  });
+
+  const selectedWords: { word: SpellingWord; isReview: boolean }[] = [];
+
+  // Prioritize 1-2 tricky words for boss battles to test real mastery!
+  for (const w of shuffle(trickyWords)) {
+    if (selectedWords.length < Math.min(2, Math.floor(bossHp / 2))) {
+      selectedWords.push({ word: w, isReview: true });
+    }
+  }
+
+  // Fill remainder with target level words
+  for (const w of shuffle(targetDifficultyWords)) {
+    if (selectedWords.length < bossHp && !selectedWords.some((x) => x.word.id === w.id)) {
+      selectedWords.push({ word: w, isReview: !!progressMap[w.id] });
+    }
+  }
+
+  // Fallback to any words if needed
+  if (selectedWords.length < bossHp) {
+    for (const w of shuffle(allWords)) {
+      if (selectedWords.length < bossHp && !selectedWords.some((x) => x.word.id === w.id)) {
+        selectedWords.push({ word: w, isReview: !!progressMap[w.id] });
+      }
+    }
+  }
+
+  // Alternate between audio dictation and proofreading for dynamic boss challenge
+  return selectedWords.map((item, index) => ({
+    word: item.word,
+    mode: index % 2 === 0 ? "audio" : "proofread",
+    isReview: item.isReview,
+  }));
 }

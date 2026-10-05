@@ -35,3 +35,15 @@ input, textarea, select, button {
 .animate-gentle-bounce {
   animation: gentle-bounce 1s infinite ease-in-out;
 }
+
+@keyframes wiggle {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  20% { transform: translateX(-6px) rotate(-3deg); }
+  40% { transform: translateX(6px) rotate(3deg); }
+  60% { transform: translateX(-4px) rotate(-1deg); }
+  80% { transform: translateX(4px) rotate(1deg); }
+}
+
+.animate-wiggle {
+  animation: wiggle 0.4s ease-in-out;
+}

@@ -1,4 +1,5 @@
 import { AppState, INITIAL_STATE, getTodayDateString, addDays } from "./srs";
+import { INITIAL_GAMIFICATION_STATE } from "./gamification";
 
 const STORAGE_KEY = "arjun_naplan_spelling_v1";
 
@@ -19,6 +20,10 @@ export function loadAppState(): AppState {
       stats: {
         ...INITIAL_STATE.stats,
         ...(parsed.stats || {}),
+      },
+      gamification: {
+        ...INITIAL_GAMIFICATION_STATE,
+        ...(parsed.gamification || {}),
       },
     };
   } catch (err) {
@@ -83,10 +88,23 @@ export function exportStateToFile(state: AppState): void {
   downloadAnchor.remove();
 }
 
+export type SoundEffectType =
+  | "correct"
+  | "incorrect"
+  | "complete"
+  | "click"
+  | "lightsaber"
+  | "laser"
+  | "repulsor"
+  | "minecraft_hit"
+  | "minecraft_xp"
+  | "boss_hit"
+  | "boss_defeat";
+
 /**
  * Play kid-friendly synthesized audio feedback using Web Audio API
  */
-export function playSound(type: "correct" | "incorrect" | "complete" | "click"): void {
+export function playSound(type: SoundEffectType): void {
   if (typeof window === "undefined") return;
 
   try {
@@ -173,6 +191,167 @@ export function playSound(type: "correct" | "incorrect" | "complete" | "click"):
 
       osc.start(now);
       osc.stop(now + 0.05);
+    } else if (type === "lightsaber") {
+      // Star Wars: Lightsaber slash hum
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const filter = ctx.createBiquadFilter();
+      const gain = ctx.createGain();
+
+      osc1.type = "sawtooth";
+      osc2.type = "triangle";
+
+      osc1.frequency.setValueAtTime(120, now);
+      osc1.frequency.exponentialRampToValueAtTime(260, now + 0.12);
+      osc1.frequency.exponentialRampToValueAtTime(95, now + 0.35);
+
+      osc2.frequency.setValueAtTime(240, now);
+      osc2.frequency.exponentialRampToValueAtTime(520, now + 0.12);
+      osc2.frequency.exponentialRampToValueAtTime(190, now + 0.35);
+
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(1500, now);
+      filter.frequency.exponentialRampToValueAtTime(3200, now + 0.15);
+      filter.frequency.exponentialRampToValueAtTime(400, now + 0.35);
+
+      gain.gain.setValueAtTime(0.22, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.38);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + 0.38);
+      osc2.stop(now + 0.38);
+    } else if (type === "laser") {
+      // Blaster pew-pew
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "sawtooth";
+      osc.frequency.setValueAtTime(1100, now);
+      osc.frequency.exponentialRampToValueAtTime(150, now + 0.18);
+
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.18);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.18);
+    } else if (type === "repulsor") {
+      // Marvel: Iron Man Repulsor blast
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc1.type = "sine";
+      osc1.frequency.setValueAtTime(300, now);
+      osc1.frequency.exponentialRampToValueAtTime(1200, now + 0.08);
+      osc1.frequency.exponentialRampToValueAtTime(100, now + 0.28);
+
+      osc2.type = "square";
+      osc2.frequency.setValueAtTime(80, now + 0.08);
+      osc2.frequency.exponentialRampToValueAtTime(40, now + 0.28);
+
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.setValueAtTime(0.25, now + 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+
+      osc1.connect(gain);
+      osc2.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc1.start(now);
+      osc2.start(now + 0.08);
+      osc1.stop(now + 0.3);
+      osc2.stop(now + 0.3);
+    } else if (type === "minecraft_hit") {
+      // Minecraft: Critical melee hit thud & wooden snap
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(180, now);
+      osc.frequency.exponentialRampToValueAtTime(60, now + 0.15);
+
+      gain.gain.setValueAtTime(0.25, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.15);
+    } else if (type === "minecraft_xp") {
+      // Minecraft: XP orb chime sequence
+      const freqs = [880, 1174.66, 1479.98]; // A5, D6, F#6
+      freqs.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const startTime = now + idx * 0.07;
+
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        gain.gain.setValueAtTime(0.18, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.2);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + 0.2);
+      });
+    } else if (type === "boss_hit") {
+      // Heavy boss hit impact
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc1.type = "sawtooth";
+      osc1.frequency.setValueAtTime(140, now);
+      osc1.frequency.exponentialRampToValueAtTime(45, now + 0.25);
+
+      osc2.type = "sine";
+      osc2.frequency.setValueAtTime(80, now);
+      osc2.frequency.exponentialRampToValueAtTime(30, now + 0.3);
+
+      gain.gain.setValueAtTime(0.3, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+
+      osc1.connect(gain);
+      osc2.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + 0.3);
+      osc2.stop(now + 0.3);
+    } else if (type === "boss_defeat") {
+      // Epic grand boss victory fanfare
+      const notes = [440, 554.37, 659.25, 880, 1108.73, 1318.51]; // A major triumphant chord
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const startTime = now + idx * 0.1;
+
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        gain.gain.setValueAtTime(0.22, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.6);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + 0.6);
+      });
     }
   } catch (e) {
     // Audio context may be restricted before user gesture
