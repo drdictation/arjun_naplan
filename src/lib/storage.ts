@@ -2,6 +2,7 @@ import { AppState, INITIAL_STATE, getTodayDateString, addDays } from "./srs";
 import { INITIAL_GAMIFICATION_STATE } from "./gamification";
 
 const STORAGE_KEY = "arjun_naplan_spelling_v1";
+const BACKUP_STORAGE_KEY = "arjun_naplan_spelling_backup_auto";
 
 export function loadAppState(): AppState {
   if (typeof window === "undefined") {
@@ -9,11 +10,63 @@ export function loadAppState(): AppState {
   }
 
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    let raw = localStorage.getItem(STORAGE_KEY);
+    // If primary is empty, fallback to auto backup
+    if (!raw) {
+      raw = localStorage.getItem(BACKUP_STORAGE_KEY);
+    }
+
     if (!raw) {
       return INITIAL_STATE;
     }
+
+    // Double-secure backup immediately
+    try {
+      localStorage.setItem(BACKUP_STORAGE_KEY, raw);
+    } catch (_) {}
+
     const parsed = JSON.parse(raw);
+    const existingGamification = parsed.gamification || {};
+
+    const mergedGamification = {
+      ...INITIAL_GAMIFICATION_STATE,
+      ...existingGamification,
+      points:
+        typeof existingGamification.points === "number"
+          ? existingGamification.points
+          : Math.max(250, existingGamification.xp || 250),
+      bossesDefeated: {
+        ...(INITIAL_GAMIFICATION_STATE.bossesDefeated || {}),
+        ...(existingGamification.bossesDefeated || {}),
+      },
+      unlockedBadges: Array.from(
+        new Set([
+          ...(INITIAL_GAMIFICATION_STATE.unlockedBadges || []),
+          ...(existingGamification.unlockedBadges || []),
+        ])
+      ),
+      unlockedPerks: Array.from(
+        new Set([
+          ...(INITIAL_GAMIFICATION_STATE.unlockedPerks || []),
+          ...(existingGamification.unlockedPerks || []),
+        ])
+      ),
+      activePerks: Array.from(
+        new Set([
+          ...(INITIAL_GAMIFICATION_STATE.activePerks || []),
+          ...(existingGamification.activePerks || []),
+        ])
+      ),
+      equippedGear: {
+        ...INITIAL_GAMIFICATION_STATE.equippedGear,
+        ...(existingGamification.equippedGear || {}),
+      },
+      speedRecords: {
+        ...INITIAL_GAMIFICATION_STATE.speedRecords,
+        ...(existingGamification.speedRecords || {}),
+      },
+    };
+
     return {
       version: parsed.version || 1,
       progress: parsed.progress || {},
@@ -21,10 +74,7 @@ export function loadAppState(): AppState {
         ...INITIAL_STATE.stats,
         ...(parsed.stats || {}),
       },
-      gamification: {
-        ...INITIAL_GAMIFICATION_STATE,
-        ...(parsed.gamification || {}),
-      },
+      gamification: mergedGamification,
     };
   } catch (err) {
     console.error("Failed to load app state from localStorage:", err);
@@ -38,7 +88,9 @@ export function saveAppState(state: AppState): void {
   }
 
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    const serialized = JSON.stringify(state);
+    localStorage.setItem(STORAGE_KEY, serialized);
+    localStorage.setItem(BACKUP_STORAGE_KEY, serialized);
   } catch (err) {
     console.error("Failed to save app state to localStorage:", err);
   }
@@ -99,7 +151,9 @@ export type SoundEffectType =
   | "minecraft_hit"
   | "minecraft_xp"
   | "boss_hit"
-  | "boss_defeat";
+  | "boss_defeat"
+  | "speed_strike"
+  | "perk_unlock";
 
 /**
  * Play kid-friendly synthesized audio feedback using Web Audio API
@@ -351,6 +405,46 @@ export function playSound(type: SoundEffectType): void {
 
         osc.start(startTime);
         osc.stop(startTime + 0.6);
+      });
+    } else if (type === "speed_strike") {
+      // High-energy fast rising chime (A5 -> C#6 -> E6 -> A6)
+      const freqs = [880, 1108.73, 1318.51, 1760];
+      freqs.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const startTime = now + idx * 0.05;
+
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        gain.gain.setValueAtTime(0.2, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.22);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + 0.22);
+      });
+    } else if (type === "perk_unlock") {
+      // Magic power-up arpeggio
+      const notes = [523.25, 659.25, 783.99, 1046.5, 1318.51];
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const startTime = now + idx * 0.08;
+
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        gain.gain.setValueAtTime(0.18, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.35);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + 0.35);
       });
     }
   } catch (e) {

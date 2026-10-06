@@ -231,7 +231,7 @@ export function buildBossSessionQueue(
   allWords: SpellingWord[],
   progressMap: Record<string, WordProgress>,
   bossHp: number,
-  bossLevel: 1 | 2 | 3
+  bossLevel: number
 ): SessionQueueItem[] {
   const shuffle = <T>(arr: T[]): T[] => [...arr].sort(() => Math.random() - 0.5);
 
@@ -242,8 +242,8 @@ export function buildBossSessionQueue(
 
   // 2. Filter words matching boss level difficulty
   const targetDifficultyWords = allWords.filter((w) => {
-    if (bossLevel === 1) return w.difficulty <= 2;
-    if (bossLevel === 2) return w.difficulty === 2 || w.difficulty === 3;
+    if (bossLevel <= 2) return w.difficulty <= 2;
+    if (bossLevel <= 4) return w.difficulty === 2 || w.difficulty === 3;
     return w.difficulty >= 2;
   });
 

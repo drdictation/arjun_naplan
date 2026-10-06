@@ -21,6 +21,7 @@ interface BossVictorySummaryProps {
   results: { word: SpellingWord; isCorrect: boolean; userAnswer: string }[];
   isVictory: boolean;
   xpEarned: number;
+  pointsEarned?: number;
   unlockedBadge?: string;
   onFightAgain: () => void;
   onNextBoss?: () => void;
@@ -33,6 +34,7 @@ export const BossVictorySummary: React.FC<BossVictorySummaryProps> = ({
   results,
   isVictory,
   xpEarned,
+  pointsEarned = 100,
   unlockedBadge,
   onFightAgain,
   onNextBoss,
@@ -107,18 +109,25 @@ export const BossVictorySummary: React.FC<BossVictorySummaryProps> = ({
       )}
 
       {/* Rewards Bar */}
-      <div className="grid grid-cols-2 gap-3 my-5">
+      <div className="grid grid-cols-3 gap-2.5 my-5">
         <div className="p-3 bg-amber-50 rounded-2xl border border-amber-200">
-          <p className="text-xs font-extrabold text-amber-700 uppercase">XP Awarded</p>
+          <p className="text-[10px] font-extrabold text-amber-700 uppercase">XP Awarded</p>
           <div className="flex items-center justify-center gap-1 mt-0.5">
-            <Sparkles className="w-5 h-5 text-amber-500" />
-            <span className="text-2xl font-black text-amber-900">+{xpEarned} XP</span>
+            <Sparkles className="w-4 h-4 text-amber-500" />
+            <span className="text-lg sm:text-xl font-black text-amber-900">+{xpEarned}</span>
           </div>
         </div>
 
+        <div className="p-3 bg-emerald-50 rounded-2xl border border-emerald-200">
+          <p className="text-[10px] font-extrabold text-emerald-700 uppercase">Perk Points</p>
+          <p className="text-lg sm:text-xl font-black text-emerald-900 mt-0.5">
+            🪙 +{pointsEarned}
+          </p>
+        </div>
+
         <div className="p-3 bg-indigo-50 rounded-2xl border border-indigo-200">
-          <p className="text-xs font-extrabold text-indigo-700 uppercase">Strikes Landed</p>
-          <p className="text-2xl font-black text-indigo-900 mt-0.5">
+          <p className="text-[10px] font-extrabold text-indigo-700 uppercase">Strikes</p>
+          <p className="text-lg sm:text-xl font-black text-indigo-900 mt-0.5">
             {correctCount} / {totalCount}
           </p>
         </div>

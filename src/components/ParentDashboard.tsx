@@ -15,9 +15,10 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { SpellingWord, YEAR_3_NAPLAN_WORDS } from "../data/words";
-import { AppState, getTodayDateString } from "../lib/srs";
+import { AppState, getTodayDateString, INITIAL_STATS } from "../lib/srs";
 import { exportStateToFile } from "../lib/storage";
 import { speakSingleWord } from "../lib/speech";
+import { INITIAL_GAMIFICATION_STATE } from "../lib/gamification";
 
 interface ParentDashboardProps {
   appState: AppState;
@@ -97,7 +98,19 @@ export const ParentDashboard: React.FC<ParentDashboardProps> = ({
       try {
         const json = JSON.parse(event.target?.result as string);
         if (json && json.progress) {
-          onImportState(json);
+          const safeState: AppState = {
+            version: json.version || 1,
+            progress: json.progress || {},
+            stats: {
+              ...INITIAL_STATS,
+              ...(json.stats || {}),
+            },
+            gamification: {
+              ...INITIAL_GAMIFICATION_STATE,
+              ...(json.gamification || {}),
+            },
+          };
+          onImportState(safeState);
           alert("Progress successfully imported from your backup!");
         } else {
           alert("Invalid backup file format.");

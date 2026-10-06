@@ -22,6 +22,7 @@ import {
   GameTheme,
   BossDefinition,
   BOSS_ROSTER,
+  calculateSpeedBonus,
   getRankForXp,
   getThemeDetails,
 } from "../lib/gamification";
@@ -34,10 +35,11 @@ import {
   ArrowRight,
   BookOpen,
   Award,
-  RefreshCw,
   Swords,
   Shield,
   Zap,
+  Timer,
+  ShoppingBag,
 } from "lucide-react";
 
 export default function Home() {
@@ -62,10 +64,14 @@ export default function Home() {
   const [activeBoss, setActiveBoss] = useState<BossDefinition | null>(null);
   const [bossHp, setBossHp] = useState<number>(0);
   const [playerHearts, setPlayerHearts] = useState<number>(3);
+  const [maxHearts, setMaxHearts] = useState<number>(3);
+  const [totemUsed, setTotemUsed] = useState<boolean>(false);
   const [sessionXpEarned, setSessionXpEarned] = useState<number>(0);
+  const [sessionPointsEarned, setSessionPointsEarned] = useState<number>(0);
   const [bossVictoryState, setBossVictoryState] = useState<{
     isVictory: boolean;
     xpEarned: number;
+    pointsEarned: number;
     unlockedBadge?: string;
   } | null>(null);
 
@@ -104,6 +110,60 @@ export default function Home() {
     handleUpdateAppState(updated);
   };
 
+  // Unlock a Perk in Armory
+  const handleUnlockPerk = (perkId: string, cost: number) => {
+    if ((appState.gamification?.points || 0) < cost) return;
+
+    const currentUnlocked = appState.gamification?.unlockedPerks || [];
+    const currentActive = appState.gamification?.activePerks || [];
+
+    const updatedState: AppState = {
+      ...appState,
+      gamification: {
+        ...appState.gamification,
+        points: Math.max(0, (appState.gamification?.points || 0) - cost),
+        unlockedPerks: Array.from(new Set([...currentUnlocked, perkId])),
+        activePerks: Array.from(new Set([...currentActive, perkId])),
+      },
+    };
+
+    handleUpdateAppState(updatedState);
+  };
+
+  // Toggle active perk on/off
+  const handleToggleActivePerk = (perkId: string) => {
+    const currentActive = appState.gamification?.activePerks || [];
+    const newActive = currentActive.includes(perkId)
+      ? currentActive.filter((p) => p !== perkId)
+      : [...currentActive, perkId];
+
+    const updatedState: AppState = {
+      ...appState,
+      gamification: {
+        ...appState.gamification,
+        activePerks: newActive,
+      },
+    };
+
+    handleUpdateAppState(updatedState);
+  };
+
+  // Equip gear
+  const handleEquipGear = (type: "weapon" | "artifact", id: string) => {
+    const updatedState: AppState = {
+      ...appState,
+      gamification: {
+        ...appState.gamification,
+        equippedGear: {
+          ...appState.gamification?.equippedGear,
+          [type]: id,
+        },
+      },
+    };
+
+    handleUpdateAppState(updatedState);
+  };
+
   // Start a new regular practice round
   const startSession = (
     modePreference: "mixed" | "audio" | "proofread" = "mixed",
@@ -114,6 +174,7 @@ export default function Home() {
     setActiveBoss(null);
     setBossVictoryState(null);
     setSessionXpEarned(0);
+    setSessionPointsEarned(0);
 
     let queue: SessionQueueItem[] = [];
 
@@ -154,7 +215,6 @@ export default function Home() {
       else playSound("click");
     }
 
-    // Curate words matching boss level and difficulty
     const queue = buildBossSessionQueue(
       YEAR_3_NAPLAN_WORDS,
       appState.progress,
@@ -162,12 +222,19 @@ export default function Home() {
       boss.level
     );
 
+    const activePerks = appState.gamification?.activePerks || [];
+    const hasShieldBoost = activePerks.includes("shield_boost");
+    const startingHearts = hasShieldBoost ? 4 : 3;
+
     setIsBossSession(true);
     setActiveBoss(boss);
     setBossHp(boss.hp);
-    setPlayerHearts(3);
+    setPlayerHearts(startingHearts);
+    setMaxHearts(startingHearts);
+    setTotemUsed(false);
     setBossVictoryState(null);
     setSessionXpEarned(0);
+    setSessionPointsEarned(0);
 
     setSessionQueue(queue);
     setCurrentQueueIndex(0);
@@ -199,7 +266,11 @@ export default function Home() {
   };
 
   // Called when child submits answer to current question
-  const handleAnswerCurrentWord = (isCorrect: boolean, userAnswer: string) => {
+  const handleAnswerCurrentWord = (
+    isCorrect: boolean,
+    userAnswer: string,
+    elapsedSeconds: number = 8
+  ) => {
     if (!sessionQueue[currentQueueIndex]) return;
     const currentItem = sessionQueue[currentQueueIndex];
 
@@ -227,25 +298,63 @@ export default function Home() {
       totalCorrect: appState.stats.totalCorrect + (isCorrect ? 1 : 0),
     };
 
-    // Calculate XP earned
-    const wordXp = isCorrect ? 40 : 10;
-    const newXp = (appState.gamification?.xp || 0) + wordXp;
+    // Calculate Speed and Perks bonuses
+    const activePerks = appState.gamification?.activePerks || [];
+    const hasSpeedPerk = activePerks.includes("speed_spark");
+    const hasXpMagnet = activePerks.includes("xp_magnet");
+    const hasCriticalRocket = activePerks.includes("critical_rocket") && currentQueueIndex === 0;
+    const hasTotem = activePerks.includes("totem_undying");
+
+    const speedBonus = calculateSpeedBonus(elapsedSeconds, hasSpeedPerk);
+
+    // Points and XP award
+    const basePointReward = isCorrect ? 25 + speedBonus.bonusPoints : 5;
+    let earnedXp = isCorrect ? 40 + speedBonus.bonusXp : 10;
+    if (hasXpMagnet && isCorrect) {
+      earnedXp = Math.round(earnedXp * 1.25);
+    }
+
+    const currentXp = appState.gamification?.xp || 0;
+    const newXp = currentXp + earnedXp;
+    const currentPoints = appState.gamification?.points || 0;
+    const newPoints = currentPoints + basePointReward;
+
     const rankInfo = getRankForXp(newXp, appState.gamification?.theme || "starwars");
 
+    // Speed record check
+    const currentSpeedRecord = appState.gamification?.speedRecords?.fastestAnswerSeconds || 99;
+    const isNewSpeedRecord = isCorrect && elapsedSeconds < currentSpeedRecord && elapsedSeconds < 6;
+    const fastestSeconds = isNewSpeedRecord ? Number(elapsedSeconds.toFixed(1)) : currentSpeedRecord;
+
+    const updatedBadges = [...(appState.gamification?.unlockedBadges || [])];
+    if (elapsedSeconds <= 5.5 && isCorrect && !updatedBadges.includes("speed_demon")) {
+      updatedBadges.push("speed_demon");
+    }
+
+    // Boss battle damage logic
     let updatedBossHp = bossHp;
     let updatedHearts = playerHearts;
+    let newTotemUsed = totemUsed;
 
     if (isBossSession && activeBoss) {
       if (isCorrect) {
-        updatedBossHp = Math.max(0, bossHp - 1);
+        const damageDealt = hasCriticalRocket ? 2 : 1;
+        updatedBossHp = Math.max(0, bossHp - damageDealt);
         setBossHp(updatedBossHp);
       } else {
-        updatedHearts = Math.max(0, playerHearts - 1);
-        setPlayerHearts(updatedHearts);
+        if (hasTotem && !totemUsed) {
+          // Saved by Totem of Undying!
+          newTotemUsed = true;
+          setTotemUsed(true);
+        } else {
+          updatedHearts = Math.max(0, playerHearts - 1);
+          setPlayerHearts(updatedHearts);
+        }
       }
     }
 
-    setSessionXpEarned((prev) => prev + wordXp);
+    setSessionXpEarned((prev) => prev + earnedXp);
+    setSessionPointsEarned((prev) => prev + basePointReward);
 
     const updatedState: AppState = {
       ...appState,
@@ -254,7 +363,15 @@ export default function Home() {
       gamification: {
         ...appState.gamification,
         xp: newXp,
+        points: newPoints,
         level: rankInfo.rank.level,
+        unlockedBadges: updatedBadges,
+        speedRecords: {
+          fastestAnswerSeconds: fastestSeconds,
+          fastestWord: isNewSpeedRecord ? currentItem.word.word : appState.gamification?.speedRecords?.fastestWord,
+          totalSpeedStrikes:
+            (appState.gamification?.speedRecords?.totalSpeedStrikes || 0) + (elapsedSeconds <= 6 && isCorrect ? 1 : 0),
+        },
       },
     };
 
@@ -277,13 +394,19 @@ export default function Home() {
     } else {
       // Session finished!
       const withStreak = updateStreak(appState.stats);
+      const activePerks = appState.gamification?.activePerks || [];
+      const hasNetherBeacon = activePerks.includes("nether_beacon");
+      const beaconBonus = hasNetherBeacon ? 50 : 0;
 
       if (isBossSession && activeBoss) {
         // Boss Battle finished
         const finalHp = bossHp;
         const isVictory = finalHp <= 0;
         const bonusXp = isVictory ? activeBoss.rewardXp : 100;
+        const bonusPoints = isVictory ? activeBoss.rewardPoints + beaconBonus : 25 + beaconBonus;
+
         const totalXp = (appState.gamification?.xp || 0) + bonusXp;
+        const totalPoints = (appState.gamification?.points || 0) + bonusPoints;
         const rankInfo = getRankForXp(totalXp, appState.gamification?.theme || "starwars");
 
         const updatedBossesDefeated = {
@@ -307,6 +430,7 @@ export default function Home() {
           gamification: {
             ...appState.gamification,
             xp: totalXp,
+            points: totalPoints,
             level: rankInfo.rank.level,
             bossesDefeated: updatedBossesDefeated,
             unlockedBadges: updatedBadges,
@@ -317,6 +441,7 @@ export default function Home() {
         setBossVictoryState({
           isVictory,
           xpEarned: sessionXpEarned + bonusXp,
+          pointsEarned: sessionPointsEarned + bonusPoints,
           unlockedBadge: isVictory ? activeBoss.rewardBadgeId : undefined,
         });
       } else {
@@ -324,11 +449,16 @@ export default function Home() {
         if (soundEnabled) {
           playSound("complete");
         }
+        const totalPoints = (appState.gamification?.points || 0) + beaconBonus;
         handleUpdateAppState({
           ...appState,
           stats: {
             ...withStreak,
             totalSessionsCompleted: withStreak.totalSessionsCompleted + 1,
+          },
+          gamification: {
+            ...appState.gamification,
+            points: totalPoints,
           },
         });
       }
@@ -366,10 +496,9 @@ export default function Home() {
   const currentTheme = getThemeDetails(appState.gamification?.theme || "starwars");
   const rankInfo = getRankForXp(appState.gamification?.xp || 0, appState.gamification?.theme || "starwars");
 
-  // Filter roster for homepage display
-  const currentThemeBosses = BOSS_ROSTER.filter(
-    (b) => b.theme === (appState.gamification?.theme === "standard" ? "starwars" : appState.gamification?.theme)
-  );
+  // Filter roster for homepage display (shows all 6 bosses of the active realm)
+  const activeRealmKey = appState.gamification?.theme === "standard" ? "starwars" : appState.gamification?.theme;
+  const currentThemeBosses = BOSS_ROSTER.filter((b) => b.theme === activeRealmKey);
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
@@ -391,12 +520,15 @@ export default function Home() {
         onOpenArmory={() => setIsArmoryOpen(true)}
       />
 
-      {/* Hero Armory Modal */}
+      {/* Hero Armory & Perk Shop Modal */}
       {isArmoryOpen && (
         <HeroArmory
           gamification={appState.gamification}
           onUpdateTheme={handleChangeTheme}
           onSelectBossToFight={startBossBattle}
+          onUnlockPerk={handleUnlockPerk}
+          onToggleActivePerk={handleToggleActivePerk}
+          onEquipGear={handleEquipGear}
           onClose={() => setIsArmoryOpen(false)}
         />
       )}
@@ -425,11 +557,12 @@ export default function Home() {
                 results={sessionResults}
                 isVictory={bossVictoryState.isVictory}
                 xpEarned={bossVictoryState.xpEarned}
+                pointsEarned={bossVictoryState.pointsEarned}
                 unlockedBadge={bossVictoryState.unlockedBadge}
                 onFightAgain={() => startBossBattle(activeBoss.id)}
                 onNextBoss={() => {
                   const nextBoss = BOSS_ROSTER.find(
-                    (b) => b.theme === activeBoss.theme && b.level === ((activeBoss.level % 3) + 1)
+                    (b) => b.theme === activeBoss.theme && b.level === ((activeBoss.level % 6) + 1)
                   );
                   if (nextBoss) startBossBattle(nextBoss.id);
                   else startBossBattle(BOSS_ROSTER[0].id);
@@ -468,8 +601,11 @@ export default function Home() {
                 bossHp={bossHp}
                 maxHp={activeBoss.hp}
                 playerHearts={playerHearts}
+                maxHearts={maxHearts}
                 currentIndex={currentQueueIndex}
                 totalWords={sessionQueue.length}
+                activePerks={appState.gamification?.activePerks || []}
+                totemUsed={totemUsed}
                 onAnswer={handleAnswerCurrentWord}
                 soundEnabled={soundEnabled}
               />
@@ -496,7 +632,7 @@ export default function Home() {
                     word={currentItem.word}
                     currentIndex={currentQueueIndex}
                     totalInSession={sessionQueue.length}
-                    onAnswer={handleAnswerCurrentWord}
+                    onAnswer={(correct, ans) => handleAnswerCurrentWord(correct, ans, 8)}
                     soundEnabled={soundEnabled}
                   />
                 ) : (
@@ -504,7 +640,7 @@ export default function Home() {
                     word={currentItem.word}
                     currentIndex={currentQueueIndex}
                     totalInSession={sessionQueue.length}
-                    onAnswer={handleAnswerCurrentWord}
+                    onAnswer={(correct, ans) => handleAnswerCurrentWord(correct, ans, 8)}
                     soundEnabled={soundEnabled}
                   />
                 )}
@@ -537,12 +673,15 @@ export default function Home() {
               className={`bg-gradient-to-tr ${currentTheme.colorClass} rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-slate-900/20 text-center sm:text-left relative overflow-hidden`}
             >
               <div className="relative z-10">
-                <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
+                <div className="flex items-center justify-center sm:justify-start gap-2 mb-2 flex-wrap">
                   <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-xs font-black uppercase tracking-wider">
                     {currentTheme.name}
                   </span>
                   <span className="px-3 py-1 rounded-full bg-amber-400 text-slate-950 text-xs font-black uppercase tracking-wider">
-                    Level {rankInfo.rank.level} • {rankInfo.title}
+                    Lvl {rankInfo.rank.level} • {rankInfo.title}
+                  </span>
+                  <span className="px-2.5 py-1 rounded-full bg-black/40 text-amber-300 text-xs font-black border border-white/10">
+                    🪙 {appState.gamification?.points || 0} Points
                   </span>
                 </div>
 
@@ -550,25 +689,25 @@ export default function Home() {
                   Welcome to {currentTheme.shortName} Spelling!
                 </h2>
                 <p className="text-slate-200 text-sm mt-1 max-w-lg">
-                  Master Year 3 NAPLAN spelling through epic boss fights, phonics strikes, and
-                  Australian proofreading trials.
+                  Speed-strike spelling battles, phonics shields, and 18 epic boss encounters
+                  await!
                 </p>
 
-                <div className="mt-5 flex flex-wrap items-center justify-center sm:justify-start gap-3">
+                <div className="mt-5 flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
                   <button
                     onClick={() => startSession("mixed")}
-                    className="px-5 py-3.5 rounded-2xl bg-amber-400 hover:bg-amber-300 active:scale-95 text-slate-900 font-extrabold text-sm sm:text-base shadow-lg shadow-amber-900/20 transition flex items-center gap-2"
+                    className="px-5 py-3 rounded-2xl bg-amber-400 hover:bg-amber-300 active:scale-95 text-slate-900 font-extrabold text-sm shadow-lg shadow-amber-900/20 transition flex items-center gap-2"
                   >
-                    <Sparkles className="w-5 h-5" />
+                    <Sparkles className="w-4 h-4" />
                     <span>Daily 10 Words</span>
                   </button>
 
                   <button
                     onClick={() => setIsArmoryOpen(true)}
-                    className="px-5 py-3.5 rounded-2xl bg-white/20 hover:bg-white/30 backdrop-blur-md active:scale-95 text-white font-extrabold text-sm sm:text-base border border-white/30 transition flex items-center gap-2"
+                    className="px-5 py-3 rounded-2xl bg-white/20 hover:bg-white/30 backdrop-blur-md active:scale-95 text-white font-extrabold text-sm border border-white/30 transition flex items-center gap-2"
                   >
-                    <Swords className="w-5 h-5 text-amber-300" />
-                    <span>Boss Arena & Badges</span>
+                    <Swords className="w-4 h-4 text-amber-300" />
+                    <span>Boss Arena & Perks</span>
                   </button>
                 </div>
               </div>
@@ -604,12 +743,12 @@ export default function Home() {
               })}
             </div>
 
-            {/* BOSS BATTLES SECTION */}
+            {/* BOSS BATTLES SECTION (All 6 Bosses for Active Realm) */}
             <div>
               <div className="flex items-center justify-between mb-3 px-1">
                 <div className="flex items-center gap-2">
                   <h3 className="text-xs font-extrabold text-slate-700 uppercase tracking-wider">
-                    ⚔️ Boss Battle Arena
+                    ⚔️ {currentTheme.shortName} Boss Battles (Levels 1 - 6)
                   </h3>
                   <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-100 text-red-700 animate-pulse">
                     Bosses Ready
@@ -619,11 +758,11 @@ export default function Home() {
                   onClick={() => setIsArmoryOpen(true)}
                   className="text-xs font-bold text-indigo-600 hover:text-indigo-800"
                 >
-                  View All 9 Bosses ➔
+                  View All 18 Bosses ➔
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {currentThemeBosses.map((boss) => {
                   const wins = appState.gamification?.bossesDefeated[boss.id] || 0;
                   const isConquered = wins > 0;
@@ -631,7 +770,7 @@ export default function Home() {
                   return (
                     <div
                       key={boss.id}
-                      className={`border rounded-2xl p-4 transition flex flex-col justify-between relative overflow-hidden group shadow-sm ${
+                      className={`border rounded-2xl p-3.5 transition flex flex-col justify-between relative overflow-hidden group shadow-sm ${
                         isConquered
                           ? "bg-gradient-to-b from-amber-50/60 to-white border-amber-300"
                           : "bg-white border-slate-200 hover:border-indigo-300 hover:shadow-md"
@@ -639,41 +778,41 @@ export default function Home() {
                     >
                       <div>
                         <div className="flex items-start justify-between">
-                          <span className="text-4xl group-hover:scale-110 transition">
+                          <span className="text-3xl group-hover:scale-110 transition">
                             {boss.avatarEmoji}
                           </span>
                           <span
-                            className={`px-2 py-0.5 rounded-full font-black text-[10px] ${
-                              boss.level === 1
-                                ? "bg-emerald-100 text-emerald-800"
-                                : boss.level === 2
+                            className={`px-1.5 py-0.5 rounded font-black text-[10px] ${
+                              boss.level >= 5
+                                ? "bg-purple-100 text-purple-800"
+                                : boss.level >= 3
                                 ? "bg-amber-100 text-amber-800"
-                                : "bg-red-100 text-red-800"
+                                : "bg-emerald-100 text-emerald-800"
                             }`}
                           >
                             Lvl {boss.level}
                           </span>
                         </div>
 
-                        <div className="mt-3">
-                          <h4 className="font-black text-sm text-slate-900 leading-snug group-hover:text-indigo-600 transition">
+                        <div className="mt-2.5">
+                          <h4 className="font-black text-xs sm:text-sm text-slate-900 leading-snug group-hover:text-indigo-600 transition line-clamp-1">
                             {boss.name}
                           </h4>
-                          <p className="text-[11px] text-slate-500 font-medium line-clamp-1 mt-0.5">
+                          <p className="text-[10px] text-slate-500 font-medium line-clamp-1 mt-0.5">
                             {boss.title}
                           </p>
-                          <div className="mt-2 flex items-center justify-between text-[11px] text-slate-600 font-bold bg-slate-50 rounded-lg p-1.5 border border-slate-100">
-                            <span>HP: {boss.hp} Words</span>
-                            <span className="text-amber-600">+{boss.rewardXp} XP</span>
+                          <div className="mt-2 flex items-center justify-between text-[10px] text-slate-600 font-bold bg-slate-50 rounded-lg p-1 border border-slate-100">
+                            <span>HP: {boss.hp}</span>
+                            <span className="text-amber-600">+{boss.rewardPoints} Pts</span>
                           </div>
                         </div>
                       </div>
 
                       <button
                         onClick={() => startBossBattle(boss.id)}
-                        className="mt-3.5 w-full py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:brightness-110 active:scale-95 text-white font-black text-xs shadow-md shadow-indigo-100 transition flex items-center justify-center gap-1.5"
+                        className="mt-3 w-full py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:brightness-110 active:scale-95 text-white font-black text-xs shadow-md shadow-indigo-100 transition flex items-center justify-center gap-1"
                       >
-                        <Swords className="w-3.5 h-3.5 text-amber-300" />
+                        <Swords className="w-3 h-3 text-amber-300" />
                         <span>Fight Boss</span>
                       </button>
                     </div>
@@ -739,14 +878,14 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Gamification Tip */}
-            <div className="bg-slate-100/80 rounded-2xl p-4 border border-slate-200 text-xs text-slate-600 flex items-center gap-3">
-              <span className="text-xl">🏆</span>
-              <p>
-                <span className="font-bold text-slate-800">Boss Level Tip:</span> Defeating bosses
-                in the Boss Arena grants massive XP boosts (+300 to +1000 XP) and unlocks exclusive
-                Star Wars, Marvel, and Minecraft trophies in your Hero Armory!
-              </p>
+            {/* Perks Tip Banner */}
+            <div className="bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 rounded-2xl p-4 border border-amber-200 text-xs text-slate-700 flex items-center gap-3">
+              <span className="text-2xl">⚡</span>
+              <div>
+                <span className="font-bold text-slate-900">Speed Scoring & Perks Active:</span> Type
+                answers in under 6 seconds for <span className="font-bold text-amber-800">LIGHTNING SPEED</span> bonus points.
+                Spend points in your <span className="font-bold text-indigo-700">Hero Armory</span> to unlock Extra Shield Armor, Jarvis HUD, and Totems of Undying!
+              </div>
             </div>
           </div>
         )}

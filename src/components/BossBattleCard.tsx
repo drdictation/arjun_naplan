@@ -7,17 +7,16 @@ import {
   HelpCircle,
   CheckCircle2,
   XCircle,
-  Heart,
-  Shield,
   Zap,
-  Sword,
   Sparkles,
   RotateCcw,
   Search,
-  Award,
+  Timer,
+  Shield,
+  Flame,
 } from "lucide-react";
 import { SpellingWord } from "../data/words";
-import { BossDefinition } from "../lib/gamification";
+import { BossDefinition, calculateSpeedBonus, PERKS_CATALOG } from "../lib/gamification";
 import { speakWordWithSentence, speakSingleWord, speakText } from "../lib/speech";
 import { playSound } from "../lib/storage";
 
@@ -28,9 +27,12 @@ interface BossBattleCardProps {
   bossHp: number;
   maxHp: number;
   playerHearts: number;
+  maxHearts: number;
   currentIndex: number;
   totalWords: number;
-  onAnswer: (isCorrect: boolean, userAnswer: string) => void;
+  activePerks?: string[];
+  totemUsed?: boolean;
+  onAnswer: (isCorrect: boolean, userAnswer: string, elapsedSeconds: number) => void;
   soundEnabled: boolean;
 }
 
@@ -41,8 +43,11 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
   bossHp,
   maxHp,
   playerHearts,
+  maxHearts,
   currentIndex,
   totalWords,
+  activePerks = [],
+  totemUsed = false,
   onAnswer,
   soundEnabled,
 }) => {
@@ -53,16 +58,36 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
   const [bossShake, setBossShake] = useState(false);
   const [attackEffect, setAttackEffect] = useState<string | null>(null);
   const [bossSpeech, setBossSpeech] = useState<string>(boss.introTaunt);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [speedResult, setSpeedResult] = useState<ReturnType<typeof calculateSpeedBonus> | null>(null);
+  const [totemActivated, setTotemActivated] = useState(false);
 
-  // Auto-play audio on new word if in audio mode
+  const inputRef = useRef<HTMLInputElement>(null);
+  const startTimeRef = useRef<number>(Date.now());
+  const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const hasHolocron = activePerks.includes("holocron_vision");
+  const hasSpeedPerk = activePerks.includes("speed_spark");
+  const hasCriticalRocket = activePerks.includes("critical_rocket") && currentIndex === 0;
+
+  // Reset & start timer on new word
   useEffect(() => {
     setInputVal("");
-    setShowHint(false);
+    setShowHint(hasHolocron);
     setHasSubmitted(false);
     setIsCorrect(false);
     setBossShake(false);
     setAttackEffect(null);
+    setElapsedSeconds(0);
+    setSpeedResult(null);
+    setTotemActivated(false);
+
+    startTimeRef.current = Date.now();
+
+    if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
+    timerIntervalRef.current = setInterval(() => {
+      setElapsedSeconds(Math.floor((Date.now() - startTimeRef.current) / 1000));
+    }, 500);
 
     if (mode === "audio" && soundEnabled) {
       speakWordWithSentence(word.word, word.sentence, false);
@@ -72,13 +97,25 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
       inputRef.current?.focus();
     }, 150);
 
-    return () => clearTimeout(timer);
-  }, [word.id, mode]);
+    return () => {
+      clearTimeout(timer);
+      if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
+    };
+  }, [word.id, mode, hasHolocron]);
 
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     const cleanInput = inputVal.trim().toLowerCase();
     if (!cleanInput || hasSubmitted) return;
+
+    if (timerIntervalRef.current) {
+      clearInterval(timerIntervalRef.current);
+      timerIntervalRef.current = null;
+    }
+
+    const secondsTaken = Math.max(1, (Date.now() - startTimeRef.current) / 1000);
+    const speedBonus = calculateSpeedBonus(secondsTaken, hasSpeedPerk);
+    setSpeedResult(speedBonus);
 
     const correct = cleanInput === word.word.toLowerCase();
     setIsCorrect(correct);
@@ -87,11 +124,20 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
     if (correct) {
       // Trigger attack animation & sounds
       setBossShake(true);
-      setAttackEffect(boss.playerAttackName);
 
-      // Play theme-specific strike sound
+      const attackLabel = hasCriticalRocket
+        ? `${boss.playerAttackName} + STARK/TNT CRITICAL (2x DMG)!`
+        : speedBonus.tier === "lightning"
+        ? `${boss.playerAttackName} (LIGHTNING SPEED)!`
+        : boss.playerAttackName;
+
+      setAttackEffect(attackLabel);
+
       if (soundEnabled) {
-        if (boss.theme === "starwars") {
+        if (speedBonus.tier === "lightning") {
+          playSound("speed_strike");
+          setTimeout(() => playSound("boss_hit"), 200);
+        } else if (boss.theme === "starwars") {
           playSound("lightsaber");
           setTimeout(() => playSound("boss_hit"), 150);
         } else if (boss.theme === "marvel") {
@@ -105,15 +151,13 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
         }
       }
 
-      // Boss hit reaction
       const randomReaction =
         boss.hitReaction[Math.floor(Math.random() * boss.hitReaction.length)];
       setBossSpeech(randomReaction);
 
-      // Confetti burst for boss damage
       confetti({
-        particleCount: 40,
-        spread: 55,
+        particleCount: speedBonus.tier === "lightning" ? 70 : 40,
+        spread: 60,
         origin: { y: 0.4 },
         colors:
           boss.theme === "starwars"
@@ -123,17 +167,23 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
             : ["#10b981", "#84cc16", "#065f46"],
       });
     } else {
-      if (soundEnabled) {
-        playSound("incorrect");
-        speakSingleWord(word.word, true);
+      // Check if Totem saves him
+      if (activePerks.includes("totem_undying") && !totemUsed) {
+        setTotemActivated(true);
+        if (soundEnabled) playSound("perk_unlock");
+        setBossSpeech("What?! The Totem of Undying absorbed my attack! Your shield remains intact!");
+      } else {
+        if (soundEnabled) {
+          playSound("incorrect");
+          speakSingleWord(word.word, true);
+        }
+        setBossSpeech("Ha! That's not the right spelling! My armor holds strong!");
       }
-      setBossSpeech("Ha! That's not the right spelling! My armor holds strong!");
     }
 
-    onAnswer(correct, cleanInput);
+    onAnswer(correct, cleanInput, secondsTaken);
   };
 
-  // Proofreading sentence split
   const parts =
     mode === "proofread"
       ? word.proofreadSentence.split(new RegExp(`(${word.misspelledWord})`, "i"))
@@ -147,7 +197,7 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
           bossShake ? "animate-wiggle" : ""
         }`}
       >
-        {/* Decorative Theme Badges & Level */}
+        {/* Top Badges & Live Timer */}
         <div className="flex items-center justify-between gap-2 mb-3">
           <div className="flex items-center gap-2">
             <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-white/10 backdrop-blur-sm border border-white/20">
@@ -160,19 +210,17 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
             </span>
           </div>
 
-          {/* Player Lives / Shields */}
-          <div className="flex items-center gap-1 bg-black/40 px-3 py-1 rounded-full border border-white/10">
-            <span className="text-xs font-bold text-slate-300 mr-1">Shields:</span>
-            {[1, 2, 3].map((heart) => (
-              <span
-                key={heart}
-                className={`text-base transition-all ${
-                  heart <= playerHearts ? "opacity-100 scale-100" : "opacity-30 scale-75 grayscale"
-                }`}
-              >
-                {boss.theme === "minecraft" ? "❤️" : boss.theme === "starwars" ? "🛡️" : "⚡"}
+          {/* Live Speed & Timer */}
+          <div className="flex items-center gap-1.5 bg-black/50 px-3 py-1 rounded-full border border-white/10 text-xs font-black">
+            <Timer className={`w-3.5 h-3.5 ${elapsedSeconds < 6 ? "text-amber-400 animate-pulse" : "text-slate-400"}`} />
+            <span className={elapsedSeconds < 6 ? "text-amber-300" : "text-slate-300"}>
+              {elapsedSeconds}s
+            </span>
+            {elapsedSeconds < 6 && (
+              <span className="text-[10px] text-amber-400 hidden sm:inline font-bold">
+                (⚡ SPEED BONUS!)
               </span>
-            ))}
+            )}
           </div>
         </div>
 
@@ -218,12 +266,53 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
           </div>
         </div>
 
+        {/* Player Shields & Active Perks Bar */}
+        <div className="flex items-center justify-between gap-2 mt-3 pt-3 border-t border-white/10 flex-wrap">
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs font-bold text-slate-300">Shields:</span>
+            {Array.from({ length: maxHearts }).map((_, idx) => (
+              <span
+                key={idx}
+                className={`text-base transition-all ${
+                  idx < playerHearts ? "opacity-100 scale-100" : "opacity-30 scale-75 grayscale"
+                }`}
+              >
+                {boss.theme === "minecraft" ? "❤️" : boss.theme === "starwars" ? "🛡️" : "⚡"}
+              </span>
+            ))}
+          </div>
+
+          {/* Active Perk Badges */}
+          {activePerks.length > 0 && (
+            <div className="flex items-center gap-1">
+              {activePerks.map((pId) => {
+                const perk = PERKS_CATALOG.find((p) => p.id === pId);
+                if (!perk) return null;
+                return (
+                  <span
+                    key={pId}
+                    className="px-2 py-0.5 rounded-md bg-white/10 text-amber-300 text-[10px] font-bold border border-white/10"
+                    title={perk.name + ": " + perk.description}
+                  >
+                    {perk.icon} {perk.name}
+                  </span>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Totem of Undying Activation Banner */}
+        {totemActivated && (
+          <div className="mt-2 p-2 rounded-xl bg-amber-400 text-slate-950 text-xs font-black text-center animate-bounce">
+            🗿 TOTEM OF UNDYING ACTIVATED! Your heart was preserved!
+          </div>
+        )}
+
         {/* Boss Taunt / Speech Bubble */}
         <div className="mt-3 bg-black/40 backdrop-blur-md rounded-2xl p-3 border border-white/10 text-xs sm:text-sm text-slate-200 flex items-start gap-2.5">
           <span className="text-lg shrink-0">💬</span>
-          <p className="italic font-medium">
-            &ldquo;{bossSpeech}&rdquo;
-          </p>
+          <p className="italic font-medium">&ldquo;{bossSpeech}&rdquo;</p>
         </div>
 
         {/* Attack Effect Toast */}
@@ -251,7 +340,7 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
         {mode === "audio" && (
           <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 mb-5 text-center">
             <p className="text-slate-600 font-medium text-xs mb-3">
-              Listen to the spell word, then type it to launch your attack:
+              Listen to the spell word, then type it quickly for speed bonus:
             </p>
             <div className="flex flex-wrap items-center justify-center gap-2">
               <button
@@ -308,14 +397,16 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
         {/* Input Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label
-              htmlFor="boss-input"
-              className="block text-sm font-bold text-slate-700 mb-1 text-center"
-            >
-              {mode === "proofread"
-                ? `Correct spelling for "${word.misspelledWord}":`
-                : "Type your spelling attack:"}
-            </label>
+            <div className="flex items-center justify-between mb-1">
+              <label
+                htmlFor="boss-input"
+                className="block text-sm font-bold text-slate-700 text-center flex-1"
+              >
+                {mode === "proofread"
+                  ? `Correct spelling for "${word.misspelledWord}":`
+                  : "Type your spelling attack:"}
+              </label>
+            </div>
             <input
               id="boss-input"
               ref={inputRef}
@@ -338,7 +429,7 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
             />
           </div>
 
-          {/* Phonics Hint */}
+          {/* Phonics Hint & Auto Holocron */}
           <div className="text-center">
             {!showHint ? (
               <button
@@ -351,7 +442,8 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
               </button>
             ) : (
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 font-medium animate-fadeIn">
-                ⚡ <span className="font-bold">Power Hint:</span> {word.phoneticHint} ({word.word.length} letters)
+                {hasHolocron ? "🔮 Jarvis/Holocron HUD: " : "💡 Phonics Hint: "}
+                Starts with &quot;<span className="font-mono font-bold uppercase">{word.word[0]}</span>&quot; • {word.phoneticHint} ({word.word.length} letters)
               </div>
             )}
           </div>
@@ -371,10 +463,17 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
               {isCorrect ? (
                 <div className="bg-emerald-50 border-2 border-emerald-300 rounded-2xl p-4 text-emerald-900 flex items-start gap-3">
                   <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-extrabold text-base text-emerald-800">
-                      Direct Hit on {boss.name}! 🌟
-                    </h4>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between flex-wrap gap-1">
+                      <h4 className="font-extrabold text-base text-emerald-800">
+                        Direct Hit on {boss.name}! 🌟
+                      </h4>
+                      {speedResult && (
+                        <span className="px-2 py-0.5 rounded-full bg-amber-300 text-slate-950 font-black text-xs uppercase animate-bounce">
+                          {speedResult.emoji} +{speedResult.bonusPoints} Speed Pts!
+                        </span>
+                      )}
+                    </div>
                     <p className="text-xs text-emerald-700 mt-0.5">{word.ruleExplanation}</p>
                   </div>
                 </div>
