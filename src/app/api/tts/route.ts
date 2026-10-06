@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { MsEdgeTTS, OUTPUT_FORMAT } from "msedge-tts";
 
+export const runtime = "nodejs";
+
 // In-memory cache for synthesized audio buffers
 const audioCache = new Map<string, Buffer>();
 const MAX_CACHE_ENTRIES = 500;
+const SYNTHESIS_TIMEOUT_MS = 6000;
 
 function escapeXml(unsafe: string): string {
   return unsafe.replace(/[<>&'"]/g, (c) => {
@@ -25,6 +28,7 @@ function escapeXml(unsafe: string): string {
 }
 
 export async function GET(request: NextRequest) {
+  let tts: MsEdgeTTS | null = null;
   try {
     const { searchParams } = new URL(request.url);
     const text = searchParams.get("text")?.trim();
@@ -52,20 +56,31 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    const tts = new MsEdgeTTS();
-    await tts.setMetadata(voice, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3);
+    tts = new MsEdgeTTS();
 
-    const safeText = escapeXml(text);
-    const { audioStream } = tts.toStream(safeText, { rate });
+    // Wrap synthesis in a timeout to guarantee the response never hangs
+    const synthPromise = (async () => {
+      if (!tts) throw new Error("TTS instance not available");
+      await tts.setMetadata(voice, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3);
 
-    const chunks: Buffer[] = [];
-    await new Promise<void>((resolve, reject) => {
-      audioStream.on("data", (chunk: Buffer) => chunks.push(chunk));
-      audioStream.on("end", () => resolve());
-      audioStream.on("error", (err: Error) => reject(err));
-    });
+      const safeText = escapeXml(text);
+      const { audioStream } = tts.toStream(safeText, { rate });
 
-    const buffer = Buffer.concat(chunks);
+      const chunks: Buffer[] = [];
+      await new Promise<void>((resolve, reject) => {
+        audioStream.on("data", (chunk: Buffer) => chunks.push(chunk));
+        audioStream.on("end", () => resolve());
+        audioStream.on("error", (err: Error) => reject(err));
+      });
+
+      return Buffer.concat(chunks);
+    })();
+
+    const timeoutPromise = new Promise<Buffer>((_, reject) =>
+      setTimeout(() => reject(new Error("TTS synthesis timed out")), SYNTHESIS_TIMEOUT_MS)
+    );
+
+    const buffer = await Promise.race([synthPromise, timeoutPromise]);
 
     if (audioCache.size >= MAX_CACHE_ENTRIES) {
       // Evict oldest entry
@@ -86,5 +101,11 @@ export async function GET(request: NextRequest) {
     const message = error instanceof Error ? error.message : "TTS synthesis failed";
     console.error("TTS API error:", message);
     return NextResponse.json({ error: message }, { status: 500 });
+  } finally {
+    if (tts) {
+      try {
+        tts.close();
+      } catch {}
+    }
   }
 }

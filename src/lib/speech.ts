@@ -67,7 +67,14 @@ if (typeof window !== "undefined" && "speechSynthesis" in window) {
   };
 }
 
+let currentAudioFallbackTimer: ReturnType<typeof setTimeout> | null = null;
+
 export function stopSpeech(): void {
+  if (currentAudioFallbackTimer) {
+    clearTimeout(currentAudioFallbackTimer);
+    currentAudioFallbackTimer = null;
+  }
+
   // Stop HTML5 Audio if playing
   if (currentAudio) {
     currentAudio.pause();
@@ -114,12 +121,15 @@ export function speakWithBrowserSynthesis(text: string, options: SpeakOptions = 
     utterance.onerror = () => options.onEnd?.();
   }
 
-  window.speechSynthesis.speak(utterance);
+  // Slight 20ms timeout prevents Chrome & Safari bug where immediate cancel() swallows subsequent speak()
+  setTimeout(() => {
+    window.speechSynthesis.speak(utterance);
+  }, 20);
 }
 
 /**
  * Speak text using Edge Neural Australian TTS (en-AU-NatashaNeural)
- * Automatically falls back to high-grade browser speech synthesis if offline or on network error.
+ * Automatically falls back to high-grade browser speech synthesis if offline, stalled, or on network error.
  */
 export function speakText(text: string, options: SpeakOptions = {}): void {
   if (typeof window === "undefined") return;
@@ -136,6 +146,10 @@ export function speakText(text: string, options: SpeakOptions = {}): void {
 
   let ended = false;
   const handleEnd = () => {
+    if (currentAudioFallbackTimer) {
+      clearTimeout(currentAudioFallbackTimer);
+      currentAudioFallbackTimer = null;
+    }
     if (!ended) {
       ended = true;
       if (currentAudio === audio) {
@@ -145,22 +159,31 @@ export function speakText(text: string, options: SpeakOptions = {}): void {
     }
   };
 
-  audio.onended = handleEnd;
-
-  audio.onerror = () => {
-    // If the server route fails or device is offline, fallback immediately to browser speech
-    if (currentAudio === audio) {
+  const triggerFallback = () => {
+    if (currentAudioFallbackTimer) {
+      clearTimeout(currentAudioFallbackTimer);
+      currentAudioFallbackTimer = null;
+    }
+    if (!ended && currentAudio === audio) {
       currentAudio = null;
+      audio.pause();
       speakWithBrowserSynthesis(text, options);
     }
   };
 
+  audio.onended = handleEnd;
+  audio.onerror = triggerFallback;
+
+  // Fallback safety timer: if server route stalls or is unreachable within 3.5 seconds, use browser synthesis
+  currentAudioFallbackTimer = setTimeout(() => {
+    if (audio.paused && audio.currentTime === 0) {
+      triggerFallback();
+    }
+  }, 3500);
+
   audio.play().catch(() => {
     // Play was interrupted or blocked by browser autoplay policy
-    if (currentAudio === audio) {
-      currentAudio = null;
-      speakWithBrowserSynthesis(text, options);
-    }
+    triggerFallback();
   });
 }
 
