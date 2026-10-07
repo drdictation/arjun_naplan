@@ -153,6 +153,10 @@ export function buildSessionQueue(
   const preferredMode = options.modePreference || "mixed";
   const today = getTodayDateString();
 
+  // Max reviews per batch (e.g. 5 for a batch of 10) to guarantee fresh words
+  const maxReviews = Math.floor(batchSize * 0.5);
+
+  // Separate due & tricky reviews
   const dueItems: SpellingWord[] = [];
   const trickyItems: SpellingWord[] = [];
   const unstartedItems: SpellingWord[] = [];
@@ -173,28 +177,38 @@ export function buildSessionQueue(
 
   const selectedWords: { word: SpellingWord; isReview: boolean }[] = [];
 
-  // Add due reviews first
+  // 1. Add due reviews (capped)
   for (const w of shuffle(dueItems)) {
-    if (selectedWords.length < batchSize) {
+    if (selectedWords.length < maxReviews) {
       selectedWords.push({ word: w, isReview: true });
     }
   }
 
-  // Add tricky words if room
+  // 2. Add tricky words if review slots remain
   for (const w of shuffle(trickyItems)) {
-    if (selectedWords.length < batchSize && !selectedWords.some((x) => x.word.id === w.id)) {
+    if (selectedWords.length < maxReviews && !selectedWords.some((x) => x.word.id === w.id)) {
       selectedWords.push({ word: w, isReview: true });
     }
   }
 
-  // Fill remaining slots with new unstarted words
+  // 3. Fill with new unstarted words (prefer core/challenge words if progressing well)
   for (const w of shuffle(unstartedItems)) {
     if (selectedWords.length < batchSize) {
       selectedWords.push({ word: w, isReview: false });
     }
   }
 
-  // If still room (e.g. all words mastered or studied), take any word
+  // 4. Fallback if new words ran out: allow remaining due/tricky reviews
+  if (selectedWords.length < batchSize) {
+    const remainingReviews = [...dueItems, ...trickyItems];
+    for (const w of shuffle(remainingReviews)) {
+      if (selectedWords.length < batchSize && !selectedWords.some((x) => x.word.id === w.id)) {
+        selectedWords.push({ word: w, isReview: true });
+      }
+    }
+  }
+
+  // 5. Final fallback to any words if total pool exhausted
   if (selectedWords.length < batchSize) {
     for (const w of shuffle(allWords)) {
       if (selectedWords.length < batchSize && !selectedWords.some((x) => x.word.id === w.id)) {
