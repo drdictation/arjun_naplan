@@ -255,35 +255,61 @@ export function buildBossSessionQueue(
   );
 
   // 2. Filter words matching boss level difficulty
+  // For bossLevel >= 7 (Nightmare & Apex), prioritize Band 6 challenge words and complex phonetic rules
   const targetDifficultyWords = allWords.filter((w) => {
     if (bossLevel <= 2) return w.difficulty <= 2;
     if (bossLevel <= 4) return w.difficulty === 2 || w.difficulty === 3;
+    if (bossLevel >= 7) {
+      return (
+        w.difficulty === 3 ||
+        (w.difficulty === 2 &&
+          (w.category.includes("Silent") ||
+            w.category.includes("Tricky") ||
+            w.category.includes("Double") ||
+            w.category.includes("Suffix")))
+      );
+    }
     return w.difficulty >= 2;
   });
 
   const selectedWords: { word: SpellingWord; isReview: boolean }[] = [];
 
-  // Prioritize 1-2 tricky words for boss battles to test real mastery!
+  // For boss battles, inject past mistakes to test real mastery
+  const maxTricky = bossLevel >= 7 ? Math.min(5, Math.floor(bossHp / 3)) : Math.min(2, Math.floor(bossHp / 2));
   for (const w of shuffle(trickyWords)) {
-    if (selectedWords.length < Math.min(2, Math.floor(bossHp / 2))) {
+    if (selectedWords.length < maxTricky) {
       selectedWords.push({ word: w, isReview: true });
     }
   }
 
-  // Fill remainder with target level words
+  // Fill with target level words
   for (const w of shuffle(targetDifficultyWords)) {
     if (selectedWords.length < bossHp && !selectedWords.some((x) => x.word.id === w.id)) {
       selectedWords.push({ word: w, isReview: !!progressMap[w.id] });
     }
   }
 
-  // Fallback to any words if needed
+  // Fallback to difficulty 2+ words if pool needed more
+  const secondaryDifficultyWords = allWords.filter((w) => w.difficulty >= 2);
+  for (const w of shuffle(secondaryDifficultyWords)) {
+    if (selectedWords.length < bossHp && !selectedWords.some((x) => x.word.id === w.id)) {
+      selectedWords.push({ word: w, isReview: !!progressMap[w.id] });
+    }
+  }
+
+  // Final fallback to any words
   if (selectedWords.length < bossHp) {
     for (const w of shuffle(allWords)) {
       if (selectedWords.length < bossHp && !selectedWords.some((x) => x.word.id === w.id)) {
         selectedWords.push({ word: w, isReview: !!progressMap[w.id] });
       }
     }
+  }
+
+  // If bossHp exceeds total words, repeat from pool
+  while (selectedWords.length < bossHp) {
+    const randomPick = allWords[Math.floor(Math.random() * allWords.length)];
+    selectedWords.push({ word: randomPick, isReview: !!progressMap[randomPick.id] });
   }
 
   // Alternate between audio dictation and proofreading for dynamic boss challenge

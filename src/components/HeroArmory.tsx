@@ -30,7 +30,7 @@ import { playSound } from "../lib/storage";
 interface HeroArmoryProps {
   gamification: GamificationState;
   onUpdateTheme: (newTheme: GameTheme) => void;
-  onSelectBossToFight: (bossId: string) => void;
+  onSelectBossToFight: (bossId: string, isHardcore?: boolean) => void;
   onUnlockPerk: (perkId: string, cost: number) => void;
   onToggleActivePerk: (perkId: string) => void;
   onEquipGear: (type: "weapon" | "artifact", id: string) => void;
@@ -47,6 +47,7 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
   onClose,
 }) => {
   const [activeTab, setActiveTab] = useState<"bosses" | "perks" | "goodies" | "badges" | "themes">("bosses");
+  const [isHardcore, setIsHardcore] = useState(false);
   const rankInfo = getRankForXp(gamification.xp, gamification.theme);
   const currentTheme = getThemeDetails(gamification.theme);
 
@@ -119,7 +120,7 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
               }`}
             >
               <Swords className="w-3.5 h-3.5" />
-              <span>Bosses (18)</span>
+              <span>Bosses (30)</span>
             </button>
             <button
               onClick={() => {
@@ -185,11 +186,31 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
           {/* TAB 1: Boss Arena Selection */}
           {activeTab === "bosses" && (
             <div className="space-y-5">
-              <div className="flex items-center justify-between text-xs text-slate-500">
-                <span className="font-bold uppercase tracking-wider">All 18 Boss Encounters</span>
-                <span className="font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
-                  🏆 {totalBossesDefeated} Victories
-                </span>
+              <div className="flex items-center justify-between text-xs flex-wrap gap-2">
+                <div>
+                  <span className="font-bold text-slate-700 uppercase tracking-wider">All 30 Boss Encounters (Levels 1 - 10)</span>
+                  <p className="text-[11px] text-slate-500">Apprentice (1-2) • Master (3-6) • Nightmare (7-9) • Apex (10)</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      setIsHardcore(!isHardcore);
+                      playSound("click");
+                    }}
+                    className={`px-2.5 py-1 rounded-xl text-xs font-black transition flex items-center gap-1.5 border ${
+                      isHardcore
+                        ? "bg-rose-950 text-rose-300 border-rose-500 shadow-sm animate-pulse"
+                        : "bg-slate-100 hover:bg-slate-200 text-slate-600 border-slate-300"
+                    }`}
+                    title="Hardcore Trial: 1.5x Boss HP, 2 Hearts Only, 3x XP and Points!"
+                  >
+                    <span>💀 Hardcore Trial</span>
+                    <span className="text-[10px] uppercase font-bold">{isHardcore ? "ON (3x Rewards)" : "OFF"}</span>
+                  </button>
+                  <span className="font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                    🏆 {totalBossesDefeated} Victories
+                  </span>
+                </div>
               </div>
 
               {(["starwars", "marvel", "minecraft"] as const).map((realmTheme) => {
@@ -211,6 +232,7 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
                       {realmBosses.map((boss) => {
                         const winCount = gamification.bossesDefeated[boss.id] || 0;
                         const isDefeated = winCount > 0;
+                        const displayHp = isHardcore ? Math.round(boss.hp * 1.5) : boss.hp;
 
                         return (
                           <div
@@ -223,11 +245,15 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
                           >
                             <div className="flex items-start justify-between gap-1">
                               <span className="text-3xl">{boss.avatarEmoji}</span>
-                              <div className="flex items-center gap-1">
+                              <div className="flex items-center gap-1 flex-wrap justify-end">
                                 <span
                                   className={`px-1.5 py-0.5 rounded text-[10px] font-black uppercase ${
-                                    boss.level >= 5
+                                    boss.level >= 10
+                                      ? "bg-rose-100 text-rose-800"
+                                      : boss.level >= 7
                                       ? "bg-purple-100 text-purple-800"
+                                      : boss.level >= 5
+                                      ? "bg-indigo-100 text-indigo-800"
                                       : boss.level >= 3
                                       ? "bg-amber-100 text-amber-800"
                                       : "bg-emerald-100 text-emerald-800"
@@ -235,6 +261,17 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
                                 >
                                   Lvl {boss.level}
                                 </span>
+                                {boss.tier && (
+                                  <span className={`px-1 py-0.5 rounded text-[9px] font-black uppercase ${
+                                    boss.tier === "Apex"
+                                      ? "bg-rose-100 text-rose-800"
+                                      : boss.tier === "Nightmare"
+                                      ? "bg-purple-100 text-purple-800"
+                                      : "bg-slate-100 text-slate-600"
+                                  }`}>
+                                    {boss.tier}
+                                  </span>
+                                )}
                                 {isDefeated && (
                                   <span className="px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-[10px]">
                                     x{winCount}
@@ -248,18 +285,22 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
                                 {boss.name}
                               </h5>
                               <p className="text-[10px] text-slate-500 font-medium line-clamp-1">
-                                HP: {boss.hp} Words • +{boss.rewardXp} XP • +{boss.rewardPoints} Pts
+                                HP: {displayHp} Words • +{boss.rewardXp * (isHardcore ? 3 : 1)} XP
                               </p>
                             </div>
 
                             <button
                               onClick={() => {
-                                onSelectBossToFight(boss.id);
+                                onSelectBossToFight(boss.id, isHardcore);
                                 onClose();
                               }}
-                              className="mt-2.5 w-full py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-black text-xs shadow-sm transition"
+                              className={`mt-2.5 w-full py-1.5 rounded-xl font-black text-xs shadow-sm transition active:scale-95 text-white ${
+                                isHardcore
+                                  ? "bg-rose-600 hover:bg-rose-700"
+                                  : "bg-indigo-600 hover:bg-indigo-700"
+                              }`}
                             >
-                              Battle ➔
+                              {isHardcore ? "💀 Hardcore Battle ➔" : "Battle ➔"}
                             </button>
                           </div>
                         );

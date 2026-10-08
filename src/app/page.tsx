@@ -10,6 +10,8 @@ import { BossBattleCard } from "../components/BossBattleCard";
 import { BossVictorySummary } from "../components/BossVictorySummary";
 import { HeroArmory } from "../components/HeroArmory";
 import { YEAR_3_NAPLAN_WORDS, SpellingWord } from "../data/words";
+import { YEAR_3_GRAMMAR_PRACTICE, GrammarQuestion } from "../data/grammar";
+import { GrammarPracticeCard } from "../components/GrammarPracticeCard";
 import {
   AppState,
   INITIAL_STATE,
@@ -54,8 +56,10 @@ export default function Home() {
   const [sessionQueue, setSessionQueue] = useState<SessionQueueItem[]>([]);
   const [currentQueueIndex, setCurrentQueueIndex] = useState(0);
   const [currentStepAnswered, setCurrentStepAnswered] = useState(false);
+  const [isGrammarSession, setIsGrammarSession] = useState(false);
+  const [grammarQueue, setGrammarQueue] = useState<GrammarQuestion[]>([]);
   const [sessionResults, setSessionResults] = useState<
-    { word: SpellingWord; isCorrect: boolean; userAnswer: string }[]
+    { word?: SpellingWord; title?: string; category?: string; isCorrect: boolean; userAnswer: string }[]
   >([]);
   const [isSessionFinished, setIsSessionFinished] = useState(false);
 
@@ -66,6 +70,8 @@ export default function Home() {
   const [playerHearts, setPlayerHearts] = useState<number>(3);
   const [maxHearts, setMaxHearts] = useState<number>(3);
   const [totemUsed, setTotemUsed] = useState<boolean>(false);
+  const [isHardcoreTrial, setIsHardcoreTrial] = useState<boolean>(false);
+  const [resurrectionUsed, setResurrectionUsed] = useState<boolean>(false);
   const [sessionXpEarned, setSessionXpEarned] = useState<number>(0);
   const [sessionPointsEarned, setSessionPointsEarned] = useState<number>(0);
   const [bossVictoryState, setBossVictoryState] = useState<{
@@ -164,6 +170,85 @@ export default function Home() {
     handleUpdateAppState(updatedState);
   };
 
+  // Start a Grammar & Conventions Session
+  const startGrammarSession = () => {
+    playSound("click");
+    setIsBossSession(false);
+    setIsGrammarSession(false);
+    setActiveBoss(null);
+    setBossVictoryState(null);
+    setSessionXpEarned(0);
+    setSessionPointsEarned(0);
+    setIsGrammarSession(true);
+
+    // Shuffle & take 10 questions
+    const shuffled = [...YEAR_3_GRAMMAR_PRACTICE].sort(() => 0.5 - Math.random()).slice(0, 10);
+    setGrammarQueue(shuffled);
+    setCurrentQueueIndex(0);
+    setCurrentStepAnswered(false);
+    setSessionResults([]);
+    setIsSessionFinished(false);
+    setIsSessionActive(true);
+    setActiveTab("practice");
+  };
+
+  const handleAnswerGrammar = (isCorrect: boolean, chosenOption: string, timeTakenMs: number) => {
+    const currentQ = grammarQueue[currentQueueIndex];
+    if (!currentQ) return;
+
+    const basePoints = isCorrect ? 35 : 5;
+    const baseExp = isCorrect ? 35 : 5;
+    const speed = calculateSpeedBonus(timeTakenMs / 1000);
+    const roundPts = basePoints + (isCorrect ? speed.bonusPoints : 0);
+    const roundXp = baseExp + (isCorrect ? speed.bonusXp : 0);
+
+    const prevGam = appState.gamification || INITIAL_STATE.gamification;
+    const newGam = {
+      ...prevGam,
+      points: (prevGam.points || 0) + roundPts,
+      xp: (prevGam.xp || 0) + roundXp,
+    };
+
+    const newStats = {
+      ...appState.stats,
+      totalWordsAnswered: appState.stats.totalWordsAnswered + 1,
+      totalCorrect: appState.stats.totalCorrect + (isCorrect ? 1 : 0),
+    };
+
+    setSessionPointsEarned((p) => p + roundPts);
+    setSessionXpEarned((x) => x + roundXp);
+
+    const newResults = [
+      ...sessionResults,
+      {
+        title: currentQ.prompt,
+        category: currentQ.category,
+        isCorrect,
+        userAnswer: chosenOption,
+      },
+    ];
+    setSessionResults(newResults);
+
+    handleUpdateAppState({
+      ...appState,
+      stats: newStats,
+      gamification: newGam,
+    });
+
+    if (currentQueueIndex + 1 < grammarQueue.length) {
+      setCurrentQueueIndex((i) => i + 1);
+    } else {
+      setIsSessionFinished(true);
+      setIsSessionActive(false);
+      const updatedStats = updateStreak(newStats);
+      handleUpdateAppState({
+        ...appState,
+        stats: updatedStats,
+        gamification: newGam,
+      });
+    }
+  };
+
   // Start a new regular practice round
   const startSession = (
     modePreference: "mixed" | "audio" | "proofread" = "mixed",
@@ -205,8 +290,10 @@ export default function Home() {
   };
 
   // Start a Boss Battle
-  const startBossBattle = (bossId: string) => {
+  const startBossBattle = (bossId: string, isHardcore?: boolean) => {
     const boss = BOSS_ROSTER.find((b) => b.id === bossId) || BOSS_ROSTER[0];
+    const hardcoreMode = isHardcore !== undefined ? isHardcore : isHardcoreTrial;
+    setIsHardcoreTrial(hardcoreMode);
 
     if (soundEnabled) {
       if (boss.theme === "starwars") playSound("lightsaber");
@@ -215,23 +302,29 @@ export default function Home() {
       else playSound("click");
     }
 
+    const effectiveHp = hardcoreMode ? Math.round(boss.hp * 1.5) : boss.hp;
+
     const queue = buildBossSessionQueue(
       YEAR_3_NAPLAN_WORDS,
       appState.progress,
-      boss.hp,
+      effectiveHp,
       boss.level
     );
 
     const activePerks = appState.gamification?.activePerks || [];
     const hasShieldBoost = activePerks.includes("shield_boost");
-    const startingHearts = hasShieldBoost ? 4 : 3;
+    const hasBeskar = activePerks.includes("beskar_forged");
+    // Hardcore mode limits player to 2 hearts; otherwise Beskar grants 5, Shield Boost grants 4, base is 3
+    const startingHearts = hardcoreMode ? 2 : hasBeskar ? 5 : hasShieldBoost ? 4 : 3;
 
     setIsBossSession(true);
+    setIsGrammarSession(false);
     setActiveBoss(boss);
-    setBossHp(boss.hp);
+    setBossHp(effectiveHp);
     setPlayerHearts(startingHearts);
     setMaxHearts(startingHearts);
     setTotemUsed(false);
+    setResurrectionUsed(false);
     setBossVictoryState(null);
     setSessionXpEarned(0);
     setSessionPointsEarned(0);
@@ -338,7 +431,8 @@ export default function Home() {
 
     if (isBossSession && activeBoss) {
       if (isCorrect) {
-        const damageDealt = hasCriticalRocket ? 2 : 1;
+        const hasGrandmasterAura = activePerks.includes("master_grandmaster_aura") && currentItem.word.difficulty === 3;
+        const damageDealt = hasCriticalRocket || hasGrandmasterAura ? 2 : 1;
         updatedBossHp = Math.max(0, bossHp - damageDealt);
         setBossHp(updatedBossHp);
       } else {
@@ -348,6 +442,11 @@ export default function Home() {
           setTotemUsed(true);
         } else {
           updatedHearts = Math.max(0, playerHearts - 1);
+          if (updatedHearts <= 0 && activePerks.includes("force_resurrection") && !resurrectionUsed) {
+            setResurrectionUsed(true);
+            updatedHearts = 2;
+            if (soundEnabled) playSound("perk_unlock");
+          }
           setPlayerHearts(updatedHearts);
         }
       }
@@ -402,8 +501,9 @@ export default function Home() {
         // Boss Battle finished
         const finalHp = bossHp;
         const isVictory = finalHp <= 0;
-        const bonusXp = isVictory ? activeBoss.rewardXp : 100;
-        const bonusPoints = isVictory ? activeBoss.rewardPoints + beaconBonus : 25 + beaconBonus;
+        const rewardMultiplier = isHardcoreTrial ? 3 : 1;
+        const bonusXp = (isVictory ? activeBoss.rewardXp : 100) * rewardMultiplier;
+        const bonusPoints = (isVictory ? activeBoss.rewardPoints + beaconBonus : 25 + beaconBonus) * rewardMultiplier;
 
         const totalXp = (appState.gamification?.xp || 0) + bonusXp;
         const totalPoints = (appState.gamification?.points || 0) + bonusPoints;
@@ -470,7 +570,7 @@ export default function Home() {
 
   // Review only missed words from this session
   const handleReviewMissedOnly = () => {
-    const missed = sessionResults.filter((r) => !r.isCorrect).map((r) => r.word);
+    const missed = sessionResults.filter((r) => !r.isCorrect && r.word).map((r) => r.word as SpellingWord);
     if (missed.length > 0) {
       startSession("mixed", missed);
     }
@@ -554,18 +654,19 @@ export default function Home() {
             {isBossSession && activeBoss && bossVictoryState ? (
               <BossVictorySummary
                 boss={activeBoss}
-                results={sessionResults}
+                results={sessionResults.filter((r) => r.word) as { word: SpellingWord; isCorrect: boolean; userAnswer: string }[]}
                 isVictory={bossVictoryState.isVictory}
                 xpEarned={bossVictoryState.xpEarned}
                 pointsEarned={bossVictoryState.pointsEarned}
                 unlockedBadge={bossVictoryState.unlockedBadge}
-                onFightAgain={() => startBossBattle(activeBoss.id)}
+                onFightAgain={() => startBossBattle(activeBoss.id, isHardcoreTrial)}
                 onNextBoss={() => {
+                  const nextLevel = activeBoss.level < 10 ? activeBoss.level + 1 : 1;
                   const nextBoss = BOSS_ROSTER.find(
-                    (b) => b.theme === activeBoss.theme && b.level === ((activeBoss.level % 6) + 1)
+                    (b) => b.theme === activeBoss.theme && b.level === nextLevel
                   );
-                  if (nextBoss) startBossBattle(nextBoss.id);
-                  else startBossBattle(BOSS_ROSTER[0].id);
+                  if (nextBoss) startBossBattle(nextBoss.id, isHardcoreTrial);
+                  else startBossBattle(BOSS_ROSTER[0].id, isHardcoreTrial);
                 }}
                 onReturnHome={() => {
                   setIsSessionFinished(false);
@@ -590,8 +691,21 @@ export default function Home() {
           </>
         )}
 
-        {/* VIEW 3: Active Card (Boss Card or Standard Cards) */}
-        {activeTab === "practice" && isSessionActive && currentItem && (
+        {/* VIEW 3: Active Card (Grammar Card, Boss Card or Standard Cards) */}
+        {activeTab === "practice" && isSessionActive && isGrammarSession && grammarQueue[currentQueueIndex] && (
+          <div className="w-full flex flex-col items-center gap-4 animate-fadeIn">
+            <GrammarPracticeCard
+              question={grammarQueue[currentQueueIndex]}
+              currentIndex={currentQueueIndex}
+              totalQuestions={grammarQueue.length}
+              onAnswer={handleAnswerGrammar}
+              soundEnabled={soundEnabled}
+            />
+          </div>
+        )}
+
+        {/* VIEW 3B: Active Card (Boss Card or Standard Cards) */}
+        {activeTab === "practice" && isSessionActive && !isGrammarSession && currentItem && (
           <div className="w-full flex flex-col items-center gap-4 animate-fadeIn">
             {isBossSession && activeBoss ? (
               <BossBattleCard
@@ -599,7 +713,7 @@ export default function Home() {
                 word={currentItem.word}
                 mode={currentItem.mode}
                 bossHp={bossHp}
-                maxHp={activeBoss.hp}
+                maxHp={isHardcoreTrial ? Math.round(activeBoss.hp * 1.5) : activeBoss.hp}
                 playerHearts={playerHearts}
                 maxHearts={maxHearts}
                 currentIndex={currentQueueIndex}
@@ -699,7 +813,15 @@ export default function Home() {
                     className="px-5 py-3 rounded-2xl bg-amber-400 hover:bg-amber-300 active:scale-95 text-slate-900 font-extrabold text-sm shadow-lg shadow-amber-900/20 transition flex items-center gap-2"
                   >
                     <Sparkles className="w-4 h-4" />
-                    <span>Daily 10 Words</span>
+                    <span>Daily 10 Spelling</span>
+                  </button>
+
+                  <button
+                    onClick={() => startGrammarSession()}
+                    className="px-5 py-3 rounded-2xl bg-purple-500 hover:bg-purple-400 active:scale-95 text-white font-extrabold text-sm shadow-lg shadow-purple-950/20 transition flex items-center gap-2"
+                  >
+                    <BookOpen className="w-4 h-4 text-purple-200" />
+                    <span>Top 1% Grammar</span>
                   </button>
 
                   <button
@@ -744,21 +866,34 @@ export default function Home() {
             </div>
 
             {/* BOSS BATTLES SECTION (All 6 Bosses for Active Realm) */}
+            {/* BOSS BATTLES SECTION (All 10 Bosses for Active Realm) */}
             <div>
-              <div className="flex items-center justify-between mb-3 px-1">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center justify-between mb-3 px-1 flex-wrap gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-xs font-extrabold text-slate-700 uppercase tracking-wider">
-                    ⚔️ {currentTheme.shortName} Boss Battles (Levels 1 - 6)
+                    ⚔️ {currentTheme.shortName} Boss Battles (Levels 1 - 10)
                   </h3>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-100 text-red-700 animate-pulse">
-                    Bosses Ready
-                  </span>
+                  <button
+                    onClick={() => {
+                      setIsHardcoreTrial(!isHardcoreTrial);
+                      playSound("click");
+                    }}
+                    className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase transition flex items-center gap-1 border ${
+                      isHardcoreTrial
+                        ? "bg-rose-950 text-rose-300 border-rose-500 animate-pulse"
+                        : "bg-slate-100 hover:bg-slate-200 text-slate-600 border-slate-300"
+                    }`}
+                    title="Hardcore Trial: 1.5x Boss HP, 2 Hearts Only, 3x XP and Points!"
+                  >
+                    <span>💀 Hardcore</span>
+                    <span>{isHardcoreTrial ? "ON (3x)" : "OFF"}</span>
+                  </button>
                 </div>
                 <button
                   onClick={() => setIsArmoryOpen(true)}
                   className="text-xs font-bold text-indigo-600 hover:text-indigo-800"
                 >
-                  View All 18 Bosses ➔
+                  View All 30 Bosses ➔
                 </button>
               </div>
 
@@ -766,6 +901,8 @@ export default function Home() {
                 {currentThemeBosses.map((boss) => {
                   const wins = appState.gamification?.bossesDefeated[boss.id] || 0;
                   const isConquered = wins > 0;
+                  const displayHp = isHardcoreTrial ? Math.round(boss.hp * 1.5) : boss.hp;
+                  const displayXp = isHardcoreTrial ? boss.rewardXp * 3 : boss.rewardXp;
 
                   return (
                     <div
@@ -781,17 +918,36 @@ export default function Home() {
                           <span className="text-3xl group-hover:scale-110 transition">
                             {boss.avatarEmoji}
                           </span>
-                          <span
-                            className={`px-1.5 py-0.5 rounded font-black text-[10px] ${
-                              boss.level >= 5
-                                ? "bg-purple-100 text-purple-800"
-                                : boss.level >= 3
-                                ? "bg-amber-100 text-amber-800"
-                                : "bg-emerald-100 text-emerald-800"
-                            }`}
-                          >
-                            Lvl {boss.level}
-                          </span>
+                          <div className="flex items-center gap-1 flex-wrap justify-end">
+                            <span
+                              className={`px-1.5 py-0.5 rounded font-black text-[10px] ${
+                                boss.level >= 10
+                                  ? "bg-rose-100 text-rose-800"
+                                  : boss.level >= 7
+                                  ? "bg-purple-100 text-purple-800"
+                                  : boss.level >= 5
+                                  ? "bg-indigo-100 text-indigo-800"
+                                  : boss.level >= 3
+                                  ? "bg-amber-100 text-amber-800"
+                                  : "bg-emerald-100 text-emerald-800"
+                              }`}
+                            >
+                              Lvl {boss.level}
+                            </span>
+                            {boss.tier && (
+                              <span
+                                className={`px-1 py-0.5 rounded font-black text-[9px] uppercase ${
+                                  boss.tier === "Apex"
+                                    ? "bg-rose-100 text-rose-800"
+                                    : boss.tier === "Nightmare"
+                                    ? "bg-purple-100 text-purple-800"
+                                    : "bg-slate-100 text-slate-600"
+                                }`}
+                              >
+                                {boss.tier}
+                              </span>
+                            )}
+                          </div>
                         </div>
 
                         <div className="mt-2.5">
@@ -802,18 +958,22 @@ export default function Home() {
                             {boss.title}
                           </p>
                           <div className="mt-2 flex items-center justify-between text-[10px] text-slate-600 font-bold bg-slate-50 rounded-lg p-1 border border-slate-100">
-                            <span>HP: {boss.hp}</span>
-                            <span className="text-amber-600">+{boss.rewardPoints} Pts</span>
+                            <span>HP: {displayHp}</span>
+                            <span className="text-amber-600">+{displayXp} XP</span>
                           </div>
                         </div>
                       </div>
 
                       <button
-                        onClick={() => startBossBattle(boss.id)}
-                        className="mt-3 w-full py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:brightness-110 active:scale-95 text-white font-black text-xs shadow-md shadow-indigo-100 transition flex items-center justify-center gap-1"
+                        onClick={() => startBossBattle(boss.id, isHardcoreTrial)}
+                        className={`mt-3 w-full py-1.5 rounded-xl font-black text-xs shadow-md transition flex items-center justify-center gap-1 active:scale-95 text-white ${
+                          isHardcoreTrial
+                            ? "bg-rose-600 hover:bg-rose-700 shadow-rose-100"
+                            : "bg-gradient-to-r from-indigo-600 to-violet-600 hover:brightness-110 shadow-indigo-100"
+                        }`}
                       >
                         <Swords className="w-3 h-3 text-amber-300" />
-                        <span>Fight Boss</span>
+                        <span>{isHardcoreTrial ? "💀 Hardcore" : "Fight Boss"}</span>
                       </button>
                     </div>
                   );
@@ -827,7 +987,36 @@ export default function Home() {
                 Standard Practice Modes
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {/* Grammar & Conventions Card */}
+                <div
+                  onClick={() => startGrammarSession()}
+                  className="bg-white hover:border-purple-400 hover:shadow-lg cursor-pointer border-2 border-purple-200/80 rounded-3xl p-5 transition flex flex-col justify-between group active:scale-[0.98] relative overflow-hidden bg-gradient-to-b from-purple-50/40 to-white"
+                >
+                  <div className="absolute top-3 right-3">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase bg-purple-600 text-white">
+                      Top 1% Skills
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-purple-100 border border-purple-200 flex items-center justify-center text-purple-700 group-hover:scale-105 transition shrink-0">
+                      <BookOpen className="w-6 h-6" />
+                    </div>
+                    <div className="pr-12 sm:pr-0">
+                      <h4 className="font-extrabold text-base text-slate-800 group-hover:text-purple-700 transition">
+                        Grammar & Punctuation
+                      </h4>
+                      <p className="text-xs text-slate-500 mt-1">
+                        Apostrophes, speech marks, past tense verbs, pronouns, and sentence structures.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-purple-100 flex items-center justify-between text-xs font-bold text-purple-700">
+                    <span>10 NAPLAN Questions</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+                  </div>
+                </div>
+
                 {/* Audio Dictation Card */}
                 <div
                   onClick={() => startSession("audio")}

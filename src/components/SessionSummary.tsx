@@ -6,7 +6,9 @@ import { Award, RotateCcw, ArrowRight, CheckCircle2, XCircle, Flame, Star } from
 import { SpellingWord } from "../data/words";
 
 interface SessionResultItem {
-  word: SpellingWord;
+  word?: SpellingWord;
+  title?: string;
+  category?: string;
   isCorrect: boolean;
   userAnswer: string;
 }
@@ -104,8 +106,8 @@ export const SessionSummary: React.FC<SessionSummaryProps> = ({
                 ) : (
                   <XCircle className="w-4 h-4 text-rose-500 shrink-0" />
                 )}
-                <span className="font-bold text-slate-800 capitalize">{res.word.word}</span>
-                <span className="text-xs text-slate-400">({res.word.category})</span>
+                <span className="font-bold text-slate-800 capitalize">{res.word ? res.word.word : (res.title || "Question")}</span>
+                <span className="text-xs text-slate-400">({res.word ? res.word.category : (res.category || "Grammar")})</span>
               </div>
               {!res.isCorrect && (
                 <span className="text-xs text-rose-600 font-mono">

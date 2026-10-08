@@ -65,16 +65,50 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const startTimeRef = useRef<number>(Date.now());
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const hasSubmittedRef = useRef<boolean>(false);
 
   const hasHolocron = activePerks.includes("holocron_vision");
   const hasSpeedPerk = activePerks.includes("speed_spark");
   const hasCriticalRocket = activePerks.includes("critical_rocket") && currentIndex === 0;
+  const hasGrandmasterAura = activePerks.includes("master_grandmaster_aura") && word.difficulty === 3;
+  const effectiveEnrage = boss.enrageSeconds
+    ? boss.enrageSeconds + (activePerks.includes("chronos_freeze") ? 10 : 0)
+    : null;
+
+  // Handle enrage timeout strike
+  const handleTimeout = () => {
+    if (hasSubmittedRef.current) return;
+    hasSubmittedRef.current = true;
+
+    if (timerIntervalRef.current) {
+      clearInterval(timerIntervalRef.current);
+      timerIntervalRef.current = null;
+    }
+
+    setHasSubmitted(true);
+    setIsCorrect(false);
+
+    if (activePerks.includes("totem_undying") && !totemUsed) {
+      setTotemActivated(true);
+      if (soundEnabled) playSound("perk_unlock");
+      setBossSpeech("The Totem of Undying absorbed my enrage blast! Your shield remains intact!");
+    } else {
+      if (soundEnabled) {
+        playSound("incorrect");
+        speakSingleWord(word.word, true);
+      }
+      setBossSpeech(`${boss.name} ENRAGED! You took too long to strike, and my counterattack broke through!`);
+    }
+
+    onAnswer(false, "(timed out)", effectiveEnrage || 25);
+  };
 
   // Reset & start timer on new word
   useEffect(() => {
     setInputVal("");
     setShowHint(hasHolocron);
     setHasSubmitted(false);
+    hasSubmittedRef.current = false;
     setIsCorrect(false);
     setBossShake(false);
     setAttackEffect(null);
@@ -86,7 +120,11 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
 
     if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
     timerIntervalRef.current = setInterval(() => {
-      setElapsedSeconds(Math.floor((Date.now() - startTimeRef.current) / 1000));
+      const sec = Math.floor((Date.now() - startTimeRef.current) / 1000);
+      setElapsedSeconds(sec);
+      if (effectiveEnrage && sec >= effectiveEnrage && !hasSubmittedRef.current) {
+        handleTimeout();
+      }
     }, 500);
 
     if (mode === "audio" && soundEnabled) {
@@ -101,13 +139,14 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
       clearTimeout(timer);
       if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
     };
-  }, [word.id, mode, hasHolocron]);
+  }, [word.id, mode, hasHolocron, effectiveEnrage]);
 
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     const cleanInput = inputVal.trim().toLowerCase();
-    if (!cleanInput || hasSubmitted) return;
+    if (!cleanInput || hasSubmittedRef.current) return;
 
+    hasSubmittedRef.current = true;
     if (timerIntervalRef.current) {
       clearInterval(timerIntervalRef.current);
       timerIntervalRef.current = null;
@@ -127,6 +166,8 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
 
       const attackLabel = hasCriticalRocket
         ? `${boss.playerAttackName} + STARK/TNT CRITICAL (2x DMG)!`
+        : hasGrandmasterAura
+        ? `${boss.playerAttackName} + GRANDMASTER AURA (2x DMG)!`
         : speedBonus.tier === "lightning"
         ? `${boss.playerAttackName} (LIGHTNING SPEED)!`
         : boss.playerAttackName;
@@ -198,8 +239,8 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
         }`}
       >
         {/* Top Badges & Live Timer */}
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2 mb-3 flex-wrap">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-white/10 backdrop-blur-sm border border-white/20">
               {boss.theme === "starwars" && "🌌 Star Wars Boss"}
               {boss.theme === "marvel" && "⚡ Marvel Boss"}
@@ -208,19 +249,49 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40">
               Level {boss.level}
             </span>
-          </div>
-
-          {/* Live Speed & Timer */}
-          <div className="flex items-center gap-1.5 bg-black/50 px-3 py-1 rounded-full border border-white/10 text-xs font-black">
-            <Timer className={`w-3.5 h-3.5 ${elapsedSeconds < 6 ? "text-amber-400 animate-pulse" : "text-slate-400"}`} />
-            <span className={elapsedSeconds < 6 ? "text-amber-300" : "text-slate-300"}>
-              {elapsedSeconds}s
-            </span>
-            {elapsedSeconds < 6 && (
-              <span className="text-[10px] text-amber-400 hidden sm:inline font-bold">
-                (⚡ SPEED BONUS!)
+            {boss.tier && (
+              <span
+                className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border ${
+                  boss.tier === "Apex"
+                    ? "bg-rose-500/30 text-rose-300 border-rose-400/50 animate-pulse"
+                    : boss.tier === "Nightmare"
+                    ? "bg-purple-500/30 text-purple-300 border-purple-400/50"
+                    : "bg-blue-500/20 text-blue-300 border-blue-400/30"
+                }`}
+              >
+                💀 {boss.tier}
               </span>
             )}
+          </div>
+
+          <div className="flex items-center gap-2">
+            {/* Live Enrage Countdown Timer */}
+            {effectiveEnrage && !hasSubmitted && (
+              <div
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-full border text-xs font-black ${
+                  effectiveEnrage - elapsedSeconds <= 6
+                    ? "bg-red-950/90 text-rose-300 border-red-500 animate-pulse"
+                    : "bg-black/50 text-slate-300 border-white/10"
+                }`}
+                title="Enrage Countdown: Answer before time expires!"
+              >
+                <Flame className={`w-3.5 h-3.5 ${effectiveEnrage - elapsedSeconds <= 6 ? "text-rose-400 animate-bounce" : "text-amber-400"}`} />
+                <span>Enrage: {Math.max(0, effectiveEnrage - elapsedSeconds)}s</span>
+              </div>
+            )}
+
+            {/* Live Speed & Timer */}
+            <div className="flex items-center gap-1.5 bg-black/50 px-3 py-1 rounded-full border border-white/10 text-xs font-black">
+              <Timer className={`w-3.5 h-3.5 ${elapsedSeconds < 6 ? "text-amber-400 animate-pulse" : "text-slate-400"}`} />
+              <span className={elapsedSeconds < 6 ? "text-amber-300" : "text-slate-300"}>
+                {elapsedSeconds}s
+              </span>
+              {elapsedSeconds < 6 && (
+                <span className="text-[10px] text-amber-400 hidden sm:inline font-bold">
+                  (⚡ SPEED)
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
