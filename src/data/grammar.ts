@@ -97,6 +97,68 @@ export const YEAR_3_GRAMMAR_PRACTICE: GrammarQuestion[] = [
     ruleTag: "Commas in Lists"
   },
 
+  {
+    id: "g-punc-06",
+    category: "Punctuation & Capitalisation",
+    difficulty: 1,
+    prompt: "Which sentence ends with the correct punctuation mark?",
+    options: [
+      "What an incredible goal that was!",
+      "What an incredible goal that was?",
+      "What an incredible goal that was,",
+      "What an incredible goal that was;"
+    ],
+    correctOptionIndex: 0,
+    explanation: "This is an exclamatory sentence showing strong excitement, so it ends with an exclamation mark (!).",
+    ruleTag: "Exclamation Marks"
+  },
+  {
+    id: "g-punc-07",
+    category: "Punctuation & Capitalisation",
+    difficulty: 2,
+    prompt: "Which sentence correctly capitalises months and holidays?",
+    options: [
+      "We celebrate anzac Day every april.",
+      "We celebrate Anzac Day every April.",
+      "We celebrate anzac day every April.",
+      "We celebrate Anzac day every april."
+    ],
+    correctOptionIndex: 1,
+    explanation: "Names of special commemorative holidays (Anzac Day) and months (April) are proper nouns and need capital letters.",
+    ruleTag: "Proper Nouns"
+  },
+  {
+    id: "g-punc-08",
+    category: "Punctuation & Capitalisation",
+    difficulty: 3,
+    prompt: "Where should the comma be placed in this sentence?",
+    sentenceContext: "\"I love reading about space\" whispered Liam.",
+    options: [
+      "After 'I'",
+      "Inside the quotation marks, after 'space'",
+      "After the quotation mark, before 'whispered'",
+      "After 'Liam'"
+    ],
+    correctOptionIndex: 1,
+    explanation: "In direct speech, commas separating dialogue from the reporting clause belong inside the quotation marks.",
+    ruleTag: "Speech Marks"
+  },
+  {
+    id: "g-punc-09",
+    category: "Punctuation & Capitalisation",
+    difficulty: 2,
+    prompt: "Which sentence uses commas correctly to separate items?",
+    options: [
+      "The recipe needs flour, sugar, butter, and two fresh eggs.",
+      "The recipe needs, flour, sugar butter, and two fresh eggs.",
+      "The recipe needs flour sugar, butter and, two fresh eggs.",
+      "The recipe needs flour, sugar butter and, two fresh eggs."
+    ],
+    correctOptionIndex: 0,
+    explanation: "Commas separate individual items in a list clearly.",
+    ruleTag: "Commas in Lists"
+  },
+
   // --- Apostrophes & Contractions ---
   {
     id: "g-apos-01",
@@ -149,6 +211,57 @@ export const YEAR_3_GRAMMAR_PRACTICE: GrammarQuestion[] = [
     correctOptionIndex: 0,
     explanation: "For regular plural nouns ending in 's' (girls), place the apostrophe after the 's': girls'.",
     ruleTag: "Plural Possession"
+  },
+  {
+    id: "g-apos-05",
+    category: "Apostrophes & Contractions",
+    difficulty: 2,
+    prompt: "Which word is the correct contraction for 'they will'?",
+    options: ["they'll", "theyl", "they'will", "they'll'"],
+    correctOptionIndex: 0,
+    explanation: "In 'they will', the 'wi' is replaced by an apostrophe: they'll.",
+    ruleTag: "Contractions"
+  },
+  {
+    id: "g-apos-06",
+    category: "Apostrophes & Contractions",
+    difficulty: 3,
+    prompt: "Which sentence correctly shows possession for an irregular plural noun (children)?",
+    options: [
+      "The childrens' playground was freshly painted.",
+      "The childrens playground was freshly painted.",
+      "The children's playground was freshly painted.",
+      "The childrens's playground was freshly painted."
+    ],
+    correctOptionIndex: 2,
+    explanation: "'Children' is already plural without an 's', so add 's to show possession: children's.",
+    ruleTag: "Irregular Plural Possession"
+  },
+  {
+    id: "g-apos-07",
+    category: "Apostrophes & Contractions",
+    difficulty: 2,
+    prompt: "Which sentence uses apostrophes correctly?",
+    options: [
+      "We aren't able to visit Grandma's house today.",
+      "We arent able to visit Grandmas' house today.",
+      "We are'nt able to visit Grandmas house today.",
+      "We aren't able to visit Grandmas house today."
+    ],
+    correctOptionIndex: 0,
+    explanation: "'aren't' is the contraction for 'are not', and 'Grandma's' shows singular possession of the house.",
+    ruleTag: "Contractions and Possession"
+  },
+  {
+    id: "g-apos-08",
+    category: "Apostrophes & Contractions",
+    difficulty: 3,
+    prompt: "Choose the correct word to complete the sentence:",
+    sentenceContext: "_______ time to pack our bags before the bell rings.",
+    options: ["Its", "It's", "Its'", "It is'"],
+    correctOptionIndex: 1,
+    explanation: "'It's' stands for 'It is'. 'It is time to pack our bags' makes complete sense.",
+    ruleTag: "Its vs It's"
   },
 
   // --- Parts of Speech ---
@@ -207,6 +320,54 @@ export const YEAR_3_GRAMMAR_PRACTICE: GrammarQuestion[] = [
     explanation: "'Flock' is a collective noun representing a group of birds.",
     ruleTag: "Collective Nouns"
   },
+  {
+    id: "g-pos-06",
+    category: "Parts of Speech",
+    difficulty: 1,
+    prompt: "Which word in this sentence is a VERB (action word)?",
+    sentenceContext: "The noisy kookaburra laughed loudly from the gum tree branch.",
+    options: ["noisy", "kookaburra", "laughed", "loudly"],
+    correctOptionIndex: 2,
+    explanation: "'Laughed' tells what the kookaburra did (action verb).",
+    ruleTag: "Verbs"
+  },
+  {
+    id: "g-pos-07",
+    category: "Parts of Speech",
+    difficulty: 2,
+    prompt: "Which word in this sentence is a PRONOUN (replaces a noun)?",
+    sentenceContext: "Lucas searched everywhere for his pencil case, but he could not find it.",
+    options: ["Lucas", "searched", "everywhere", "he"],
+    correctOptionIndex: 3,
+    explanation: "'He' is a pronoun standing in place of Lucas.",
+    ruleTag: "Pronouns"
+  },
+  {
+    id: "g-pos-08",
+    category: "Parts of Speech",
+    difficulty: 2,
+    prompt: "Which word is an ADVERB telling WHEN an action happened?",
+    sentenceContext: "We will visit the wildlife sanctuary tomorrow.",
+    options: ["visit", "wildlife", "tomorrow", "sanctuary"],
+    correctOptionIndex: 2,
+    explanation: "'Tomorrow' is a time adverb answering 'when' the visit will take place.",
+    ruleTag: "Adverbs"
+  },
+  {
+    id: "g-pos-09",
+    category: "Parts of Speech",
+    difficulty: 3,
+    prompt: "Which underlined word is functioning as a NOUN?",
+    options: [
+      "We went for a long walk in the national park.",
+      "Did you walk to school today?",
+      "They walk briskly every morning.",
+      "Can you walk the dog before dinner?"
+    ],
+    correctOptionIndex: 0,
+    explanation: "In 'a long walk', 'walk' is a thing (noun preceded by the article 'a' and adjective 'long'). In the others, it is a verb.",
+    ruleTag: "Parts of Speech in Context"
+  },
 
   // --- Tense & Verb Agreement ---
   {
@@ -260,6 +421,58 @@ export const YEAR_3_GRAMMAR_PRACTICE: GrammarQuestion[] = [
     correctOptionIndex: 1,
     explanation: "'Wrote' is the simple past tense of 'write'.",
     ruleTag: "Irregular Past Tense"
+  },
+  {
+    id: "g-verb-05",
+    category: "Tense & Verb Agreement",
+    difficulty: 2,
+    prompt: "Which verb correctly completes this sentence in the past tense?",
+    sentenceContext: "The frightened wallaby _______ into the dense scrub.",
+    options: ["runned", "ran", "running", "runs"],
+    correctOptionIndex: 1,
+    explanation: "'Ran' is the irregular past tense form of 'run'.",
+    ruleTag: "Irregular Past Tense"
+  },
+  {
+    id: "g-verb-06",
+    category: "Tense & Verb Agreement",
+    difficulty: 2,
+    prompt: "Select the sentence with correct subject-verb agreement:",
+    options: [
+      "Neither the dog nor the cats was in the backyard.",
+      "The players on the team practices hard every Tuesday.",
+      "The dog and the cat are sleeping together in the basket.",
+      "The dog and the cat is sleeping together in the basket."
+    ],
+    correctOptionIndex: 2,
+    explanation: "Two subjects joined by 'and' ('The dog and the cat') form a plural subject and take the plural verb 'are'.",
+    ruleTag: "Subject-Verb Agreement"
+  },
+  {
+    id: "g-verb-07",
+    category: "Tense & Verb Agreement",
+    difficulty: 3,
+    prompt: "Which verb correctly completes the sentence?",
+    sentenceContext: "Last summer, our family _______ across the crystal clear lake.",
+    options: ["swam", "swum", "swimmed", "swimming"],
+    correctOptionIndex: 0,
+    explanation: "'Swam' is the simple past tense of 'swim'. ('Swum' requires an auxiliary verb like 'had swum').",
+    ruleTag: "Irregular Past Tense"
+  },
+  {
+    id: "g-verb-08",
+    category: "Tense & Verb Agreement",
+    difficulty: 2,
+    prompt: "Which sentence is written entirely in future tense?",
+    options: [
+      "We will travel to the Great Barrier Reef next holidays.",
+      "We traveled to the Great Barrier Reef next holidays.",
+      "We are traveling to the Great Barrier Reef yesterday.",
+      "We travel to the Great Barrier Reef last holidays."
+    ],
+    correctOptionIndex: 0,
+    explanation: "'Will travel' shows an event that will occur in the future.",
+    ruleTag: "Future Tense"
   },
 
   // --- Sentence Structure & Conjunctions ---
@@ -315,6 +528,58 @@ export const YEAR_3_GRAMMAR_PRACTICE: GrammarQuestion[] = [
     explanation: "'As soon as' connects the timing of putting up umbrellas to when rain starts.",
     ruleTag: "Subordinating Conjunctions"
   },
+  {
+    id: "g-sent-05",
+    category: "Sentence Structure & Conjunctions",
+    difficulty: 2,
+    prompt: "Which conjunction shows a cause or reason?",
+    sentenceContext: "Sophie stayed inside at lunchtime _______ she had a sore throat.",
+    options: ["because", "or", "so", "but"],
+    correctOptionIndex: 0,
+    explanation: "'Because' explains the reason why Sophie stayed inside.",
+    ruleTag: "Subordinating Conjunctions"
+  },
+  {
+    id: "g-sent-06",
+    category: "Sentence Structure & Conjunctions",
+    difficulty: 3,
+    prompt: "Which sentence is a COMPOUND sentence?",
+    options: [
+      "The sun went down, and the bright stars appeared.",
+      "After the sun went down, the bright stars appeared.",
+      "The stars appeared in the darkening night sky.",
+      "Looking up at the bright twinkling stars."
+    ],
+    correctOptionIndex: 0,
+    explanation: "A compound sentence joins two independent clauses with a coordinating conjunction: 'The sun went down' + 'and' + 'the bright stars appeared'.",
+    ruleTag: "Compound Sentences"
+  },
+  {
+    id: "g-sent-07",
+    category: "Sentence Structure & Conjunctions",
+    difficulty: 2,
+    prompt: "Which word best completes the sentence to show a condition?",
+    sentenceContext: "You cannot borrow a library book _______ you return your overdue ones.",
+    options: ["until", "because", "so", "and"],
+    correctOptionIndex: 0,
+    explanation: "'Until' indicates the condition and time required before borrowing again.",
+    ruleTag: "Conjunctions"
+  },
+  {
+    id: "g-sent-08",
+    category: "Sentence Structure & Conjunctions",
+    difficulty: 1,
+    prompt: "Which sentence is a command (imperative sentence)?",
+    options: [
+      "Please close the classroom door quietly.",
+      "The classroom door is wide open.",
+      "Did you close the classroom door?",
+      "What a heavy classroom door this is!"
+    ],
+    correctOptionIndex: 0,
+    explanation: "A command gives an instruction or polite direction to do something.",
+    ruleTag: "Sentence Types"
+  },
 
   // --- Pronouns & Modifiers (Top 1% Traps) ---
   {
@@ -368,6 +633,80 @@ export const YEAR_3_GRAMMAR_PRACTICE: GrammarQuestion[] = [
     correctOptionIndex: 1,
     explanation: "'Neither' is singular, so the formal grammatical pronoun agreeing with 'boy' is 'his' (Band 6 excellence).",
     ruleTag: "Pronoun Agreement"
+  },
+  {
+    id: "g-pro-05",
+    category: "Pronouns & Modifiers",
+    difficulty: 2,
+    prompt: "Which pronoun correctly completes the subject of the sentence?",
+    sentenceContext: "_______ and Oliver built a solar-powered model car.",
+    options: ["Me", "Him", "I", "Us"],
+    correctOptionIndex: 2,
+    explanation: "Tip: Remove 'and Oliver': 'I built a model car' (subject pronoun), not 'Me built'.",
+    ruleTag: "Subject vs Object Pronouns"
+  },
+  {
+    id: "g-pro-06",
+    category: "Pronouns & Modifiers",
+    difficulty: 2,
+    prompt: "Which sentence uses the correct superlative adjective?",
+    options: [
+      "Mount Kosciuszko is the most highest peak in Australia.",
+      "Mount Kosciuszko is the higher peak in Australia.",
+      "Mount Kosciuszko is the highest peak in Australia.",
+      "Mount Kosciuszko is the high peak in Australia."
+    ],
+    correctOptionIndex: 2,
+    explanation: "For comparing three or more things, use '-est' (highest). Do not say 'most highest'.",
+    ruleTag: "Superlative Adjectives"
+  },
+  {
+    id: "g-pro-07",
+    category: "Pronouns & Modifiers",
+    difficulty: 3,
+    prompt: "Which sentence uses 'your' and 'you're' correctly?",
+    options: [
+      "You're going to love your new science project book.",
+      "Your going to love you're new science project book.",
+      "Your going to love your new science project book.",
+      "You're going to love you're new science project book."
+    ],
+    correctOptionIndex: 0,
+    explanation: "'You're' = 'you are', while 'your' shows possession ('your project book').",
+    ruleTag: "Your vs You're"
+  },
+  {
+    id: "g-pro-08",
+    category: "Pronouns & Modifiers",
+    difficulty: 2,
+    prompt: "Which word correctly completes this sentence?",
+    sentenceContext: "The teacher asked _______ to line up quietly outside the library.",
+    options: ["we", "us", "they", "he"],
+    correctOptionIndex: 1,
+    explanation: "'Us' is the object pronoun receiving the action of the verb 'asked'.",
+    ruleTag: "Subject vs Object Pronouns"
+  },
+  {
+    id: "g-pro-09",
+    category: "Pronouns & Modifiers",
+    difficulty: 3,
+    prompt: "Choose the correct words to complete the sentence:",
+    sentenceContext: "The blue team played _______ than the yellow team today.",
+    options: ["gooder", "more good", "better", "best"],
+    correctOptionIndex: 2,
+    explanation: "The comparative form of the irregular adjective 'good' is 'better'.",
+    ruleTag: "Irregular Comparatives"
+  },
+  {
+    id: "g-pro-10",
+    category: "Pronouns & Modifiers",
+    difficulty: 2,
+    prompt: "Which word correctly completes the comparison?",
+    sentenceContext: "Out of all three runners, Leo ran the _______.",
+    options: ["faster", "fastest", "most fast", "more faster"],
+    correctOptionIndex: 1,
+    explanation: "Comparing three or more items requires the superlative form: 'fastest'.",
+    ruleTag: "Superlative Adjectives"
   }
 ];
 
