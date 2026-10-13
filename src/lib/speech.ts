@@ -128,63 +128,14 @@ export function speakWithBrowserSynthesis(text: string, options: SpeakOptions = 
 }
 
 /**
- * Speak text using Edge Neural Australian TTS (en-AU-NatashaNeural)
- * Automatically falls back to high-grade browser speech synthesis if offline, stalled, or on network error.
+ * Speak text using native device Speech Synthesis (Australian English priority)
+ * 100% client-side, zero network calls, immune to third-party API breakages.
  */
 export function speakText(text: string, options: SpeakOptions = {}): void {
   if (typeof window === "undefined") return;
 
   stopSpeech();
-
-  const isSlow = options.slowMode || (options.rate !== undefined && options.rate < 0.8);
-  const rateParam = isSlow ? "-25%" : "-5%";
-  const encodedText = encodeURIComponent(text);
-  const audioUrl = `/api/tts?text=${encodedText}&voice=en-AU-NatashaNeural&rate=${encodeURIComponent(rateParam)}`;
-
-  const audio = new Audio(audioUrl);
-  currentAudio = audio;
-
-  let ended = false;
-  const handleEnd = () => {
-    if (currentAudioFallbackTimer) {
-      clearTimeout(currentAudioFallbackTimer);
-      currentAudioFallbackTimer = null;
-    }
-    if (!ended) {
-      ended = true;
-      if (currentAudio === audio) {
-        currentAudio = null;
-      }
-      options.onEnd?.();
-    }
-  };
-
-  const triggerFallback = () => {
-    if (currentAudioFallbackTimer) {
-      clearTimeout(currentAudioFallbackTimer);
-      currentAudioFallbackTimer = null;
-    }
-    if (!ended && currentAudio === audio) {
-      currentAudio = null;
-      audio.pause();
-      speakWithBrowserSynthesis(text, options);
-    }
-  };
-
-  audio.onended = handleEnd;
-  audio.onerror = triggerFallback;
-
-  // Fallback safety timer: if server route stalls or is unreachable within 3.5 seconds, use browser synthesis
-  currentAudioFallbackTimer = setTimeout(() => {
-    if (audio.paused && audio.currentTime === 0) {
-      triggerFallback();
-    }
-  }, 3500);
-
-  audio.play().catch(() => {
-    // Play was interrupted or blocked by browser autoplay policy
-    triggerFallback();
-  });
+  speakWithBrowserSynthesis(text, options);
 }
 
 /**
