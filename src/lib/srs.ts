@@ -28,11 +28,26 @@ export interface UserStats {
   totalCorrect: number;
 }
 
+export interface PassageProgress {
+  passageId: string;
+  stars: number; // 1, 2, or 3
+  bestScore: number;
+  totalQuestions: number;
+  completedAt: string;
+}
+
+export interface ReadingSkillStat {
+  total: number;
+  correct: number;
+}
+
 export interface AppState {
   version: number;
   progress: Record<string, WordProgress>;
   stats: UserStats;
   gamification: GamificationState;
+  readingProgress?: Record<string, PassageProgress>;
+  readingSkillStats?: Record<string, ReadingSkillStat>;
 }
 
 export const INITIAL_STATS: UserStats = {
@@ -48,6 +63,8 @@ export const INITIAL_STATE: AppState = {
   progress: {},
   stats: INITIAL_STATS,
   gamification: INITIAL_GAMIFICATION_STATE,
+  readingProgress: {},
+  readingSkillStats: {},
 };
 
 export function getTodayDateString(): string {

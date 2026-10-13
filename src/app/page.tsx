@@ -12,6 +12,7 @@ import { HeroArmory } from "../components/HeroArmory";
 import { YEAR_3_NAPLAN_WORDS, SpellingWord } from "../data/words";
 import { YEAR_3_GRAMMAR_PRACTICE, GrammarQuestion } from "../data/grammar";
 import { GrammarPracticeCard } from "../components/GrammarPracticeCard";
+import { ReadingHub } from "../components/ReadingHub";
 import {
   AppState,
   INITIAL_STATE,
@@ -50,6 +51,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<"practice" | "dashboard">("practice");
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isArmoryOpen, setIsArmoryOpen] = useState(false);
+  const [isReadingMode, setIsReadingMode] = useState(false);
 
   // Session state
   const [isSessionActive, setIsSessionActive] = useState(false);
@@ -615,6 +617,7 @@ export default function Home() {
           setActiveTab(tab);
           if (tab === "dashboard") {
             setIsSessionActive(false);
+            setIsReadingMode(false);
           }
         }}
         onOpenArmory={() => setIsArmoryOpen(true)}
@@ -645,6 +648,16 @@ export default function Home() {
               }
             }}
             onStartSpecificWord={handleStartSpecificWord}
+          />
+        )}
+
+        {/* VIEW 1.5: Reading Comprehension Quests */}
+        {activeTab === "practice" && isReadingMode && (
+          <ReadingHub
+            appState={appState}
+            soundEnabled={soundEnabled}
+            onUpdateAppState={handleUpdateAppState}
+            onBackToHome={() => setIsReadingMode(false)}
           />
         )}
 
@@ -780,7 +793,7 @@ export default function Home() {
         )}
 
         {/* VIEW 4: Practice Hub / Mode Selector (Default Home) */}
-        {activeTab === "practice" && !isSessionActive && !isSessionFinished && (
+        {activeTab === "practice" && !isSessionActive && !isSessionFinished && !isReadingMode && (
           <div className="w-full max-w-2xl space-y-6 animate-fadeIn">
             {/* Themed Hero Banner */}
             <div
@@ -822,6 +835,14 @@ export default function Home() {
                   >
                     <BookOpen className="w-4 h-4 text-purple-200" />
                     <span>Top 1% Grammar</span>
+                  </button>
+
+                  <button
+                    onClick={() => setIsReadingMode(true)}
+                    className="px-5 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-extrabold text-sm shadow-lg shadow-emerald-950/20 transition flex items-center gap-2"
+                  >
+                    <BookOpen className="w-4 h-4 text-emerald-200" />
+                    <span>Reading Quests (Band 6)</span>
                   </button>
 
                   <button
@@ -987,7 +1008,36 @@ export default function Home() {
                 Standard Practice Modes
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Reading Comprehension Quests Card */}
+                <div
+                  onClick={() => setIsReadingMode(true)}
+                  className="bg-white hover:border-emerald-400 hover:shadow-lg cursor-pointer border-2 border-emerald-200/80 rounded-3xl p-5 transition flex flex-col justify-between group active:scale-[0.98] relative overflow-hidden bg-gradient-to-b from-emerald-50/40 to-white"
+                >
+                  <div className="absolute top-3 right-3">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase bg-emerald-600 text-white">
+                      Band 6 Exceeding
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-700 group-hover:scale-105 transition shrink-0">
+                      <BookOpen className="w-6 h-6" />
+                    </div>
+                    <div className="pr-12 sm:pr-0">
+                      <h4 className="font-extrabold text-base text-slate-800 group-hover:text-emerald-700 transition">
+                        Reading Comprehension
+                      </h4>
+                      <p className="text-xs text-slate-500 mt-1">
+                        Split-screen reading quests: Narrative, Informational, Persuasive, and Poetry with text evidence.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-emerald-100 flex items-center justify-between text-xs font-bold text-emerald-700">
+                    <span>4 Passages • 18 Band 6 Questions</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+                  </div>
+                </div>
+
                 {/* Grammar & Conventions Card */}
                 <div
                   onClick={() => startGrammarSession()}

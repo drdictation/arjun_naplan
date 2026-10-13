@@ -1288,6 +1288,12 @@ export const BADGES_CATALOG: BadgeDefinition[] = [
   { id: "streak_7", theme: "standard", title: "Week-Long Hero", description: "Practiced 7 days in a row!", icon: "👑", rarity: "epic" },
   { id: "master_25", theme: "standard", title: "Silver Scholar", description: "Mastered 25 NAPLAN words!", icon: "🥈", rarity: "rare" },
   { id: "master_50", theme: "standard", title: "Gold Wordsmith", description: "Mastered 50 NAPLAN words!", icon: "🥇", rarity: "legendary" },
+
+  // Reading Quests Badges
+  { id: "reading_sw_archivist", theme: "starwars", title: "Galactic Archivist", description: "Decoded ancient Jedi scrolls and conquered Reading Comprehension!", icon: "📜", rarity: "epic" },
+  { id: "reading_marvel_scholar", theme: "marvel", title: "Vibranium Scholar", description: "Mastered the high-tech archives of the Wakandan library!", icon: "🔮", rarity: "epic" },
+  { id: "reading_mc_bookworm", theme: "minecraft", title: "Enchanted Bookworm", description: "Decoded ancient librarian enchantments and story scrolls!", icon: "📖", rarity: "epic" },
+  { id: "reading_master_detective", theme: "standard", title: "Master Detective", description: "Discovered hidden textual evidence and conquered reading comprehension!", icon: "🔍", rarity: "epic" },
 ];
 
 export interface PlayerRank {

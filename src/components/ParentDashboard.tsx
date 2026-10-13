@@ -13,8 +13,11 @@ import {
   Volume2,
   BookOpen,
   RotateCcw,
+  Star,
+  CheckCircle,
 } from "lucide-react";
 import { SpellingWord, YEAR_3_NAPLAN_WORDS } from "../data/words";
+import { YEAR_3_READING_PASSAGES } from "../data/reading";
 import { AppState, getTodayDateString, INITIAL_STATS } from "../lib/srs";
 import { exportStateToFile } from "../lib/storage";
 import { speakSingleWord } from "../lib/speech";
@@ -191,6 +194,83 @@ export const ParentDashboard: React.FC<ParentDashboardProps> = ({
           <p className="text-3xl font-black text-slate-800">{unstartedCount}</p>
           <p className="text-xs text-slate-500 mt-0.5 font-medium">New words remaining</p>
         </div>
+      </div>
+
+      {/* Reading Comprehension Quests Section */}
+      <div className="bg-white rounded-3xl p-5 border border-indigo-100 shadow-sm space-y-4">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div>
+            <h3 className="text-base font-extrabold text-slate-800 flex items-center gap-2">
+              <span>📖 Reading Comprehension (Band 6 Quests)</span>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700">
+                4 Passages
+              </span>
+            </h3>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Tracks performance across Narrative, Informational, Persuasive, and Poetry formats.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {YEAR_3_READING_PASSAGES.map((passage) => {
+            const prog = appState.readingProgress?.[passage.id];
+            const stars = prog?.stars || 0;
+            return (
+              <div
+                key={passage.id}
+                className="p-3.5 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-2"
+              >
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400">
+                    {passage.genre}
+                  </span>
+                  <h4 className="text-xs font-black text-slate-800 line-clamp-1">{passage.title}</h4>
+                </div>
+                <div className="flex items-center justify-between pt-1 border-t border-slate-200">
+                  <div className="flex items-center gap-0.5">
+                    {[1, 2, 3].map((s) => (
+                      <Star
+                        key={s}
+                        className={`w-3.5 h-3.5 ${
+                          s <= stars ? "text-amber-400 fill-amber-400" : "text-slate-300"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-[11px] font-bold text-slate-600">
+                    {prog ? `${prog.bestScore}/${prog.totalQuestions}` : "Not attempted"}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Cognitive Skill Breakdown */}
+        {appState.readingSkillStats && Object.keys(appState.readingSkillStats).length > 0 && (
+          <div className="pt-2 border-t border-slate-100">
+            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">
+              Cognitive Skill Accuracy
+            </span>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
+              {Object.entries(appState.readingSkillStats).map(([skill, stat]) => {
+                const pct = stat.total > 0 ? Math.round((stat.correct / stat.total) * 100) : 0;
+                return (
+                  <div key={skill} className="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-center">
+                    <span className="text-[10px] font-bold text-slate-500 block truncate" title={skill}>
+                      {skill}
+                    </span>
+                    <span className="text-sm font-black text-slate-800">{pct}%</span>
+                    <span className="text-[9px] text-slate-400 block">
+                      {stat.correct}/{stat.total}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Filter and Search Controls */}
