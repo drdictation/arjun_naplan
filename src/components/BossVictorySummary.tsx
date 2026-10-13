@@ -93,17 +93,17 @@ export const BossVictorySummary: React.FC<BossVictorySummaryProps> = ({
         </div>
       ) : (
         <div className="relative mb-4">
-          <div className="w-20 h-20 mx-auto rounded-3xl bg-slate-200 flex items-center justify-center text-4xl text-slate-700 shadow-md">
+          <div className="w-20 h-20 mx-auto rounded-3xl bg-rose-100 flex items-center justify-center text-4xl text-rose-700 shadow-md border-2 border-rose-300">
             <span>🛡️</span>
           </div>
-          <span className="inline-block mt-3 px-4 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-black uppercase tracking-wider">
-            Battle Complete
+          <span className="inline-block mt-3 px-4 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-black uppercase tracking-wider border border-rose-200">
+            Shields Depleted • Defeat
           </span>
           <h2 className="text-2xl font-black text-slate-900 tracking-tight mt-1">
-            Good Effort Against {boss.name}!
+            Defeated by {boss.name}!
           </h2>
-          <p className="text-slate-600 text-xs mt-1">
-            You softened up the boss defenses! Practice the tricky words and challenge again!
+          <p className="text-slate-600 text-xs mt-1 max-w-sm mx-auto">
+            The boss broke through your defenses! Practice the tricky words below to restore your shields and rematch!
           </p>
         </div>
       )}

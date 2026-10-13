@@ -24,11 +24,13 @@ import {
   GOODIES_CATALOG,
   getRankForXp,
   getThemeDetails,
+  checkBossUnlocked,
 } from "../lib/gamification";
 import { playSound } from "../lib/storage";
 
 interface HeroArmoryProps {
   gamification: GamificationState;
+  masteredWordsCount?: number;
   onUpdateTheme: (newTheme: GameTheme) => void;
   onSelectBossToFight: (bossId: string, isHardcore?: boolean) => void;
   onUnlockPerk: (perkId: string, cost: number) => void;
@@ -39,6 +41,7 @@ interface HeroArmoryProps {
 
 export const HeroArmory: React.FC<HeroArmoryProps> = ({
   gamification,
+  masteredWordsCount = 0,
   onUpdateTheme,
   onSelectBossToFight,
   onUnlockPerk,
@@ -188,8 +191,8 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
             <div className="space-y-5">
               <div className="flex items-center justify-between text-xs flex-wrap gap-2">
                 <div>
-                  <span className="font-bold text-slate-700 uppercase tracking-wider">All 30 Boss Encounters (Levels 1 - 10)</span>
-                  <p className="text-[11px] text-slate-500">Apprentice (1-2) • Master (3-6) • Nightmare (7-9) • Apex (10)</p>
+                  <span className="font-bold text-slate-700 uppercase tracking-wider">All {BOSS_ROSTER.length} Boss Encounters (Levels 1 - 15)</span>
+                  <p className="text-[11px] text-slate-500">Apprentice (1-2) • Master (3-6) • Nightmare (7-9) • Apex (10) • Titan (11-12) • Mythic (13-14) • Immortal (15)</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
@@ -232,23 +235,38 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
                       {realmBosses.map((boss) => {
                         const winCount = gamification.bossesDefeated[boss.id] || 0;
                         const isDefeated = winCount > 0;
+                        const unlockStatus = checkBossUnlocked(
+                          boss,
+                          gamification.bossesDefeated,
+                          masteredWordsCount,
+                          rankInfo.rank.level
+                        );
+                        const isUnlocked = unlockStatus.isUnlocked;
                         const displayHp = isHardcore ? Math.round(boss.hp * 1.5) : boss.hp;
 
                         return (
                           <div
                             key={boss.id}
                             className={`border rounded-2xl p-3 flex flex-col justify-between transition relative text-left ${
-                              isDefeated
+                              !isUnlocked
+                                ? "bg-slate-50/80 border-slate-300 opacity-80"
+                                : isDefeated
                                 ? "bg-amber-50/40 border-amber-300 shadow-sm"
                                 : "bg-white border-slate-200 hover:border-indigo-300"
                             }`}
                           >
                             <div className="flex items-start justify-between gap-1">
-                              <span className="text-3xl">{boss.avatarEmoji}</span>
+                              <span className={`text-3xl ${!isUnlocked ? "grayscale opacity-75" : ""}`}>
+                                {boss.avatarEmoji}
+                              </span>
                               <div className="flex items-center gap-1 flex-wrap justify-end">
                                 <span
                                   className={`px-1.5 py-0.5 rounded text-[10px] font-black uppercase ${
-                                    boss.level >= 10
+                                    boss.level >= 13
+                                      ? "bg-amber-400 text-amber-950 font-black"
+                                      : boss.level >= 11
+                                      ? "bg-cyan-100 text-cyan-900 font-black"
+                                      : boss.level >= 10
                                       ? "bg-rose-100 text-rose-800"
                                       : boss.level >= 7
                                       ? "bg-purple-100 text-purple-800"
@@ -263,7 +281,13 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
                                 </span>
                                 {boss.tier && (
                                   <span className={`px-1 py-0.5 rounded text-[9px] font-black uppercase ${
-                                    boss.tier === "Apex"
+                                    boss.tier === "Immortal"
+                                      ? "bg-amber-100 text-amber-900 border border-amber-300"
+                                      : boss.tier === "Mythic"
+                                      ? "bg-fuchsia-100 text-fuchsia-900"
+                                      : boss.tier === "Titan"
+                                      ? "bg-cyan-100 text-cyan-900"
+                                      : boss.tier === "Apex"
                                       ? "bg-rose-100 text-rose-800"
                                       : boss.tier === "Nightmare"
                                       ? "bg-purple-100 text-purple-800"
@@ -287,20 +311,30 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
                               <p className="text-[10px] text-slate-500 font-medium line-clamp-1">
                                 HP: {displayHp} Words • +{boss.rewardXp * (isHardcore ? 3 : 1)} XP
                               </p>
+                              {!isUnlocked && unlockStatus.lockReason && (
+                                <p className="text-[10px] text-amber-800 font-bold bg-amber-50 rounded px-1.5 py-0.5 mt-1.5 border border-amber-200">
+                                  🔒 {unlockStatus.lockReason}
+                                </p>
+                              )}
                             </div>
 
                             <button
+                              disabled={!isUnlocked}
                               onClick={() => {
-                                onSelectBossToFight(boss.id, isHardcore);
-                                onClose();
+                                if (isUnlocked) {
+                                  onSelectBossToFight(boss.id, isHardcore);
+                                  onClose();
+                                }
                               }}
                               className={`mt-2.5 w-full py-1.5 rounded-xl font-black text-xs shadow-sm transition active:scale-95 text-white ${
-                                isHardcore
+                                !isUnlocked
+                                  ? "bg-slate-400 cursor-not-allowed opacity-75 shadow-none"
+                                  : isHardcore
                                   ? "bg-rose-600 hover:bg-rose-700"
                                   : "bg-indigo-600 hover:bg-indigo-700"
                               }`}
                             >
-                              {isHardcore ? "💀 Hardcore Battle ➔" : "Battle ➔"}
+                              {!isUnlocked ? "🔒 Locked" : isHardcore ? "💀 Hardcore Battle ➔" : "Battle ➔"}
                             </button>
                           </div>
                         );

@@ -28,6 +28,7 @@ import {
   calculateSpeedBonus,
   getRankForXp,
   getThemeDetails,
+  checkBossUnlocked,
 } from "../lib/gamification";
 import { loadAppState, saveAppState, updateStreak, playSound } from "../lib/storage";
 import {
@@ -297,6 +298,20 @@ export default function Home() {
     const hardcoreMode = isHardcore !== undefined ? isHardcore : isHardcoreTrial;
     setIsHardcoreTrial(hardcoreMode);
 
+    const currentMastered = Object.values(appState.progress).filter(
+      (p) => p.status === "mastered"
+    ).length;
+    const currentLevel = getRankForXp(appState.gamification?.xp || 0, appState.gamification?.theme || "starwars").rank.level;
+    const unlockStatus = checkBossUnlocked(
+      boss,
+      appState.gamification?.bossesDefeated,
+      currentMastered,
+      currentLevel
+    );
+    if (!unlockStatus.isUnlocked) {
+      return;
+    }
+
     if (soundEnabled) {
       if (boss.theme === "starwars") playSound("lightsaber");
       else if (boss.theme === "marvel") playSound("repulsor");
@@ -489,7 +504,10 @@ export default function Home() {
   // Advance to next word
   const handleNextWord = () => {
     playSound("click");
-    if (currentQueueIndex + 1 < sessionQueue.length) {
+    const isOutOfHearts = isBossSession && playerHearts <= 0;
+    const isBossDead = isBossSession && bossHp <= 0;
+
+    if (!isOutOfHearts && !isBossDead && currentQueueIndex + 1 < sessionQueue.length) {
       setCurrentQueueIndex((prev) => prev + 1);
       setCurrentStepAnswered(false);
     } else {
@@ -502,7 +520,7 @@ export default function Home() {
       if (isBossSession && activeBoss) {
         // Boss Battle finished
         const finalHp = bossHp;
-        const isVictory = finalHp <= 0;
+        const isVictory = finalHp <= 0 && playerHearts > 0;
         const rewardMultiplier = isHardcoreTrial ? 3 : 1;
         const bonusXp = (isVictory ? activeBoss.rewardXp : 100) * rewardMultiplier;
         const bonusPoints = (isVictory ? activeBoss.rewardPoints + beaconBonus : 25 + beaconBonus) * rewardMultiplier;
@@ -627,6 +645,7 @@ export default function Home() {
       {isArmoryOpen && (
         <HeroArmory
           gamification={appState.gamification}
+          masteredWordsCount={masteredCount}
           onUpdateTheme={handleChangeTheme}
           onSelectBossToFight={startBossBattle}
           onUnlockPerk={handleUnlockPerk}
@@ -674,12 +693,28 @@ export default function Home() {
                 unlockedBadge={bossVictoryState.unlockedBadge}
                 onFightAgain={() => startBossBattle(activeBoss.id, isHardcoreTrial)}
                 onNextBoss={() => {
-                  const nextLevel = activeBoss.level < 10 ? activeBoss.level + 1 : 1;
+                  const nextLevel = activeBoss.level < 15 ? activeBoss.level + 1 : 1;
                   const nextBoss = BOSS_ROSTER.find(
                     (b) => b.theme === activeBoss.theme && b.level === nextLevel
                   );
-                  if (nextBoss) startBossBattle(nextBoss.id, isHardcoreTrial);
-                  else startBossBattle(BOSS_ROSTER[0].id, isHardcoreTrial);
+                  if (nextBoss) {
+                    const unlockStatus = checkBossUnlocked(
+                      nextBoss,
+                      appState.gamification?.bossesDefeated,
+                      masteredCount,
+                      rankInfo.rank.level
+                    );
+                    if (unlockStatus.isUnlocked) {
+                      startBossBattle(nextBoss.id, isHardcoreTrial);
+                    } else {
+                      setIsSessionFinished(false);
+                      setIsBossSession(false);
+                      setActiveBoss(null);
+                      setIsArmoryOpen(true);
+                    }
+                  } else {
+                    startBossBattle(BOSS_ROSTER[0].id, isHardcoreTrial);
+                  }
                 }}
                 onReturnHome={() => {
                   setIsSessionFinished(false);
@@ -778,13 +813,25 @@ export default function Home() {
             {currentStepAnswered && (
               <button
                 onClick={handleNextWord}
-                className="w-full max-w-xl py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] text-white font-black text-lg shadow-xl shadow-indigo-300 flex items-center justify-center gap-2 animate-bounce transition"
+                className={`w-full max-w-xl py-4 rounded-2xl active:scale-[0.99] text-white font-black text-lg shadow-xl flex items-center justify-center gap-2 animate-bounce transition ${
+                  isBossSession && playerHearts <= 0
+                    ? "bg-rose-600 hover:bg-rose-700 shadow-rose-300"
+                    : isBossSession && bossHp <= 0
+                    ? "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-300"
+                    : "bg-indigo-600 hover:bg-indigo-700 shadow-indigo-300"
+                }`}
               >
                 <span>
-                  {currentQueueIndex + 1 === sessionQueue.length
-                    ? isBossSession
+                  {isBossSession
+                    ? playerHearts <= 0
+                      ? "Shields Depleted! See Battle Result 🛡️"
+                      : bossHp <= 0
+                      ? "Boss Conquered! Claim Victory 🏆"
+                      : currentQueueIndex + 1 === sessionQueue.length
                       ? "See Boss Battle Results ⚔️"
-                      : "See Results & Stars 🎉"
+                      : "Next Spelling Strike ➔"
+                    : currentQueueIndex + 1 === sessionQueue.length
+                    ? "See Results & Stars 🎉"
                     : "Next Word ➔"}
                 </span>
               </button>
@@ -892,7 +939,7 @@ export default function Home() {
               <div className="flex items-center justify-between mb-3 px-1 flex-wrap gap-2">
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-xs font-extrabold text-slate-700 uppercase tracking-wider">
-                    ⚔️ {currentTheme.shortName} Boss Battles (Levels 1 - 10)
+                    ⚔️ {currentTheme.shortName} Boss Battles (Levels 1 - 15)
                   </h3>
                   <button
                     onClick={() => {
@@ -914,7 +961,7 @@ export default function Home() {
                   onClick={() => setIsArmoryOpen(true)}
                   className="text-xs font-bold text-indigo-600 hover:text-indigo-800"
                 >
-                  View All 30 Bosses ➔
+                  View All {BOSS_ROSTER.length} Bosses ➔
                 </button>
               </div>
 
@@ -922,6 +969,13 @@ export default function Home() {
                 {currentThemeBosses.map((boss) => {
                   const wins = appState.gamification?.bossesDefeated[boss.id] || 0;
                   const isConquered = wins > 0;
+                  const unlockStatus = checkBossUnlocked(
+                    boss,
+                    appState.gamification?.bossesDefeated,
+                    masteredCount,
+                    rankInfo.rank.level
+                  );
+                  const isUnlocked = unlockStatus.isUnlocked;
                   const displayHp = isHardcoreTrial ? Math.round(boss.hp * 1.5) : boss.hp;
                   const displayXp = isHardcoreTrial ? boss.rewardXp * 3 : boss.rewardXp;
 
@@ -929,20 +983,26 @@ export default function Home() {
                     <div
                       key={boss.id}
                       className={`border rounded-2xl p-3.5 transition flex flex-col justify-between relative overflow-hidden group shadow-sm ${
-                        isConquered
+                        !isUnlocked
+                          ? "bg-slate-50/80 border-slate-300 opacity-80"
+                          : isConquered
                           ? "bg-gradient-to-b from-amber-50/60 to-white border-amber-300"
                           : "bg-white border-slate-200 hover:border-indigo-300 hover:shadow-md"
                       }`}
                     >
                       <div>
                         <div className="flex items-start justify-between">
-                          <span className="text-3xl group-hover:scale-110 transition">
+                          <span className={`text-3xl transition ${!isUnlocked ? "grayscale opacity-75" : "group-hover:scale-110"}`}>
                             {boss.avatarEmoji}
                           </span>
                           <div className="flex items-center gap-1 flex-wrap justify-end">
                             <span
                               className={`px-1.5 py-0.5 rounded font-black text-[10px] ${
-                                boss.level >= 10
+                                boss.level >= 13
+                                  ? "bg-amber-400 text-amber-950 font-black"
+                                  : boss.level >= 11
+                                  ? "bg-cyan-100 text-cyan-900 font-black"
+                                  : boss.level >= 10
                                   ? "bg-rose-100 text-rose-800"
                                   : boss.level >= 7
                                   ? "bg-purple-100 text-purple-800"
@@ -958,7 +1018,13 @@ export default function Home() {
                             {boss.tier && (
                               <span
                                 className={`px-1 py-0.5 rounded font-black text-[9px] uppercase ${
-                                  boss.tier === "Apex"
+                                  boss.tier === "Immortal"
+                                    ? "bg-amber-100 text-amber-900 border border-amber-300"
+                                    : boss.tier === "Mythic"
+                                    ? "bg-fuchsia-100 text-fuchsia-900"
+                                    : boss.tier === "Titan"
+                                    ? "bg-cyan-100 text-cyan-900"
+                                    : boss.tier === "Apex"
                                     ? "bg-rose-100 text-rose-800"
                                     : boss.tier === "Nightmare"
                                     ? "bg-purple-100 text-purple-800"
@@ -982,19 +1048,35 @@ export default function Home() {
                             <span>HP: {displayHp}</span>
                             <span className="text-amber-600">+{displayXp} XP</span>
                           </div>
+                          {!isUnlocked && unlockStatus.lockReason && (
+                            <p className="text-[10px] text-amber-800 font-bold bg-amber-50 rounded px-1.5 py-0.5 mt-1.5 border border-amber-200">
+                              🔒 {unlockStatus.lockReason}
+                            </p>
+                          )}
                         </div>
                       </div>
 
                       <button
-                        onClick={() => startBossBattle(boss.id, isHardcoreTrial)}
+                        disabled={!isUnlocked}
+                        onClick={() => {
+                          if (isUnlocked) startBossBattle(boss.id, isHardcoreTrial);
+                        }}
                         className={`mt-3 w-full py-1.5 rounded-xl font-black text-xs shadow-md transition flex items-center justify-center gap-1 active:scale-95 text-white ${
-                          isHardcoreTrial
+                          !isUnlocked
+                            ? "bg-slate-400 cursor-not-allowed opacity-75 shadow-none"
+                            : isHardcoreTrial
                             ? "bg-rose-600 hover:bg-rose-700 shadow-rose-100"
                             : "bg-gradient-to-r from-indigo-600 to-violet-600 hover:brightness-110 shadow-indigo-100"
                         }`}
                       >
-                        <Swords className="w-3 h-3 text-amber-300" />
-                        <span>{isHardcoreTrial ? "💀 Hardcore" : "Fight Boss"}</span>
+                        {!isUnlocked ? (
+                          <span>🔒 Locked</span>
+                        ) : (
+                          <>
+                            <Swords className="w-3 h-3 text-amber-300" />
+                            <span>{isHardcoreTrial ? "💀 Hardcore" : "Fight Boss"}</span>
+                          </>
+                        )}
                       </button>
                     </div>
                   );

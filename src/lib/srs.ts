@@ -272,10 +272,21 @@ export function buildBossSessionQueue(
   );
 
   // 2. Filter words matching boss level difficulty
-  // For bossLevel >= 7 (Nightmare & Apex), prioritize Band 6 challenge words and complex phonetic rules
+  // For bossLevel >= 7 (Nightmare & Apex) and bossLevel >= 11 (Titan, Mythic, Immortal)
   const targetDifficultyWords = allWords.filter((w) => {
     if (bossLevel <= 2) return w.difficulty <= 2;
     if (bossLevel <= 4) return w.difficulty === 2 || w.difficulty === 3;
+    if (bossLevel >= 11) {
+      return (
+        w.difficulty === 3 ||
+        (w.difficulty >= 2 &&
+          (w.category.includes("Silent") ||
+            w.category.includes("Tricky") ||
+            w.category.includes("Double") ||
+            w.category.includes("Suffix") ||
+            w.category.includes("Compound")))
+      );
+    }
     if (bossLevel >= 7) {
       return (
         w.difficulty === 3 ||
@@ -292,7 +303,12 @@ export function buildBossSessionQueue(
   const selectedWords: { word: SpellingWord; isReview: boolean }[] = [];
 
   // For boss battles, inject past mistakes to test real mastery
-  const maxTricky = bossLevel >= 7 ? Math.min(5, Math.floor(bossHp / 3)) : Math.min(2, Math.floor(bossHp / 2));
+  const maxTricky =
+    bossLevel >= 11
+      ? Math.min(8, Math.floor(bossHp / 3))
+      : bossLevel >= 7
+      ? Math.min(5, Math.floor(bossHp / 3))
+      : Math.min(2, Math.floor(bossHp / 2));
   for (const w of shuffle(trickyWords)) {
     if (selectedWords.length < maxTricky) {
       selectedWords.push({ word: w, isReview: true });
