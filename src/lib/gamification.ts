@@ -1651,13 +1651,13 @@ export const PERKS_CATALOG: PerkDefinition[] = [
   },
   {
     id: "holocron_vision",
-    name: "Jedi Holocron / Jarvis HUD",
+    name: "Jedi Holocron / Jarvis Tactical HUD",
     realm: "starwars",
-    description: "Free phonics hint always revealed without clicking the hint button!",
+    description: "Tactical combat computer: Extends Speed Strike bonus window by +3 seconds and grants +50 Bonus XP on every correct answer!",
     icon: "🔮",
     category: "intel",
     costPoints: 250,
-    bonusEffect: "Auto-reveals first letter & letter count",
+    bonusEffect: "+3s Speed Strike window & +50 XP per correct strike",
   },
   {
     id: "critical_rocket",

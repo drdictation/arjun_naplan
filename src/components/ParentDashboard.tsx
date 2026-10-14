@@ -203,7 +203,7 @@ export const ParentDashboard: React.FC<ParentDashboardProps> = ({
             <h3 className="text-base font-extrabold text-slate-800 flex items-center gap-2">
               <span>📖 Reading Comprehension (Band 6 Quests)</span>
               <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700">
-                4 Passages
+                {YEAR_3_READING_PASSAGES.length} Passages
               </span>
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">

@@ -411,15 +411,18 @@ export default function Home() {
     // Calculate Speed and Perks bonuses
     const activePerks = appState.gamification?.activePerks || [];
     const hasSpeedPerk = activePerks.includes("speed_spark");
+    const hasHolocron = activePerks.includes("holocron_vision");
     const hasXpMagnet = activePerks.includes("xp_magnet");
     const hasCriticalRocket = activePerks.includes("critical_rocket") && currentQueueIndex === 0;
     const hasTotem = activePerks.includes("totem_undying");
 
-    const speedBonus = calculateSpeedBonus(elapsedSeconds, hasSpeedPerk);
+    // Jarvis HUD adds +3s to speed strike window
+    const effectiveSpeedSeconds = hasHolocron ? Math.max(1, elapsedSeconds - 3) : elapsedSeconds;
+    const speedBonus = calculateSpeedBonus(effectiveSpeedSeconds, hasSpeedPerk);
 
     // Points and XP award
     const basePointReward = isCorrect ? 25 + speedBonus.bonusPoints : 5;
-    let earnedXp = isCorrect ? 40 + speedBonus.bonusXp : 10;
+    let earnedXp = isCorrect ? 40 + speedBonus.bonusXp + (hasHolocron ? 50 : 0) : 10;
     if (hasXpMagnet && isCorrect) {
       earnedXp = Math.round(earnedXp * 1.25);
     }
@@ -1115,7 +1118,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="mt-4 pt-3 border-t border-emerald-100 flex items-center justify-between text-xs font-bold text-emerald-700">
-                    <span>4 Passages • 18 Band 6 Questions</span>
+                    <span>8 Passages • 37 Band 6 Questions</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
                   </div>
                 </div>

@@ -106,7 +106,7 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
   // Reset & start timer on new word
   useEffect(() => {
     setInputVal("");
-    setShowHint(hasHolocron);
+    setShowHint(false);
     setHasSubmitted(false);
     hasSubmittedRef.current = false;
     setIsCorrect(false);
@@ -139,7 +139,7 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
       clearTimeout(timer);
       if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
     };
-  }, [word.id, mode, hasHolocron, effectiveEnrage]);
+  }, [word.id, mode, effectiveEnrage]);
 
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -506,8 +506,15 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
             />
           </div>
 
-          {/* Phonics Hint & Auto Holocron */}
-          <div className="text-center">
+          {/* Tactical HUD & Category Clue */}
+          <div className="space-y-2 text-center">
+            {hasHolocron && (
+              <div className="flex justify-center">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-900/40 border border-indigo-400/30 text-cyan-200 text-xs font-bold">
+                  🔮 Jarvis Tactical HUD Active (+3s Speed Window)
+                </span>
+              </div>
+            )}
             {!showHint ? (
               <button
                 type="button"
@@ -515,12 +522,11 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-indigo-600 transition"
               >
                 <HelpCircle className="w-3.5 h-3.5" />
-                <span>Need Phonics Power? ({word.word.length} letters)</span>
+                <span>Need Clue? ({word.word.length} letters)</span>
               </button>
             ) : (
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 font-medium animate-fadeIn">
-                {hasHolocron ? "🔮 Jarvis/Holocron HUD: " : "💡 Phonics Hint: "}
-                Starts with &quot;<span className="font-mono font-bold uppercase">{word.word[0]}</span>&quot; • {word.phoneticHint} ({word.word.length} letters)
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-2.5 text-xs text-amber-900 font-medium animate-fadeIn">
+                💡 <span className="font-bold">Rule Category:</span> {word.category} ({word.word.length} letters)
               </div>
             )}
           </div>
