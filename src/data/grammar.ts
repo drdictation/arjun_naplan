@@ -707,6 +707,231 @@ export const YEAR_3_GRAMMAR_PRACTICE: GrammarQuestion[] = [
     correctOptionIndex: 1,
     explanation: "Comparing three or more items requires the superlative form: 'fastest'.",
     ruleTag: "Superlative Adjectives"
+  },
+
+  // =========================================================================
+  // NAPLAN PRACTICE SET (Direct from JSON Practice Paper)
+  // =========================================================================
+  {
+    id: "g-nap-016",
+    category: "Parts of Speech",
+    difficulty: 1,
+    prompt: "Choose the correct homophone to complete the sentence:",
+    sentenceContext: "Spiders have _______ legs.",
+    options: ["ate", "eight", "ait", "eigt"],
+    correctOptionIndex: 1,
+    explanation: "'Eight' is the number 8. 'Ate' is the past tense of eat.",
+    ruleTag: "Homophones"
+  },
+  {
+    id: "g-nap-017",
+    category: "Parts of Speech",
+    difficulty: 1,
+    prompt: "Choose the correct homophone to complete the sentence:",
+    sentenceContext: "Their legs are covered with lots of _______.",
+    options: ["hairs", "hares", "heirs", "hears"],
+    correctOptionIndex: 0,
+    explanation: "'Hairs' grow on the body. A 'hare' is an animal similar to a rabbit.",
+    ruleTag: "Homophones"
+  },
+  {
+    id: "g-nap-018",
+    category: "Tense & Verb Agreement",
+    difficulty: 1,
+    prompt: "Choose the verb that agrees with the plural subject:",
+    sentenceContext: "All spiders _______ fangs!",
+    options: ["has", "have", "haves", "having"],
+    correctOptionIndex: 1,
+    explanation: "'Spiders' is plural, so we use 'have': All spiders have fangs.",
+    ruleTag: "Subject-Verb Agreement"
+  },
+  {
+    id: "g-nap-019",
+    category: "Apostrophes & Contractions",
+    difficulty: 2,
+    prompt: "Choose the correct contraction to complete the sentence:",
+    sentenceContext: "We _______ able to go to the party.",
+    options: ["wasn’t", "aren’t", "isn’t", "doesn’t"],
+    correctOptionIndex: 1,
+    explanation: "'We' is plural, so 'aren't' (are not) matches correctly.",
+    ruleTag: "Contractions & Agreement"
+  },
+  {
+    id: "g-nap-020",
+    category: "Punctuation & Capitalisation",
+    difficulty: 2,
+    prompt: "Which sentence has the correct punctuation and quotation marks?",
+    options: [
+      "“Close the door” shouted Tom.",
+      "“close the door,” shouted Tom.",
+      "“Close the door,” shouted tom.",
+      "“Close the door!” shouted Tom."
+    ],
+    correctOptionIndex: 3,
+    explanation: "Speech begins with a capital letter, contains punctuation inside the quotation marks, and proper names (Tom) must be capitalized.",
+    ruleTag: "Dialogue Punctuation"
+  },
+  {
+    id: "g-nap-021",
+    category: "Punctuation & Capitalisation",
+    difficulty: 2,
+    prompt: "Jess asked me what was in my desk. I said: Which list uses commas correctly?",
+    options: [
+      "Books, pens, pencils, ruler.",
+      "Books and pens and pencils and a ruler.",
+      "Books, pens, pencils and a ruler.",
+      "Books pens pencils and a ruler"
+    ],
+    correctOptionIndex: 2,
+    explanation: "Use commas to separate items in a list, with 'and' before the final item.",
+    ruleTag: "Commas in Lists"
+  },
+  {
+    id: "g-nap-022",
+    category: "Tense & Verb Agreement",
+    difficulty: 1,
+    prompt: "Which verb form correctly completes the sentence?",
+    sentenceContext: "The day was _______ out just fine.",
+    options: ["turned", "turns", "turning", "turn"],
+    correctOptionIndex: 2,
+    explanation: "'Was turning' is past continuous tense, indicating an action that was unfolding.",
+    ruleTag: "Verb Tense"
+  },
+  {
+    id: "g-nap-023",
+    category: "Punctuation & Capitalisation",
+    difficulty: 1,
+    prompt: "Find the correct spelling to replace 'bascetball':",
+    sentenceContext: "I’m going to be late for bascetball.",
+    options: ["basketball", "baskitball", "basketbal", "bascetball"],
+    correctOptionIndex: 0,
+    explanation: "The sport is spelt 'basketball' with a 'k'.",
+    ruleTag: "Spelling Correction"
+  },
+  {
+    id: "g-nap-024",
+    category: "Parts of Speech",
+    difficulty: 2,
+    prompt: "Find the correct homophone to replace 'sowed':",
+    sentenceContext: "Mum sowed the button onto my shirt.",
+    options: ["sewed", "sowed", "sewd", "soed"],
+    correctOptionIndex: 0,
+    explanation: "To fasten with needle and thread is to 'sew' (past tense: 'sewed'). 'Sow' is planting seeds.",
+    ruleTag: "Homophones"
+  },
+  {
+    id: "g-nap-025",
+    category: "Parts of Speech",
+    difficulty: 1,
+    prompt: "Find the correct homophone to replace 'right':",
+    sentenceContext: "We had to right our name on the paper.",
+    options: ["write", "right", "writ", "wright"],
+    correctOptionIndex: 0,
+    explanation: "'Write' means to put words on paper. 'Right' means correct or opposite of left.",
+    ruleTag: "Homophones"
+  },
+  {
+    id: "g-nap-026",
+    category: "Punctuation & Capitalisation",
+    difficulty: 2,
+    prompt: "Which sentence has the correct punctuation and apostrophe?",
+    options: [
+      "There were dogs, cats, fish and birds at the St Luke’s pet parade?",
+      "There were dogs, cats, fish and birds at the St Luke’s pet parade.",
+      "There were dogs, cats, fish and birds at the St Lukes pet parade.",
+      "There were dogs, cats, fish and birds at the St Luke’s pet parade"
+    ],
+    correctOptionIndex: 1,
+    explanation: "The sentence ends in a full stop, includes commas in the list, and uses a possessive apostrophe for St Luke’s.",
+    ruleTag: "Punctuation & Apostrophes"
+  },
+  {
+    id: "g-nap-027",
+    category: "Punctuation & Capitalisation",
+    difficulty: 1,
+    prompt: "Choose the correct spelling of the food word:",
+    sentenceContext: "I’m having some _______ for lunch.",
+    options: ["soap", "soop", "supe", "soup"],
+    correctOptionIndex: 3,
+    explanation: "The warm bowl of liquid food is spelt 'soup'. 'Soap' is for washing!",
+    ruleTag: "Spelling"
+  },
+  {
+    id: "g-nap-028",
+    category: "Apostrophes & Contractions",
+    difficulty: 2,
+    prompt: "Choose the correct contraction:",
+    sentenceContext: "I _______ open the tin by myself.",
+    options: ["hasn’t", "couldn’t", "doesn’t", "isn’t"],
+    correctOptionIndex: 1,
+    explanation: "'Could not' contracts to 'couldn't'. It fits the subject 'I' in ability.",
+    ruleTag: "Contractions"
+  },
+  {
+    id: "g-nap-029",
+    category: "Pronouns & Modifiers",
+    difficulty: 1,
+    prompt: "Choose the reflexive pronoun that agrees with 'I':",
+    sentenceContext: "I couldn’t open the tin by _______.",
+    options: ["meself", "himself", "myself", "herself"],
+    correctOptionIndex: 2,
+    explanation: "The reflexive pronoun for 'I' is 'myself' (not 'meself').",
+    ruleTag: "Pronouns"
+  },
+  {
+    id: "g-nap-030",
+    category: "Parts of Speech",
+    difficulty: 1,
+    prompt: "Find the correct homophone to replace 'new':",
+    sentenceContext: "I just new that I was sitting in the wrong spot.",
+    options: ["knew", "new", "knue", "nu"],
+    correctOptionIndex: 0,
+    explanation: "'Knew' is the past tense of know (with silent 'k'). 'New' means not old.",
+    ruleTag: "Homophones & Silent K"
+  },
+  {
+    id: "g-nap-031",
+    category: "Punctuation & Capitalisation",
+    difficulty: 1,
+    prompt: "Find the correct spelling to replace 'somethink':",
+    sentenceContext: "I want to buy somethink in this shop.",
+    options: ["something", "somethink", "sumthing", "some thing"],
+    correctOptionIndex: 0,
+    explanation: "'Something' ends in -ing, not -ink.",
+    ruleTag: "Spelling"
+  },
+  {
+    id: "g-nap-032",
+    category: "Apostrophes & Contractions",
+    difficulty: 1,
+    prompt: "Which contraction correctly replaces 'Hes':",
+    sentenceContext: "Hes going to catch the bus home.",
+    options: ["He’s", "Hes", "His", "Hees"],
+    correctOptionIndex: 0,
+    explanation: "Short for 'He is' requires an apostrophe of omission: 'He's'.",
+    ruleTag: "Contractions"
+  },
+  {
+    id: "g-nap-033",
+    category: "Apostrophes & Contractions",
+    difficulty: 1,
+    prompt: "Which contraction correctly replaces 'dont':",
+    sentenceContext: "I dont like basketball.",
+    options: ["don’t", "dont", "do’nt", "doesnt"],
+    correctOptionIndex: 0,
+    explanation: "'Do not' contracts to 'don't' with the apostrophe replacing the 'o' in not.",
+    ruleTag: "Contractions"
+  },
+  {
+    id: "g-nap-034",
+    category: "Punctuation & Capitalisation",
+    difficulty: 1,
+    prompt: "Find the correct spelling to replace 'clasroom':",
+    sentenceContext: "I left my books in the clasroom.",
+    options: ["classroom", "clasroom", "classrom", "class room"],
+    correctOptionIndex: 0,
+    explanation: "A compound word with double 's': 'class' + 'room' = 'classroom'.",
+    ruleTag: "Compound Words & Double Consonants"
   }
 ];
 

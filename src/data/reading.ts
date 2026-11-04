@@ -899,5 +899,217 @@ export const YEAR_3_READING_PASSAGES: ReadingPassage[] = [
         explanation: "Stanza 4 describes dark clouds looming and rain washing away the gloom, concluding the bird's dance."
       }
     ]
+  },
+  // =========================================================================
+  // PASSAGE 13: INFORMATIONAL - WHY DOES IT RAIN? (NAPLAN Practice Test)
+  // =========================================================================
+  {
+    id: "passage-info-rain",
+    title: "Why Does It Rain?",
+    genre: "Informational",
+    subtitle: "How clouds form and water returns to Earth",
+    estimatedMinutes: 4,
+    introduction: "Read the explanation below about how rain forms, then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "When clouds get too heavy with water, the water falls back down to the ground as rain. Water is in oceans, rivers and under the ground. When the Sun shines it makes the water warm. As the water warms it turns into droplets. These droplets rise up into the sky."
+      },
+      {
+        id: 2,
+        text: "As the water droplets get cooler they condense into clouds. Eventually these water droplets fall from the clouds as rain. Falling raindrops are often illustrated like a teardrop with a round bottom and narrower top but this is incorrect. Small raindrops are like spheres and larger ones look like spheres with flat bottoms. Larger raindrops always fall faster than smaller ones."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-rain-01",
+        passageId: "passage-info-rain",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 1,
+        evidenceQuote: "When clouds get too heavy with water, the water falls back down to the ground as rain.",
+        prompt: "What type of text is this?",
+        options: ["A narrative", "A poem", "An explanation", "A recount"],
+        correctOptionIndex: 2,
+        explanation: "This text explains the scientific process of how rain occurs, so it is an explanation."
+      },
+      {
+        id: "rq-rain-02",
+        passageId: "passage-info-rain",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 2,
+        evidenceQuote: "As the water droplets get cooler they condense into clouds.",
+        prompt: "Which statement is true according to the passage?",
+        options: [
+          "Clouds are made up of water droplets.",
+          "Falling raindrops are tear-shaped.",
+          "Small raindrops fall faster than larger ones.",
+          "Rain is water in the oceans and rivers."
+        ],
+        correctOptionIndex: 0,
+        explanation: "The passage states that cooler droplets condense into clouds, meaning clouds are made up of water droplets."
+      },
+      {
+        id: "rq-rain-03",
+        passageId: "passage-info-rain",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 1,
+        evidenceQuote: "As the water warms it turns into droplets.",
+        prompt: "According to the passage, what happens to water when it warms?",
+        options: [
+          "It turns into rain.",
+          "It turns into clouds.",
+          "It turns into water droplets.",
+          "It turns into teardrops."
+        ],
+        correctOptionIndex: 2,
+        explanation: "Paragraph 1 states directly: 'When the Sun shines it makes the water warm. As the water warms it turns into droplets.'"
+      },
+      {
+        id: "rq-rain-04",
+        passageId: "passage-info-rain",
+        cognitiveSkill: "Inference",
+        paragraphRef: 2,
+        evidenceQuote: "Falling raindrops are often illustrated like a teardrop with a round bottom and narrower top but this is incorrect.",
+        prompt: "Which statement is false?",
+        options: [
+          "Warm water turns into water droplets.",
+          "Large raindrops fall faster than small raindrops.",
+          "Water droplets cool and condense into clouds.",
+          "Raindrops are narrow at the top and round at the bottom."
+        ],
+        correctOptionIndex: 3,
+        explanation: "The passage clarifies that drawing raindrops as teardrops (narrow at top, round at bottom) is incorrect."
+      },
+      {
+        id: "rq-rain-05",
+        passageId: "passage-info-rain",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 2,
+        evidenceQuote: "Small raindrops are like spheres and larger ones look like spheres with flat bottoms.",
+        prompt: "What shape are small raindrops?",
+        options: ["Round", "Square", "Oval", "Rectangular"],
+        correctOptionIndex: 0,
+        explanation: "The text says 'Small raindrops are like spheres', which means they are round in 3D."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 14: INFORMATIONAL - THE AUSTRALIAN GOLD RUSH (NAPLAN Practice Test)
+  // =========================================================================
+  {
+    id: "passage-info-goldrush",
+    title: "The Australian Gold Rush",
+    genre: "Informational",
+    subtitle: "How discovering gold changed Australian history and population",
+    estimatedMinutes: 5,
+    introduction: "Read the historical recount below, then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "The Australian gold rush began in the 1850s. The first person to find gold was a man named Edward Hargraves. Hargraves found gold in a waterhole at Bathurst, New South Wales, in 1851. As soon as people heard that gold had been discovered they were eager to try to find gold themselves."
+      },
+      {
+        id: 2,
+        text: "People left their jobs and homes and rushed to the goldfields and began digging for gold. The entire country became swept up in “gold fever”. The Australian gold rush was responsible for the first wave of people arriving from countries other than England. These people made Australia their home as they dug for gold. Gold diggers came from America, Europe and Asia."
+      },
+      {
+        id: 3,
+        text: "From 1851 to 1857, Australia’s population grew from 430,000 to 1.7 million! Between 1851 and 1861, Australia produced one-third of the world’s gold."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-gold-01",
+        passageId: "passage-info-goldrush",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 1,
+        evidenceQuote: "Hargraves found gold in a waterhole at Bathurst, New South Wales, in 1851.",
+        prompt: "When did Edward Hargraves find gold?",
+        options: ["1857", "1855", "1851", "1861"],
+        correctOptionIndex: 2,
+        explanation: "Paragraph 1 clearly states Hargraves found gold in 1851."
+      },
+      {
+        id: "rq-gold-02",
+        passageId: "passage-info-goldrush",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 1,
+        evidenceQuote: "Hargraves found gold in a waterhole at Bathurst, New South Wales, in 1851.",
+        prompt: "What was the name of the town near where the first gold was found?",
+        options: ["Bathurst", "Sydney", "Melbourne", "Ballarat"],
+        correctOptionIndex: 0,
+        explanation: "Gold was discovered at a waterhole in Bathurst, New South Wales."
+      },
+      {
+        id: "rq-gold-03",
+        passageId: "passage-info-goldrush",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 3,
+        evidenceQuote: "Between 1851 and 1861, Australia produced one-third of the world’s gold.",
+        prompt: "During which decade did Australia produce one-third of all gold in the world?",
+        options: ["1851–1861", "1850–1860", "1851–1857", "1860–1870"],
+        correctOptionIndex: 0,
+        explanation: "Paragraph 3 notes: 'Between 1851 and 1861, Australia produced one-third of the world’s gold.'"
+      },
+      {
+        id: "rq-gold-04",
+        passageId: "passage-info-goldrush",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 3,
+        evidenceQuote: "From 1851 to 1857, Australia’s population grew from 430,000 to 1.7 million!",
+        prompt: "How many years did it take for Australia’s population to boom from 430,000 to 1.7 million?",
+        options: ["10 years", "6 years", "3 years", "12 years"],
+        correctOptionIndex: 1,
+        explanation: "1857 minus 1851 equals 6 years."
+      },
+      {
+        id: "rq-gold-05",
+        passageId: "passage-info-goldrush",
+        cognitiveSkill: "Inference",
+        paragraphRef: 2,
+        evidenceQuote: "The Australian gold rush was responsible for the first wave of people arriving from countries other than England.",
+        prompt: "What caused Australia’s dramatic population growth in the 1850s?",
+        options: [
+          "The gold rush attracted people from many countries worldwide.",
+          "People stopped moving away from Australia.",
+          "Gold became cheaper and easier to buy in shops.",
+          "New railway lines connected all cities."
+        ],
+        correctOptionIndex: 0,
+        explanation: "People from America, Europe, and Asia sailed to Australia to find gold, booming the population."
+      },
+      {
+        id: "rq-gold-06",
+        passageId: "passage-info-goldrush",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 2,
+        evidenceQuote: "People left their jobs and homes and rushed to the goldfields and began digging for gold.",
+        prompt: "Why did people leave their jobs and homes to rush to the goldfields?",
+        options: [
+          "To search for gold and seek fortune",
+          "To escape heavy rain in the cities",
+          "To become sheep farmers in the outback",
+          "To build new schoolhouses"
+        ],
+        correctOptionIndex: 0,
+        explanation: "People rushed to the goldfields with the hope of striking rich by finding gold."
+      },
+      {
+        id: "rq-gold-07",
+        passageId: "passage-info-goldrush",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 2,
+        evidenceQuote: "The entire country became swept up in “gold fever”.",
+        prompt: "What does the expression “gold fever” mean in this text?",
+        options: [
+          "A medical illness caused by touching gold",
+          "Widespread excitement and eagerness to search for gold",
+          "A hot fever suffered only by miners in winter",
+          "The fear of losing gold coins"
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Gold fever' is a metaphor describing the overwhelming excitement and urge to hunt for gold."
+      }
+    ]
   }
 ];

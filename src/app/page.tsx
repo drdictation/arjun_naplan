@@ -12,6 +12,8 @@ import { HeroArmory } from "../components/HeroArmory";
 import { YEAR_3_NAPLAN_WORDS, SpellingWord } from "../data/words";
 import { YEAR_3_GRAMMAR_PRACTICE, GrammarQuestion } from "../data/grammar";
 import { GrammarPracticeCard } from "../components/GrammarPracticeCard";
+import { YEAR_3_NUMERACY_QUESTIONS, NumeracyQuestion } from "../data/numeracy";
+import { NumeracyPracticeCard } from "../components/NumeracyPracticeCard";
 import { ReadingHub } from "../components/ReadingHub";
 import {
   AppState,
@@ -44,6 +46,7 @@ import {
   Zap,
   Timer,
   ShoppingBag,
+  Calculator,
 } from "lucide-react";
 
 export default function Home() {
@@ -61,6 +64,8 @@ export default function Home() {
   const [currentStepAnswered, setCurrentStepAnswered] = useState(false);
   const [isGrammarSession, setIsGrammarSession] = useState(false);
   const [grammarQueue, setGrammarQueue] = useState<GrammarQuestion[]>([]);
+  const [isNumeracySession, setIsNumeracySession] = useState(false);
+  const [numeracyQueue, setNumeracyQueue] = useState<NumeracyQuestion[]>([]);
   const [sessionResults, setSessionResults] = useState<
     { word?: SpellingWord; title?: string; category?: string; isCorrect: boolean; userAnswer: string }[]
   >([]);
@@ -178,6 +183,7 @@ export default function Home() {
     playSound("click");
     setIsBossSession(false);
     setIsGrammarSession(false);
+    setIsNumeracySession(false);
     setActiveBoss(null);
     setBossVictoryState(null);
     setSessionXpEarned(0);
@@ -193,6 +199,86 @@ export default function Home() {
     setIsSessionFinished(false);
     setIsSessionActive(true);
     setActiveTab("practice");
+  };
+
+  // Start a Numeracy Practice Session
+  const startNumeracySession = () => {
+    playSound("click");
+    setIsBossSession(false);
+    setIsGrammarSession(false);
+    setIsNumeracySession(false);
+    setActiveBoss(null);
+    setBossVictoryState(null);
+    setSessionXpEarned(0);
+    setSessionPointsEarned(0);
+    setIsNumeracySession(true);
+
+    // Shuffle & take 10 questions
+    const shuffled = [...YEAR_3_NUMERACY_QUESTIONS].sort(() => 0.5 - Math.random()).slice(0, 10);
+    setNumeracyQueue(shuffled);
+    setCurrentQueueIndex(0);
+    setCurrentStepAnswered(false);
+    setSessionResults([]);
+    setIsSessionFinished(false);
+    setIsSessionActive(true);
+    setActiveTab("practice");
+  };
+
+  const handleAnswerNumeracy = (isCorrect: boolean, chosenOption: string, timeTakenMs: number) => {
+    const currentQ = numeracyQueue[currentQueueIndex];
+    if (!currentQ) return;
+
+    const basePoints = isCorrect ? 35 : 5;
+    const baseExp = isCorrect ? 35 : 5;
+    const speed = calculateSpeedBonus(timeTakenMs / 1000);
+    const roundPts = basePoints + (isCorrect ? speed.bonusPoints : 0);
+    const roundXp = baseExp + (isCorrect ? speed.bonusXp : 0);
+
+    const prevGam = appState.gamification || INITIAL_STATE.gamification;
+    const newGam = {
+      ...prevGam,
+      points: (prevGam.points || 0) + roundPts,
+      xp: (prevGam.xp || 0) + roundXp,
+    };
+
+    const newStats = {
+      ...appState.stats,
+      totalWordsAnswered: appState.stats.totalWordsAnswered + 1,
+      totalCorrect: appState.stats.totalCorrect + (isCorrect ? 1 : 0),
+    };
+
+    setSessionPointsEarned((p) => p + roundPts);
+    setSessionXpEarned((x) => x + roundXp);
+
+    const newResults = [
+      ...sessionResults,
+      {
+        title: currentQ.question,
+        category: `Numeracy: ${currentQ.topic}`,
+        isCorrect,
+        userAnswer: chosenOption,
+      },
+    ];
+    setSessionResults(newResults);
+
+    handleUpdateAppState({
+      ...appState,
+      stats: newStats,
+      gamification: newGam,
+    });
+
+    if (currentQueueIndex + 1 < numeracyQueue.length) {
+      setCurrentQueueIndex((i) => i + 1);
+    } else {
+      setIsSessionFinished(true);
+      setIsSessionActive(false);
+      const updatedStats = updateStreak(newStats);
+      handleUpdateAppState({
+        ...appState,
+        stats: updatedStats,
+        gamification: newGam,
+      });
+    }
   };
 
   const handleAnswerGrammar = (isCorrect: boolean, chosenOption: string, timeTakenMs: number) => {
@@ -742,7 +828,7 @@ export default function Home() {
           </>
         )}
 
-        {/* VIEW 3: Active Card (Grammar Card, Boss Card or Standard Cards) */}
+        {/* VIEW 3: Active Card (Grammar Card, Numeracy Card, Boss Card or Standard Cards) */}
         {activeTab === "practice" && isSessionActive && isGrammarSession && grammarQueue[currentQueueIndex] && (
           <div className="w-full flex flex-col items-center gap-4 animate-fadeIn">
             <GrammarPracticeCard
@@ -755,8 +841,21 @@ export default function Home() {
           </div>
         )}
 
+        {/* VIEW 3.2: Active Numeracy Card */}
+        {activeTab === "practice" && isSessionActive && isNumeracySession && numeracyQueue[currentQueueIndex] && (
+          <div className="w-full flex flex-col items-center gap-4 animate-fadeIn">
+            <NumeracyPracticeCard
+              question={numeracyQueue[currentQueueIndex]}
+              currentIndex={currentQueueIndex}
+              totalQuestions={numeracyQueue.length}
+              onAnswer={handleAnswerNumeracy}
+              soundEnabled={soundEnabled}
+            />
+          </div>
+        )}
+
         {/* VIEW 3B: Active Card (Boss Card or Standard Cards) */}
-        {activeTab === "practice" && isSessionActive && !isGrammarSession && currentItem && (
+        {activeTab === "practice" && isSessionActive && !isGrammarSession && !isNumeracySession && currentItem && (
           <div className="w-full flex flex-col items-center gap-4 animate-fadeIn">
             {isBossSession && activeBoss ? (
               <BossBattleCard
@@ -893,6 +992,14 @@ export default function Home() {
                   >
                     <BookOpen className="w-4 h-4 text-emerald-200" />
                     <span>Reading Quests (Band 6)</span>
+                  </button>
+
+                  <button
+                    onClick={() => startNumeracySession()}
+                    className="px-5 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-extrabold text-sm shadow-lg shadow-blue-950/20 transition flex items-center gap-2"
+                  >
+                    <Calculator className="w-4 h-4 text-blue-200" />
+                    <span>Numeracy Challenge (30 Qs)</span>
                   </button>
 
                   <button
