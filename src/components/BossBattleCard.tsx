@@ -252,7 +252,11 @@ export const BossBattleCard: React.FC<BossBattleCardProps> = ({
             {boss.tier && (
               <span
                 className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border ${
-                  boss.tier === "Immortal"
+                  boss.tier === "Omnipotent"
+                    ? "bg-gradient-to-r from-cyan-400 via-purple-500 to-amber-300 text-slate-950 font-black border-cyan-300 animate-pulse shadow-xl"
+                    : boss.tier === "Cosmic"
+                    ? "bg-gradient-to-r from-rose-500/40 via-amber-500/40 to-cyan-500/40 text-amber-200 border-amber-300 animate-pulse shadow-lg"
+                    : boss.tier === "Immortal"
                     ? "bg-gradient-to-r from-amber-500/40 to-rose-500/40 text-amber-200 border-amber-400/80 animate-pulse shadow-lg"
                     : boss.tier === "Mythic"
                     ? "bg-fuchsia-500/30 text-fuchsia-200 border-fuchsia-400/60 shadow-md"

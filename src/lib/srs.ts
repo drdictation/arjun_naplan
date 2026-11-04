@@ -272,10 +272,21 @@ export function buildBossSessionQueue(
   );
 
   // 2. Filter words matching boss level difficulty
-  // For bossLevel >= 7 (Nightmare & Apex) and bossLevel >= 11 (Titan, Mythic, Immortal)
+  // For bossLevel >= 16 (Cosmic & Omnipotent): strictly hardest Band 6 challenge words and tricky rules
+  // For bossLevel >= 11 (Titan, Mythic, Immortal)
   const targetDifficultyWords = allWords.filter((w) => {
     if (bossLevel <= 2) return w.difficulty <= 2;
     if (bossLevel <= 4) return w.difficulty === 2 || w.difficulty === 3;
+    if (bossLevel >= 16) {
+      return (
+        w.difficulty === 3 ||
+        (w.difficulty === 2 &&
+          (w.category.includes("Silent") ||
+            w.category.includes("Tricky") ||
+            w.category.includes("Double") ||
+            w.category.includes("Suffix")))
+      );
+    }
     if (bossLevel >= 11) {
       return (
         w.difficulty === 3 ||
@@ -304,7 +315,9 @@ export function buildBossSessionQueue(
 
   // For boss battles, inject past mistakes to test real mastery
   const maxTricky =
-    bossLevel >= 11
+    bossLevel >= 16
+      ? Math.min(12, Math.floor(bossHp / 3))
+      : bossLevel >= 11
       ? Math.min(8, Math.floor(bossHp / 3))
       : bossLevel >= 7
       ? Math.min(5, Math.floor(bossHp / 3))

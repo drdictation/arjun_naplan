@@ -1111,5 +1111,286 @@ export const YEAR_3_READING_PASSAGES: ReadingPassage[] = [
         explanation: "'Gold fever' is a metaphor describing the overwhelming excitement and urge to hunt for gold."
       }
     ]
+  },
+  // =========================================================================
+  // PASSAGE 15: NARRATIVE - THE TIDE POOL EXPEDITION
+  // =========================================================================
+  {
+    id: "passage-narrative-tidepool",
+    title: "The Tide Pool Expedition",
+    genre: "Narrative",
+    subtitle: "A surprising encounter beneath the rock shelves of Bondi",
+    estimatedMinutes: 4,
+    introduction: "Read the story below. Then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "The low tide had exposed a jagged labyrinth of sandstone rock pools along the coast. Maya hopped carefully from one dry ledge to another, her yellow bucket swinging by its rope handle. Sea anemones swayed in emerald pools like underwater chrysanthemums, and tiny hermit crabs scrambled into dark crevices whenever her shadow passed."
+      },
+      {
+        id: 2,
+        text: "In the deepest pool beneath a hanging curtain of brown kelp, something moved with deliberate grace. Maya dropped to her knees on the damp rock. A small creature, no larger than her palm, was gliding along the sandy floor. Its caramel body was speckled with brilliant, neon-blue rings that seemed to pulse and glow beneath the water."
+      },
+      {
+        id: 3,
+        text: "Maya inhaled sharply, instantly remembering Mr Harrison's science lesson from Tuesday. 'If the rings glow electric blue, step back immediately,' he had warned the class. Her fingers froze an inch from the surface. Slowly and silently, without splashing or startling the octopus, Maya stood up and took three steady steps backwards onto dry rock."
+      },
+      {
+        id: 4,
+        text: "She waved urgently toward the patrol tower where Lifeguard Dan was standing watch. Within minutes, Dan had arrived with warning flags to mark the pool. 'Outstanding spotting, Maya,' Dan said, kneeling to check the creature. 'You stayed calm, remembered your training, and kept everyone safe.'"
+      }
+    ],
+    questions: [
+      {
+        id: "rq-tide-01",
+        passageId: "passage-narrative-tidepool",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 1,
+        evidenceQuote: "Sea anemones swayed in emerald pools like underwater chrysanthemums",
+        prompt: "According to paragraph 1, what did the sea anemones look like in the emerald pools?",
+        options: [
+          "Underwater chrysanthemums",
+          "Tiny yellow starfish",
+          "Rough clumps of brown kelp",
+          "Speckled sea shells"
+        ],
+        correctOptionIndex: 0,
+        explanation: "Paragraph 1 compares the sea anemones directly to 'underwater chrysanthemums'."
+      },
+      {
+        id: "rq-tide-02",
+        passageId: "passage-narrative-tidepool",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 2,
+        evidenceQuote: "something moved with deliberate grace.",
+        prompt: "In paragraph 2, what does the phrase 'deliberate grace' suggest about the creature's movement?",
+        options: [
+          "It was clumsy and splashing loudly",
+          "It moved smoothly and with careful purpose",
+          "It was darting around in frantic panic",
+          "It was frozen stiff and unable to swim"
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Deliberate grace' means smooth, controlled, and intentional motion."
+      },
+      {
+        id: "rq-tide-03",
+        passageId: "passage-narrative-tidepool",
+        cognitiveSkill: "Inference",
+        paragraphRef: 3,
+        evidenceQuote: "'If the rings glow electric blue, step back immediately,' he had warned the class.",
+        prompt: "Why did Maya freeze and back away instead of touching the small octopus?",
+        options: [
+          "She dropped her bucket into the deep water",
+          "She remembered blue-ringed octopuses are highly venomous and dangerous",
+          "She was scared of slipping on the dry sandstone",
+          "She heard Lifeguard Dan blowing a loud whistle"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Mr Harrison's warning about glowing blue rings signaled danger, prompting Maya's quick cautious reaction."
+      },
+      {
+        id: "rq-tide-04",
+        passageId: "passage-narrative-tidepool",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 4,
+        evidenceQuote: "'You stayed calm, remembered your training, and kept everyone safe.'",
+        prompt: "What is the main message or theme of this story?",
+        options: [
+          "Collecting hermit crabs is the best beach activity",
+          "Knowledge and calm action help protect yourself and others from danger",
+          "Lifeguards should never leave the patrol tower",
+          "Rock pools are too dangerous for children to visit"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The story highlights how listening in school and staying calm enabled Maya to avoid harm and protect beachgoers."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 16: PERSUASIVE - WHY EVERY SCHOOL NEEDS A VEGETABLE GARDEN
+  // =========================================================================
+  {
+    id: "passage-persuasive-garden",
+    title: "Why Every School Needs a Kitchen Garden",
+    genre: "Persuasive",
+    subtitle: "Digging up real knowledge beyond textbooks",
+    estimatedMinutes: 4,
+    introduction: "Read the opinion article below. Then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Imagine stepping out of the classroom into sunshine, pulling crisp sweet carrots straight from rich dark compost, and harvesting fragrant basil for cooking class. Every primary school should build a kitchen garden. It transforms empty grass patches into thriving outdoor laboratories."
+      },
+      {
+        id: 2,
+        text: "Firstly, hands-on gardening brings classroom science to life. Instead of merely gazing at diagrams in a dusty textbook, students witness seeds germination, observe bees pollinating pumpkin flowers, and test soil moisture with their own fingertips. Scientific facts stick far better when students can feel, smell, and observe nature in action."
+      },
+      {
+        id: 3,
+        text: "Furthermore, school gardens build healthy eating habits that last a lifetime. Many children claim they dislike vegetables like spinach or beetroot, yet research shows that when kids plant, water, and pick crops themselves, they are eager to eat them. Growing food gives children genuine pride in eating fresh produce."
+      },
+      {
+        id: 4,
+        text: "Some sceptics argue that gardens consume too much school time and budget. However, simple timber garden beds and recycled rain barrels cost very little, and community volunteers are always eager to assist. It is high time our schools invested in gardens to nurture healthy bodies and curious young minds."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-gard-01",
+        passageId: "passage-persuasive-garden",
+        cognitiveSkill: "Main Idea",
+        paragraphRef: 1,
+        evidenceQuote: "Every primary school should build a kitchen garden. It transforms empty grass patches into thriving outdoor laboratories.",
+        prompt: "What is the author's primary argument in this text?",
+        options: [
+          "Schools should replace all textbooks with gardening tools",
+          "Every primary school should establish a kitchen vegetable garden",
+          "Students should only eat vegetables grown in pots",
+          "Schools spend too much money on timber and rain barrels"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The central contention stated clearly in the introduction is that all primary schools should have a kitchen garden."
+      },
+      {
+        id: "rq-gard-02",
+        passageId: "passage-persuasive-garden",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 3,
+        evidenceQuote: "when kids plant, water, and pick crops themselves, they are eager to eat them.",
+        prompt: "According to paragraph 3, what encourages children to enjoy eating fresh vegetables?",
+        options: [
+          "Buying vegetables from expensive organic markets",
+          "Watching cooking shows on television",
+          "Planting, nurturing, and harvesting the crops themselves",
+          "Reading recipes in textbooks"
+        ],
+        correctOptionIndex: 2,
+        explanation: "Paragraph 3 explains that growing food personally makes kids eager and proud to eat it."
+      },
+      {
+        id: "rq-gard-03",
+        passageId: "passage-persuasive-garden",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 4,
+        evidenceQuote: "Some sceptics argue that gardens consume too much school time and budget.",
+        prompt: "Why does the author mention 'sceptics' in paragraph 4?",
+        options: [
+          "To agree that gardens are too expensive for schools",
+          "To introduce an opposing viewpoint and then disprove it with practical solutions",
+          "To list people who dislike eating carrots and basil",
+          "To suggest schools ask volunteers to run classrooms"
+        ],
+        correctOptionIndex: 1,
+        explanation: "In persuasive writing, acknowledging the counterargument (cost/time) and addressing it strengthens the case."
+      },
+      {
+        id: "rq-gard-04",
+        passageId: "passage-persuasive-garden",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 4,
+        evidenceQuote: "to nurture healthy bodies and curious young minds.",
+        prompt: "What does the word 'nurture' mean as used in the final sentence?",
+        options: [
+          "To care for and encourage growth",
+          "To paint or decorate brightly",
+          "To inspect strictly for errors",
+          "To buy at a supermarket"
+        ],
+        correctOptionIndex: 0,
+        explanation: "'Nurture' means to feed, care for, and encourage healthy development."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 17: INFORMATIONAL - SECRETS OF THE PLATYPUS
+  // =========================================================================
+  {
+    id: "passage-info-platypus",
+    title: "Secrets of the Platypus",
+    genre: "Informational",
+    subtitle: "Australia's extraordinary egg-laying marvel",
+    estimatedMinutes: 4,
+    introduction: "Read the scientific report about the platypus below, then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "When British scientists in 1799 first examined a preserved platypus skin sent from Australia, they believed it was an elaborate hoax stitched together by a mischievous taxidermist. With a duck-like bill, beaver-like tail, webbed feet, and otter fur, this river-dwelling creature seemed physically impossible."
+      },
+      {
+        id: 2,
+        text: "The platypus is a monotreme, one of only two surviving types of mammals that lay eggs instead of giving birth to live young (the other being the echidna). A mother platypus lays one or two soft, leathery eggs inside a burrow dug high into the riverbank, curling around them to keep them warm until they hatch ten days later."
+      },
+      {
+        id: 3,
+        text: "Beneath the water, the platypus does not rely on eyesight or smell. Instead, its rubbery bill is packed with tens of thousands of microscopic electroreceptors. These sensory cells detect tiny electrical impulses produced when shrimp, yabbies, and insect larvae contract their muscles. By sweeping its bill from side to side along murky riverbeds, the platypus detects prey with laser precision."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-platy-01",
+        passageId: "passage-info-platypus",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 1,
+        evidenceQuote: "they believed it was an elaborate hoax stitched together by a mischievous taxidermist.",
+        prompt: "Why did 18th-century British scientists think the platypus specimen was a hoax?",
+        options: [
+          "The animal was completely white in colour",
+          "Its unusual mix of duck, beaver, and otter features seemed stitched together",
+          "The skin had arrived damaged from the sea voyage",
+          "They believed it was a bird rather than a mammal"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Scientists couldn't believe an animal with a duck bill and beaver tail was real, suspecting a fake."
+      },
+      {
+        id: "rq-platy-02",
+        passageId: "passage-info-platypus",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 2,
+        evidenceQuote: "The platypus is a monotreme, one of only two surviving types of mammals that lay eggs",
+        prompt: "What is unique about monotremes compared to most other mammals?",
+        options: [
+          "They have scales like lizards",
+          "They lay eggs instead of giving birth to live young",
+          "They cannot breathe underwater",
+          "They only feed on eucalyptus leaves"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Monotremes are unique mammals that reproduce by laying eggs."
+      },
+      {
+        id: "rq-platy-03",
+        passageId: "passage-info-platypus",
+        cognitiveSkill: "Inference",
+        paragraphRef: 3,
+        evidenceQuote: "its rubbery bill is packed with tens of thousands of microscopic electroreceptors.",
+        prompt: "How is the platypus able to catch prey in murky riverbeds with closed eyes?",
+        options: [
+          "By shouting sound waves like a dolphin",
+          "By detecting electric signals given off by prey with sensors on its bill",
+          "By using long whiskers to feel vibrations",
+          "By waiting on the riverbank until sunrise"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 3 explains the bill uses electroreceptors to detect tiny muscle signals from prey."
+      },
+      {
+        id: "rq-platy-04",
+        passageId: "passage-info-platypus",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 1,
+        evidenceQuote: "With a duck-like bill, beaver-like tail, webbed feet, and otter fur, this river-dwelling creature seemed physically impossible.",
+        prompt: "What is the author's purpose in writing this article?",
+        options: [
+          "To persuade readers to buy pet platypuses",
+          "To inform readers about the fascinating adaptations and biology of the platypus",
+          "To argue that British scientists were foolish",
+          "To explain how to build burrows on riverbanks"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The article provides factual scientific information about the platypus's unique adaptations."
+      }
+    ]
   }
 ];

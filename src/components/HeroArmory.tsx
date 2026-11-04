@@ -191,8 +191,8 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
             <div className="space-y-5">
               <div className="flex items-center justify-between text-xs flex-wrap gap-2">
                 <div>
-                  <span className="font-bold text-slate-700 uppercase tracking-wider">All {BOSS_ROSTER.length} Boss Encounters (Levels 1 - 15)</span>
-                  <p className="text-[11px] text-slate-500">Apprentice (1-2) • Master (3-6) • Nightmare (7-9) • Apex (10) • Titan (11-12) • Mythic (13-14) • Immortal (15)</p>
+                  <span className="font-bold text-slate-700 uppercase tracking-wider">All {BOSS_ROSTER.length} Boss Encounters (Levels 1 - 20)</span>
+                  <p className="text-[11px] text-slate-500">Apprentice (1-2) • Master (3-6) • Nightmare (7-9) • Apex (10) • Titan (11-12) • Mythic (13-14) • Immortal (15) • Cosmic (16-18) • Omnipotent (19-20)</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
@@ -262,7 +262,11 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
                               <div className="flex items-center gap-1 flex-wrap justify-end">
                                 <span
                                   className={`px-1.5 py-0.5 rounded text-[10px] font-black uppercase ${
-                                    boss.level >= 13
+                                    boss.level >= 19
+                                      ? "bg-gradient-to-r from-purple-500 to-cyan-400 text-white font-black"
+                                      : boss.level >= 16
+                                      ? "bg-gradient-to-r from-rose-500 to-amber-400 text-white font-black"
+                                      : boss.level >= 13
                                       ? "bg-amber-400 text-amber-950 font-black"
                                       : boss.level >= 11
                                       ? "bg-cyan-100 text-cyan-900 font-black"
@@ -281,7 +285,11 @@ export const HeroArmory: React.FC<HeroArmoryProps> = ({
                                 </span>
                                 {boss.tier && (
                                   <span className={`px-1 py-0.5 rounded text-[9px] font-black uppercase ${
-                                    boss.tier === "Immortal"
+                                    boss.tier === "Omnipotent"
+                                      ? "bg-gradient-to-r from-cyan-400 via-purple-500 to-amber-300 text-slate-950 font-black"
+                                      : boss.tier === "Cosmic"
+                                      ? "bg-gradient-to-r from-rose-500 to-amber-400 text-white font-black"
+                                      : boss.tier === "Immortal"
                                       ? "bg-amber-100 text-amber-900 border border-amber-300"
                                       : boss.tier === "Mythic"
                                       ? "bg-fuchsia-100 text-fuchsia-900"

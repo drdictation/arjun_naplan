@@ -782,7 +782,10 @@ export default function Home() {
                 unlockedBadge={bossVictoryState.unlockedBadge}
                 onFightAgain={() => startBossBattle(activeBoss.id, isHardcoreTrial)}
                 onNextBoss={() => {
-                  const nextLevel = activeBoss.level < 15 ? activeBoss.level + 1 : 1;
+                  const maxLevel = Math.max(
+                    ...BOSS_ROSTER.filter((b) => b.theme === activeBoss.theme).map((b) => b.level)
+                  );
+                  const nextLevel = activeBoss.level < maxLevel ? activeBoss.level + 1 : 1;
                   const nextBoss = BOSS_ROSTER.find(
                     (b) => b.theme === activeBoss.theme && b.level === nextLevel
                   );
@@ -999,7 +1002,7 @@ export default function Home() {
                     className="px-5 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-extrabold text-sm shadow-lg shadow-blue-950/20 transition flex items-center gap-2"
                   >
                     <Calculator className="w-4 h-4 text-blue-200" />
-                    <span>Numeracy Challenge (30 Qs)</span>
+                    <span>Numeracy Challenge (60 Qs)</span>
                   </button>
 
                   <button
@@ -1049,7 +1052,7 @@ export default function Home() {
               <div className="flex items-center justify-between mb-3 px-1 flex-wrap gap-2">
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-xs font-extrabold text-slate-700 uppercase tracking-wider">
-                    ⚔️ {currentTheme.shortName} Boss Battles (Levels 1 - 15)
+                    ⚔️ {currentTheme.shortName} Boss Battles (Levels 1 - {Math.max(...currentThemeBosses.map((b) => b.level))})
                   </h3>
                   <button
                     onClick={() => {
@@ -1108,7 +1111,11 @@ export default function Home() {
                           <div className="flex items-center gap-1 flex-wrap justify-end">
                             <span
                               className={`px-1.5 py-0.5 rounded font-black text-[10px] ${
-                                boss.level >= 13
+                                boss.level >= 19
+                                  ? "bg-gradient-to-r from-purple-500 to-cyan-400 text-white font-black"
+                                  : boss.level >= 16
+                                  ? "bg-gradient-to-r from-rose-500 to-amber-400 text-white font-black"
+                                  : boss.level >= 13
                                   ? "bg-amber-400 text-amber-950 font-black"
                                   : boss.level >= 11
                                   ? "bg-cyan-100 text-cyan-900 font-black"
@@ -1128,7 +1135,11 @@ export default function Home() {
                             {boss.tier && (
                               <span
                                 className={`px-1 py-0.5 rounded font-black text-[9px] uppercase ${
-                                  boss.tier === "Immortal"
+                                  boss.tier === "Omnipotent"
+                                    ? "bg-gradient-to-r from-cyan-400 via-purple-500 to-amber-300 text-slate-950 font-black"
+                                    : boss.tier === "Cosmic"
+                                    ? "bg-gradient-to-r from-rose-500 to-amber-400 text-white font-black"
+                                    : boss.tier === "Immortal"
                                     ? "bg-amber-100 text-amber-900 border border-amber-300"
                                     : boss.tier === "Mythic"
                                     ? "bg-fuchsia-100 text-fuchsia-900"
