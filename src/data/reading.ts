@@ -1392,5 +1392,282 @@ export const YEAR_3_READING_PASSAGES: ReadingPassage[] = [
         explanation: "The article provides factual scientific information about the platypus's unique adaptations."
       }
     ]
+  },
+  // =========================================================================
+  // PASSAGE 18: NARRATIVE - THE ROBOT RACE IN ROOM 4
+  // =========================================================================
+  {
+    id: "passage-narrative-robotics",
+    title: "The Robot Race in Room 4",
+    genre: "Narrative",
+    subtitle: "Trial, error, and teamwork on the coding track",
+    estimatedMinutes: 4,
+    introduction: "Read the story below. Then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "The classroom hummed with tension as twelve solar-powered rover robots lined up along the black tape track. For three weeks, Leo and Zara had soldered wires, tested infrared sensors, and tweaked their code on the laptop. Their robot, nicknamed The Grasshopper because of its bright green chassis and bouncy suspension, was ready for the final trial."
+      },
+      {
+        id: 2,
+        text: "‘Three, two, one, activate!’ called Mrs Chen, clicking the stopwatch. Whirring electric motors filled the room. The Grasshopper darted forward smoothly, hugging the first sharp hairpin turn with precision. But midway through the straight run, a loose wheel lug began to wobble violently. The Grasshopper veered sideways toward the boundary line."
+      },
+      {
+        id: 3,
+        text: "‘Adjust the left motor bias in the loop!’ shouted Zara, eyes glued to the telemetry monitor. Leo’s fingers flew across the keyboard, uploading an emergency throttle compensation via Bluetooth. Just two centimetres from disaster, The Grasshopper’s left wheel corrected its spin, stabilized, and shot across the checkered tape in first place."
+      },
+      {
+        id: 4,
+        text: "The entire class erupted in cheers. Leo and Zara exchanged an exhausted high-five. They hadn't just built a fast robot; they had learned that staying calm under pressure was the most powerful code of all."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-robot-01",
+        passageId: "passage-narrative-robotics",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 1,
+        evidenceQuote: "nicknamed The Grasshopper because of its bright green chassis and bouncy suspension",
+        prompt: "Why was the robot given the nickname 'The Grasshopper'?",
+        options: [
+          "It made loud chirping noises while driving",
+          "It had a bright green chassis and bouncy suspension",
+          "It was programmed to leap over obstacles",
+          "It was the smallest robot in the classroom"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 1 clearly links the name to its bright green chassis and bouncy suspension."
+      },
+      {
+        id: "rq-robot-02",
+        passageId: "passage-narrative-robotics",
+        cognitiveSkill: "Inference",
+        paragraphRef: 2,
+        evidenceQuote: "a loose wheel lug began to wobble violently. The Grasshopper veered sideways toward the boundary line.",
+        prompt: "What problem threatened to disqualify The Grasshopper during the race?",
+        options: [
+          "Its solar battery ran completely flat",
+          "A loose wheel lug caused the robot to wobble off track",
+          "Mrs Chen’s stopwatch malfunctioned",
+          "Another rover crashed into its rear bumper"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The wobbling wheel lug caused the robot to veer sideways toward the edge."
+      },
+      {
+        id: "rq-robot-03",
+        passageId: "passage-narrative-robotics",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 3,
+        evidenceQuote: "Leo’s fingers flew across the keyboard, uploading an emergency throttle compensation via Bluetooth.",
+        prompt: "What does the phrase 'fingers flew across the keyboard' tell us about Leo?",
+        options: [
+          "He was typing very rapidly and with urgent focus",
+          "He was swatting away an insect",
+          "He was playing a musical song on the keys",
+          "He had accidentally bumped the laptop off the table"
+        ],
+        correctOptionIndex: 0,
+        explanation: "The idiom illustrates typing with extreme speed and intense concentration."
+      },
+      {
+        id: "rq-robot-04",
+        passageId: "passage-narrative-robotics",
+        cognitiveSkill: "Main Idea",
+        paragraphRef: 4,
+        evidenceQuote: "they had learned that staying calm under pressure was the most powerful code of all.",
+        prompt: "What is the key lesson Leo and Zara discovered from the challenge?",
+        options: [
+          "Bluetooth signals always fail in competitions",
+          "Quick teamwork and staying calm resolve unexpected crises",
+          "Solar rovers are faster than battery rovers",
+          "Coding is only useful for winning prizes"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The resolution emphasizes that teamwork and maintaining composure under pressure solved the crisis."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 19: INFORMATIONAL - THE GREAT BARRIER REEF CORAL SPAWN
+  // =========================================================================
+  {
+    id: "passage-info-coral",
+    title: "The Great Barrier Reef's Midnight Magic",
+    genre: "Informational",
+    subtitle: "One of the natural world's greatest synchronised spectacles",
+    estimatedMinutes: 5,
+    introduction: "Read the scientific report about the Great Barrier Reef, then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Every year in late spring or early summer, following the full moon when sea temperatures rise above 26 degrees Celsius, Australia’s Great Barrier Reef hosts the largest mass reproduction event on Earth: coral spawning. Over several nights, hundreds of coral species release billions of tiny pink, orange, and white egg-and-sperm bundles into the sea simultaneously."
+      },
+      {
+        id: 2,
+        text: "This phenomenon transforms the ocean into an underwater snowstorm in reverse. Billions of buoyant bundles float slowly upward toward the surface. By releasing everything at the exact same hour, corals overwhelm hungry predators such as fish and crabs, ensuring that millions of fertilised larvae survive to drift on ocean currents and establish new colonies."
+      },
+      {
+        id: 3,
+        text: "Scientists use satellites and underwater drones to track coral slicks, which are so massive they can even be photographed from space. Understanding when corals spawn helps marine biologists protect reefs from pollution and collect larvae to restore damaged sections of this World Heritage wonder."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-coral-01",
+        passageId: "passage-info-coral",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 1,
+        evidenceQuote: "following the full moon when sea temperatures rise above 26 degrees Celsius",
+        prompt: "According to paragraph 1, what two environmental cues trigger coral spawning?",
+        options: [
+          "Winter storms and low tides",
+          "The full moon and water temperatures over 26°C",
+          "Heavy rainfall and solar eclipses",
+          "Strong westerly winds and high waves"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 1 specifies the full moon and sea temperatures exceeding 26°C as the triggers."
+      },
+      {
+        id: "rq-coral-02",
+        passageId: "passage-info-coral",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 2,
+        evidenceQuote: "This phenomenon transforms the ocean into an underwater snowstorm in reverse.",
+        prompt: "Why does the author describe the event as 'an underwater snowstorm in reverse'?",
+        options: [
+          "Because the sea water freezes into ice crystals",
+          "Because millions of pale bundles float upward toward the surface instead of falling down",
+          "Because the fish are frightened of the cold water",
+          "Because it only happens during winter months"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Snow falls downward, but buoyant coral bundles drift upward, creating the reverse visual effect."
+      },
+      {
+        id: "rq-coral-03",
+        passageId: "passage-info-coral",
+        cognitiveSkill: "Inference",
+        paragraphRef: 2,
+        evidenceQuote: "corals overwhelm hungry predators such as fish and crabs, ensuring that millions of fertilised larvae survive",
+        prompt: "What evolutionary advantage is gained by all corals releasing bundles at the exact same time?",
+        options: [
+          "It confuses predators and ensures more larvae survive being eaten",
+          "It scares all the fish away permanently",
+          "It cools the ocean down for swimming",
+          "It keeps the water clear for sunlight"
+        ],
+        correctOptionIndex: 0,
+        explanation: "Predator satiation: overwhelming numbers prevent fish from eating all larvae, allowing survival."
+      },
+      {
+        id: "rq-coral-04",
+        passageId: "passage-info-coral",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 3,
+        evidenceQuote: "coral slicks, which are so massive they can even be photographed from space.",
+        prompt: "How large can coral slicks become during spawning?",
+        options: [
+          "Only as large as a dinner plate",
+          "Visible only under a high-power microscope",
+          "Massive enough to be photographed from space by satellites",
+          "Covering only a single rock pool"
+        ],
+        correctOptionIndex: 2,
+        explanation: "Paragraph 3 notes coral slicks are so vast they can be captured from orbiting satellites."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 20: POEM - SONG OF THE GUM TREE GULLY
+  // =========================================================================
+  {
+    id: "passage-poem-gumtree",
+    title: "Song of the Gum Tree Gully",
+    genre: "Poem",
+    subtitle: "A lyrical tribute to bush sounds at twilight",
+    estimatedMinutes: 3,
+    introduction: "Read the bush poem below, then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "The copper sun slips down the ridge,\nBeneath the timber wagon bridge,\nThe sleepy creek begins to hum,\nBeside the peeling ghost-bark gum."
+      },
+      {
+        id: 2,
+        text: "A chorus starts among the reeds,\nWhere cicadas tap on bamboo beads,\nAnd flying foxes take to flight,\nAcross the velvet cloak of night."
+      },
+      {
+        id: 3,
+        text: "The mopoke calls its gentle tune,\nTo greet the silver crescent moon,\nWhile nestled safe in hollow logs,\nThe possums sleep through chorus frogs."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-gum-01",
+        passageId: "passage-poem-gumtree",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 2,
+        evidenceQuote: "Across the velvet cloak of night.",
+        prompt: "In stanza 2, what does the poet compare the night sky to?",
+        options: [
+          "A timber bridge",
+          "A velvet cloak",
+          "A silver crescent",
+          "A bamboo bead"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The metaphor 'velvet cloak of night' describes the dark, smooth night sky."
+      },
+      {
+        id: "rq-gum-02",
+        passageId: "passage-poem-gumtree",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 1,
+        evidenceQuote: "The sleepy creek begins to hum,",
+        prompt: "Which poetic technique gives human actions to the creek in stanza 1?",
+        options: [
+          "Personification",
+          "Alliteration",
+          "Hyperbole",
+          "Rhyming slang"
+        ],
+        correctOptionIndex: 0,
+        explanation: "Describing a creek as 'sleepy' and able to 'hum' gives it human qualities (personification)."
+      },
+      {
+        id: "rq-gum-03",
+        passageId: "passage-poem-gumtree",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 3,
+        evidenceQuote: "The mopoke calls its gentle tune, / To greet the silver crescent moon,",
+        prompt: "Which Australian night bird greets the crescent moon in stanza 3?",
+        options: [
+          "A kookaburra",
+          "A mopoke (tawny frogmouth/boobook owl)",
+          "A cockatoo",
+          "A magpie"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Stanza 3 specifically names the mopoke calling its gentle tune."
+      },
+      {
+        id: "rq-gum-04",
+        passageId: "passage-poem-gumtree",
+        cognitiveSkill: "Inference",
+        paragraphRef: 1,
+        evidenceQuote: "The copper sun slips down the ridge,",
+        prompt: "What time of day is captured throughout the poem?",
+        options: [
+          "Early dawn",
+          "Midday blazing heat",
+          "Dusk turning into night",
+          "Mid-morning recess"
+        ],
+        correctOptionIndex: 2,
+        explanation: "The sun slipping down the ridge and the crescent moon rising depicts twilight/dusk."
+      }
+    ]
   }
 ];

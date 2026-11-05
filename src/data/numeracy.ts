@@ -640,5 +640,422 @@ export const YEAR_3_NUMERACY_QUESTIONS: NumeracyQuestion[] = [
     correctOptionIndex: 2,
     explanation: "A coin has only two equal sides (heads and tails), giving an even (50/50) chance.",
     topic: "Probability"
+  },
+
+  // --- MEGA EXPANSION PACK (QUESTIONS 61 TO 100) ---
+  {
+    id: "num-gen-061",
+    strand: "Number & Algebra",
+    difficulty: 2,
+    question: "What number is 10 more than 495?",
+    options: ["485", "505", "515", "595"],
+    correctOptionIndex: 1,
+    explanation: "495 + 10 = 505 (crosses the hundred boundary).",
+    topic: "Place Value & Mental Addition"
+  },
+  {
+    id: "num-gen-062",
+    strand: "Number & Algebra",
+    difficulty: 2,
+    question: "Which number sentence has the same answer as 8 × 4?",
+    options: ["4 + 8", "16 + 16", "8 + 4", "6 × 5"],
+    correctOptionIndex: 1,
+    explanation: "8 × 4 = 32. 16 + 16 = 32.",
+    topic: "Multiplication & Equivalence"
+  },
+  {
+    id: "num-gen-063",
+    strand: "Number & Algebra",
+    difficulty: 2,
+    question: "Which fraction is the largest?",
+    options: ["1/8", "1/4", "1/2", "1/6"],
+    correctOptionIndex: 2,
+    explanation: "When unit fractions have a smaller denominator, the pieces are larger. 1/2 is the biggest.",
+    topic: "Comparing Fractions"
+  },
+  {
+    id: "num-gen-064",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "There are 24 children in a class. One third (1/3) of the class wear glasses. How many children wear glasses?",
+    options: ["6", "8", "9", "12"],
+    correctOptionIndex: 1,
+    explanation: "1/3 of 24 is 24 ÷ 3 = 8 children.",
+    topic: "Fractions of Quantities"
+  },
+  {
+    id: "num-gen-065",
+    strand: "Number & Algebra",
+    difficulty: 2,
+    question: "What is the missing number? 100, 92, 84, ?, 68, 60",
+    options: ["78", "76", "74", "72"],
+    correctOptionIndex: 1,
+    explanation: "The pattern subtracts 8 each step: 84 − 8 = 76.",
+    topic: "Number Patterns"
+  },
+  {
+    id: "num-gen-066",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "Ethan bought 3 packs of trading cards. Each pack contains 8 cards. He gave 5 cards to his friend. How many cards does Ethan have left?",
+    options: ["19", "21", "24", "29"],
+    correctOptionIndex: 0,
+    explanation: "3 × 8 = 24 cards. 24 − 5 = 19 cards left.",
+    topic: "Two-step Word Problems"
+  },
+  {
+    id: "num-gen-067",
+    strand: "Number & Algebra",
+    difficulty: 2,
+    question: "Which number rounded to the nearest 10 gives 70?",
+    options: ["64", "67", "76", "82"],
+    correctOptionIndex: 1,
+    explanation: "67 rounds up to 70 because its units digit (7) is 5 or greater.",
+    topic: "Rounding Numbers"
+  },
+  {
+    id: "num-gen-068",
+    strand: "Number & Algebra",
+    difficulty: 2,
+    question: "35 ÷ 5 = ?",
+    options: ["6", "7", "8", "9"],
+    correctOptionIndex: 1,
+    explanation: "5 × 7 = 35, so 35 ÷ 5 = 7.",
+    topic: "Division Facts"
+  },
+  {
+    id: "num-gen-069",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "Which of these numbers is an EVEN number and a multiple of 3?",
+    options: ["15", "18", "21", "25"],
+    correctOptionIndex: 1,
+    explanation: "18 ends in an even digit (8) and is 3 × 6 = 18.",
+    topic: "Multiples & Properties"
+  },
+  {
+    id: "num-gen-070",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "A baker bakes 6 trays of muffins. Each tray has 9 muffins. How many muffins are baked in total?",
+    options: ["45", "54", "56", "63"],
+    correctOptionIndex: 1,
+    explanation: "6 × 9 = 54 muffins.",
+    topic: "Multiplication"
+  },
+  {
+    id: "num-gen-071",
+    strand: "Measurement & Geometry",
+    difficulty: 2,
+    question: "How many centimetres are there in 3 and a half metres (3.5 m)?",
+    options: ["35 cm", "305 cm", "350 cm", "3500 cm"],
+    correctOptionIndex: 2,
+    explanation: "1 m = 100 cm. 3 m = 300 cm, 0.5 m = 50 cm. Total = 350 cm.",
+    topic: "Length Units"
+  },
+  {
+    id: "num-gen-072",
+    strand: "Measurement & Geometry",
+    difficulty: 2,
+    question: "A soccer match starts at 10:15 am and finishes at 11:30 am. How long was the match?",
+    options: ["1 hour 15 minutes", "1 hour 30 minutes", "1 hour 45 minutes", "2 hours"],
+    correctOptionIndex: 0,
+    explanation: "From 10:15 to 11:15 is 1 hour, plus 15 more minutes to 11:30 = 1 hour 15 minutes.",
+    topic: "Elapsed Time"
+  },
+  {
+    id: "num-gen-073",
+    strand: "Measurement & Geometry",
+    difficulty: 2,
+    question: "Which 3D object has 2 flat circular faces and 1 curved surface?",
+    options: ["Cone", "Sphere", "Cylinder", "Torus"],
+    correctOptionIndex: 2,
+    explanation: "A cylinder (like a tin can) has circular top and bottom faces and a curved surface.",
+    topic: "3D Shapes"
+  },
+  {
+    id: "num-gen-074",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "What is the area of a rectangle that is 6 cm long and 4 cm wide?",
+    options: ["10 cm²", "20 cm²", "24 cm²", "28 cm²"],
+    correctOptionIndex: 2,
+    explanation: "Area = length × width = 6 × 4 = 24 cm².",
+    topic: "Area of Rectangles"
+  },
+  {
+    id: "num-gen-075",
+    strand: "Measurement & Geometry",
+    difficulty: 2,
+    question: "Noah buys a notebook for $2.60 and a pen for $1.80. He pays with a $5 note. How much change does he get?",
+    options: ["40c", "60c", "80c", "$1.20"],
+    correctOptionIndex: 1,
+    explanation: "$2.60 + $1.80 = $4.40 spent. $5.00 − $4.40 = 60c change.",
+    topic: "Australian Money"
+  },
+  {
+    id: "num-gen-076",
+    strand: "Measurement & Geometry",
+    difficulty: 1,
+    question: "How many months of the year have exactly 30 days?",
+    options: ["4", "5", "6", "7"],
+    correctOptionIndex: 0,
+    explanation: "Four months: April, June, September, November.",
+    topic: "Calendar & Seasons"
+  },
+  {
+    id: "num-gen-077",
+    strand: "Measurement & Geometry",
+    difficulty: 2,
+    question: "Which of these angles is an obtuse angle?",
+    options: ["45°", "80°", "90°", "120°"],
+    correctOptionIndex: 3,
+    explanation: "An obtuse angle is greater than 90° and less than 180°. 120° is obtuse.",
+    topic: "Angles"
+  },
+  {
+    id: "num-gen-078",
+    strand: "Measurement & Geometry",
+    difficulty: 2,
+    question: "A jug holds 1.5 litres of fruit juice. How many millilitres (mL) is this?",
+    options: ["150 mL", "500 mL", "1500 mL", "15000 mL"],
+    correctOptionIndex: 2,
+    explanation: "1 litre = 1000 mL. 1.5 litres = 1500 mL.",
+    topic: "Capacity Conversion"
+  },
+  {
+    id: "num-gen-079",
+    strand: "Measurement & Geometry",
+    difficulty: 2,
+    question: "Which shape has exactly one line of symmetry?",
+    options: [
+      "Square",
+      "Isosceles triangle (two equal sides)",
+      "Circle",
+      "Rectangle"
+    ],
+    correctOptionIndex: 1,
+    explanation: "An isosceles triangle has only 1 line of vertical symmetry down its middle.",
+    topic: "Symmetry"
+  },
+  {
+    id: "num-gen-080",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A rectangular playground has a perimeter of 30 metres. If the length is 10 metres, what is the width?",
+    options: ["5 metres", "10 metres", "15 metres", "20 metres"],
+    correctOptionIndex: 0,
+    explanation: "Perimeter = 2 × (length + width) = 30 m. Length + width = 15 m. Width = 15 − 10 = 5 metres.",
+    topic: "Perimeter Problem Solving"
+  },
+  {
+    id: "num-gen-081",
+    strand: "Statistics & Probability",
+    difficulty: 2,
+    question: "A spinner has 8 equal sections: 4 Red, 2 Blue, 1 Green, 1 Yellow. Which colour is least likely to be spun?",
+    options: ["Red", "Blue", "Green and Yellow (equal least)", "Blue and Red"],
+    correctOptionIndex: 2,
+    explanation: "Green (1/8) and Yellow (1/8) both have the fewest sections.",
+    topic: "Chance Experiments"
+  },
+  {
+    id: "num-gen-082",
+    strand: "Statistics & Probability",
+    difficulty: 2,
+    question: "In a class picture graph, 1 book symbol = 5 library visits. The class has 6 book symbols. How many visits in total?",
+    options: ["11", "25", "30", "35"],
+    correctOptionIndex: 2,
+    explanation: "6 symbols × 5 visits = 30 total visits.",
+    topic: "Pictographs"
+  },
+  {
+    id: "num-gen-083",
+    strand: "Statistics & Probability",
+    difficulty: 2,
+    question: "Zara draws a card from a standard deck. The card is either red or black. What is the likelihood of drawing a red card?",
+    options: ["Impossible", "Equal chance (1 in 2)", "Unlikely", "Certain"],
+    correctOptionIndex: 1,
+    explanation: "Half the cards are red (hearts and diamonds) and half are black, so it is an even 1 in 2 chance.",
+    topic: "Probability"
+  },
+  {
+    id: "num-gen-084",
+    strand: "Statistics & Probability",
+    difficulty: 2,
+    question: "A tally table records vehicles passing school: Cars (卌 卌 卌 II), Buses (IIII), Bikes (卌 I). How many cars passed?",
+    options: ["15", "16", "17", "18"],
+    correctOptionIndex: 2,
+    explanation: "Three bundles of 5 = 15, plus 2 singles = 17 cars.",
+    topic: "Tally Charts"
+  },
+  {
+    id: "num-gen-085",
+    strand: "Statistics & Probability",
+    difficulty: 3,
+    question: "Five students ran a 100m sprint: Liam 18s, Noah 16s, Jack 17s, Ben 19s, Leo 15s. Who was the fastest runner?",
+    options: ["Liam", "Noah", "Ben", "Leo"],
+    correctOptionIndex: 3,
+    explanation: "In a running race, the lowest time is the fastest. Leo ran in 15 seconds.",
+    topic: "Interpreting Data"
+  },
+  {
+    id: "num-gen-086",
+    strand: "Number & Algebra",
+    difficulty: 2,
+    question: "What number is halfway between 300 and 400?",
+    options: ["340", "350", "360", "375"],
+    correctOptionIndex: 1,
+    explanation: "The midpoint between 300 and 400 is 350.",
+    topic: "Number Line & Place Value"
+  },
+  {
+    id: "num-gen-087",
+    strand: "Number & Algebra",
+    difficulty: 2,
+    question: "Which of the following is equal to 4 × 7?",
+    options: ["7 + 7 + 7", "4 + 4 + 4 + 4", "7 + 7 + 7 + 7", "4 × 4 × 4 × 4"],
+    correctOptionIndex: 2,
+    explanation: "4 × 7 means 4 groups of 7, which is 7 + 7 + 7 + 7.",
+    topic: "Repeated Addition"
+  },
+  {
+    id: "num-gen-088",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "If 1 box holds 10 pencils, how many boxes are needed to pack 85 pencils completely?",
+    options: ["8 boxes", "9 boxes", "10 boxes", "85 boxes"],
+    correctOptionIndex: 1,
+    explanation: "8 boxes hold 80 pencils, leaving 5 left over. You need a 9th box to hold all pencils.",
+    topic: "Division with Remainders in Context"
+  },
+  {
+    id: "num-gen-089",
+    strand: "Number & Algebra",
+    difficulty: 2,
+    question: "Chloe had $20. She bought lunch for $8.50. How much money does she have remaining?",
+    options: ["$11.50", "$12.50", "$11.00", "$10.50"],
+    correctOptionIndex: 0,
+    explanation: "$20.00 − $8.50 = $11.50.",
+    topic: "Money & Subtraction"
+  },
+  {
+    id: "num-gen-090",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "Which pattern rule describes this sequence: 3, 6, 12, 24, 48?",
+    options: ["Add 3 each time", "Add 6 each time", "Multiply by 2 each time", "Multiply by 3 each time"],
+    correctOptionIndex: 2,
+    explanation: "Each number is doubled: 3 × 2 = 6, 6 × 2 = 12, 12 × 2 = 24, 24 × 2 = 48.",
+    topic: "Geometric Sequences"
+  },
+  {
+    id: "num-gen-091",
+    strand: "Measurement & Geometry",
+    difficulty: 2,
+    question: "How many hours are there in 2 full days?",
+    options: ["24 hours", "36 hours", "48 hours", "72 hours"],
+    correctOptionIndex: 2,
+    explanation: "1 day = 24 hours. 2 days = 2 × 24 = 48 hours.",
+    topic: "Time Units"
+  },
+  {
+    id: "num-gen-092",
+    strand: "Measurement & Geometry",
+    difficulty: 2,
+    question: "Which 3D shape has 1 apex (top point), 1 curved surface, and 1 flat circular base?",
+    options: ["Cylinder", "Cone", "Sphere", "Hemisphere"],
+    correctOptionIndex: 1,
+    explanation: "A cone has a circular base pointing up to an apex.",
+    topic: "3D Shapes"
+  },
+  {
+    id: "num-gen-093",
+    strand: "Measurement & Geometry",
+    difficulty: 2,
+    question: "Sam drinks 250 mL of water 4 times a day. How much water does he drink in total per day?",
+    options: ["500 mL", "750 mL", "1000 mL (1 Litre)", "1250 mL"],
+    correctOptionIndex: 2,
+    explanation: "4 × 250 mL = 1000 mL = 1 Litre.",
+    topic: "Capacity & Volume"
+  },
+  {
+    id: "num-gen-094",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A digital clock reads 08:45. What is another way to say this time?",
+    options: ["Quarter past 8", "Quarter to 8", "Quarter past 9", "Quarter to 9"],
+    correctOptionIndex: 3,
+    explanation: "8:45 is 15 minutes before 9:00, which is 'quarter to 9'.",
+    topic: "Time Language"
+  },
+  {
+    id: "num-gen-095",
+    strand: "Measurement & Geometry",
+    difficulty: 2,
+    question: "Which tool would you use to measure the mass (weight) of an apple?",
+    options: ["Tape measure", "Kitchen scale", "Stopwatch", "Thermometer"],
+    correctOptionIndex: 1,
+    explanation: "A kitchen scale measures mass/weight in grams.",
+    topic: "Measurement Tools"
+  },
+  {
+    id: "num-gen-096",
+    strand: "Number & Algebra",
+    difficulty: 2,
+    question: "Solve: 250 − 65 = ?",
+    options: ["175", "185", "195", "205"],
+    correctOptionIndex: 1,
+    explanation: "250 − 50 = 200, 200 − 15 = 185.",
+    topic: "Mental Subtraction"
+  },
+  {
+    id: "num-gen-097",
+    strand: "Number & Algebra",
+    difficulty: 2,
+    question: "Four coins add up to 70 cents. What are the four coins?",
+    options: [
+      "Two 20c coins and two 10c coins",
+      "One 50c coin and three 10c coins",
+      "One 50c coin, one 10c coin, and two 5c coins",
+      "Three 20c coins and one 5c coin"
+    ],
+    correctOptionIndex: 2,
+    explanation: "50c + 10c + 5c + 5c = 70c (exactly 4 coins).",
+    topic: "Australian Money Combinations"
+  },
+  {
+    id: "num-gen-098",
+    strand: "Statistics & Probability",
+    difficulty: 2,
+    question: "A bag holds 5 red jellybeans, 5 green jellybeans, and 5 blue jellybeans. Which outcome has an equal chance?",
+    options: [
+      "Picking red or picking green",
+      "Picking blue or picking yellow",
+      "Picking green or picking orange",
+      "Picking red or picking purple"
+    ],
+    correctOptionIndex: 0,
+    explanation: "Since red and green both have 5 beans each, they have the exact same likelihood (equal chance).",
+    topic: "Probability & Likelihood"
+  },
+  {
+    id: "num-gen-099",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "Which number makes this sentence true? (4 × 5) + 6 = ?",
+    options: ["20", "24", "26", "30"],
+    correctOptionIndex: 2,
+    explanation: "4 × 5 = 20. 20 + 6 = 26.",
+    topic: "Order of Operations"
+  },
+  {
+    id: "num-gen-100",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A square tile has an area of 16 cm². What is the length of one of its sides?",
+    options: ["2 cm", "4 cm", "8 cm", "16 cm"],
+    correctOptionIndex: 1,
+    explanation: "For a square, area = side × side. 4 × 4 = 16, so each side is 4 cm.",
+    topic: "Area of Squares"
   }
 ];
