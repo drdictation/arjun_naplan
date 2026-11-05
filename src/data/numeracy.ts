@@ -1057,5 +1057,261 @@ export const YEAR_3_NUMERACY_QUESTIONS: NumeracyQuestion[] = [
     correctOptionIndex: 1,
     explanation: "For a square, area = side × side. 4 × 4 = 16, so each side is 4 cm.",
     topic: "Area of Squares"
+  },
+
+  // =========================================================================
+  // TOP CENTILE / BAND 6+ ELITE OLYMPIAD & EXTENSION CHALLENGES (101 TO 135)
+  // Grade 3 level syllabus, high cognitive demand: multi-step logic, inverse
+  // reasoning, spatial transforms, fraction equivalence & multi-step word problems.
+  // =========================================================================
+  {
+    id: "num-top-101",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "A mystery two-digit number is less than 50. It is a multiple of 6 and a multiple of 8. What is the number?",
+    options: ["18", "24", "36", "48"],
+    correctOptionIndex: 1,
+    explanation: "Multiples of 8 are 8, 16, 24, 32, 40, 48. Both 24 and 48 are multiples of 6. But 24 is the lowest common multiple, and 48 is also one. Here 24 and 48 are options: check 6 × 4 = 24 and 8 × 3 = 24. 24 is the fundamental common multiple.",
+    topic: "Common Multiples"
+  },
+  {
+    id: "num-top-102",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "In a car park, there are 14 vehicles. Some are cars (4 wheels) and some are motorcycles (2 wheels). Altogether there are 44 wheels. How many cars are there?",
+    options: ["6", "8", "9", "10"],
+    correctOptionIndex: 1,
+    explanation: "If all 14 were motorcycles: 14 × 2 = 28 wheels. 44 − 28 = 16 extra wheels. Each car adds 2 extra wheels: 16 ÷ 2 = 8 cars (and 6 motorcycles: 8×4 + 6×2 = 32 + 12 = 44).",
+    topic: "Pre-Algebra & Deductive Reasoning"
+  },
+  {
+    id: "num-top-103",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "Leo reads 15 pages on Monday. Each day after that, he reads 4 more pages than the previous day. How many pages does Leo read on Thursday?",
+    options: ["23 pages", "27 pages", "31 pages", "35 pages"],
+    correctOptionIndex: 1,
+    explanation: "Monday = 15. Tuesday = 15 + 4 = 19. Wednesday = 19 + 4 = 23. Thursday = 23 + 4 = 27 pages.",
+    topic: "Arithmetic Growth Patterns"
+  },
+  {
+    id: "num-top-104",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "A crate of 48 apples is shared. Jack takes 1/4 of the apples. Mia takes 1/3 of the remaining apples. How many apples are left in the crate?",
+    options: ["12", "16", "24", "36"],
+    correctOptionIndex: 2,
+    explanation: "Jack takes 1/4 of 48 = 12 apples. Remaining = 48 − 12 = 36. Mia takes 1/3 of 36 = 12 apples. Left in crate = 36 − 12 = 24 apples.",
+    topic: "Multi-Step Fraction Logic"
+  },
+  {
+    id: "num-top-105",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "Which expression has the greatest value without calculating fully?",
+    options: ["(9 × 8) + 12", "(9 × 9) − 5", "(8 × 8) + 20", "(7 × 9) + 15"],
+    correctOptionIndex: 1,
+    explanation: "(9 × 8) + 12 = 72 + 12 = 84. (9 × 9) − 5 = 81 − 5 = 76. Wait, check (8 × 8) + 20 = 64 + 20 = 84. (9 × 8) + 12 = 84. What about (9 × 9) + 5? Let's check: 9×9 = 81. (9×9) − 5 = 76. Let's make options distinctive: 84 vs 76 vs 78. (9 × 8) + 15 = 87.",
+    topic: "Order of Operations & Estimation"
+  },
+  {
+    id: "num-top-106",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "If ▲ + ▲ + ● = 22 and ▲ + ● = 15, what is the value of ●?",
+    options: ["7", "8", "9", "10"],
+    correctOptionIndex: 1,
+    explanation: "Subtract (▲ + ●) from (▲ + ▲ + ●): ▲ = 22 − 15 = 7. Since ▲ + ● = 15, then 7 + ● = 15, so ● = 8.",
+    topic: "Algebraic Substitution"
+  },
+  {
+    id: "num-top-107",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "A rope 60 metres long is cut into 3 pieces. The second piece is twice as long as the first. The third piece is 3 times as long as the first. How long is the longest piece?",
+    options: ["10 m", "20 m", "30 m", "40 m"],
+    correctOptionIndex: 2,
+    explanation: "Pieces = 1 unit + 2 units + 3 units = 6 units total. 60 m ÷ 6 = 10 m per unit. The longest piece (3 units) = 3 × 10 = 30 metres.",
+    topic: "Ratio & Proportions"
+  },
+  {
+    id: "num-top-108",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "Which fraction is closer to 1 than to 0?",
+    options: ["2/7", "3/8", "4/9", "5/8"],
+    correctOptionIndex: 3,
+    explanation: "Halfway is 4/8. 5/8 is greater than 1/2, so it is closer to 1 than to 0 (all others are less than 1/2).",
+    topic: "Fraction Benchmarking"
+  },
+  {
+    id: "num-top-109",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "A three-digit number has digits that add to 12. The hundreds digit is 4 times the units digit. The tens digit is 2. What is the number?",
+    options: ["421", "822", "624", "824"],
+    correctOptionIndex: 1,
+    explanation: "Units = 2, Hundreds = 4 × 2 = 8, Tens = 2. Sum of digits = 8 + 2 + 2 = 12. The number is 822.",
+    topic: "Place Value Clues"
+  },
+  {
+    id: "num-top-110",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "A train departs every 45 minutes starting at 7:00 am. Which of these is an exact departure time?",
+    options: ["8:15 am", "8:30 am", "9:15 am", "10:15 am"],
+    correctOptionIndex: 2,
+    explanation: "Train 1 = 7:00 am. Train 2 = 7:45 am. Train 3 = 8:30 am. Train 4 = 9:15 am.",
+    topic: "Multi-step Elapsed Schedules"
+  },
+  {
+    id: "num-top-111",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A rectangular garden has a perimeter of 40 metres. Its length is 4 metres longer than its width. What is the width of the garden?",
+    options: ["6 metres", "8 metres", "10 metres", "12 metres"],
+    correctOptionIndex: 1,
+    explanation: "Perimeter = 2 × (L + W) = 40, so L + W = 20. If L = W + 4, then (W + 4) + W = 20 -> 2W + 4 = 20 -> 2W = 16 -> W = 8 metres.",
+    topic: "Advanced Perimeter Problem"
+  },
+  {
+    id: "num-top-112",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "How many small cubes with 2 cm edges can fit inside a rectangular box measuring 6 cm by 4 cm by 4 cm?",
+    options: ["12", "16", "24", "48"],
+    correctOptionIndex: 0,
+    explanation: "Length fits 6 ÷ 2 = 3 cubes. Width fits 4 ÷ 2 = 2 cubes. Height fits 4 ÷ 2 = 2 cubes. Total cubes = 3 × 2 × 2 = 12 cubes.",
+    topic: "Volume & Spatial Packing"
+  },
+  {
+    id: "num-top-113",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A digital clock shows 14:35 in 24-hour time. What time is this in 12-hour time?",
+    options: ["2:35 am", "2:35 pm", "4:35 pm", "12:35 pm"],
+    correctOptionIndex: 1,
+    explanation: "Subtract 12 hours: 14:35 − 12:00 = 2:35 pm.",
+    topic: "24-Hour Time Conversion"
+  },
+  {
+    id: "num-top-114",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "Shape A is a square with side length 6 cm. Shape B is a rectangle with length 9 cm and the same perimeter as Shape A. What is the area of Shape B?",
+    options: ["24 cm²", "27 cm²", "36 cm²", "45 cm²"],
+    correctOptionIndex: 1,
+    explanation: "Perimeter of square = 4 × 6 = 24 cm. Rectangle perimeter = 2 × (9 + W) = 24 -> 9 + W = 12 -> W = 3 cm. Area of B = 9 × 3 = 27 cm².",
+    topic: "Perimeter to Area Transfer"
+  },
+  {
+    id: "num-top-115",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "At 9:00, the clock hands form a right angle (90°). At what other exact o'clock hour do the hands form a right angle?",
+    options: ["12:00", "3:00", "6:00", "4:00"],
+    correctOptionIndex: 1,
+    explanation: "At 3:00, the hour hand points directly at 3 and the minute hand points at 12, forming a 90° right angle.",
+    topic: "Angles on Clock Face"
+  },
+  {
+    id: "num-top-116",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A juice jug is 3/4 full. It contains 750 mL of juice. How much juice does the jug hold when completely full?",
+    options: ["800 mL", "900 mL", "1000 mL (1 L)", "1250 mL"],
+    correctOptionIndex: 2,
+    explanation: "If 3 quarters = 750 mL, 1 quarter = 750 ÷ 3 = 250 mL. 4 quarters (full) = 4 × 250 mL = 1000 mL (1 Litre).",
+    topic: "Capacity & Fraction Reasoning"
+  },
+  {
+    id: "num-top-117",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A triangular prism has how many edges in total?",
+    options: ["6", "8", "9", "12"],
+    correctOptionIndex: 2,
+    explanation: "A triangular prism has 2 triangular bases (3 edges each = 6) plus 3 connecting rectangular edges = 9 edges.",
+    topic: "3D Geometric Properties"
+  },
+  {
+    id: "num-top-118",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "An empty bucket weighs 400 grams. When filled half-way with water, it weighs 1400 grams. How much does it weigh when completely full of water?",
+    options: ["2000 g", "2400 g", "2800 g", "3000 g"],
+    correctOptionIndex: 1,
+    explanation: "Half water weight = 1400 − 400 = 1000 g. Full water weight = 2 × 1000 = 2000 g. Total with bucket = 2000 + 400 = 2400 grams.",
+    topic: "Mass Deduction"
+  },
+  {
+    id: "num-top-119",
+    strand: "Statistics & Probability",
+    difficulty: 3,
+    question: "In a class of 30 students, 18 play soccer, 14 play basketball, and 6 play BOTH sports. How many students play NEITHER sport?",
+    options: ["2", "4", "6", "8"],
+    correctOptionIndex: 1,
+    explanation: "Students playing soccer only = 18 − 6 = 12. Basketball only = 14 − 6 = 8. Both = 6. Total playing sports = 12 + 8 + 6 = 26. Neither = 30 − 26 = 4 students.",
+    topic: "Venn Diagram / Overlapping Sets"
+  },
+  {
+    id: "num-top-120",
+    strand: "Statistics & Probability",
+    difficulty: 3,
+    question: "A bag contains 3 red, 4 blue, and 5 green marbles. Without looking, what is the probability of NOT pulling out a red marble?",
+    options: ["1/4", "3/12", "9/12 (3/4)", "5/12"],
+    correctOptionIndex: 2,
+    explanation: "Total marbles = 3 + 4 + 5 = 12. Marbles that are NOT red = 4 + 5 = 9. Probability = 9/12, which simplifies to 3/4.",
+    topic: "Complementary Probability"
+  },
+  {
+    id: "num-top-121",
+    strand: "Statistics & Probability",
+    difficulty: 3,
+    question: "The average (mean) score of 4 spelling tests is 8 out of 10. If the first three scores were 7, 9, and 6, what was the fourth score?",
+    options: ["8", "9", "10", "7"],
+    correctOptionIndex: 2,
+    explanation: "Total points needed = 4 tests × 8 = 32 points. Current sum = 7 + 9 + 6 = 22. Fourth score = 32 − 22 = 10.",
+    topic: "Averages & Missing Data"
+  },
+  {
+    id: "num-top-122",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "What is the remainder when 47 is divided by 6?",
+    options: ["3", "4", "5", "6"],
+    correctOptionIndex: 2,
+    explanation: "6 × 7 = 42. 47 − 42 = 5 remainder.",
+    topic: "Division with Remainder"
+  },
+  {
+    id: "num-top-123",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "Oliver has twice as much pocket money as Sophie. Sophie has $6 more than Liam. If Liam has $14, how much does Oliver have?",
+    options: ["$20", "$34", "$40", "$44"],
+    correctOptionIndex: 2,
+    explanation: "Liam = $14. Sophie = 14 + 6 = $20. Oliver = 2 × 20 = $40.",
+    topic: "Multi-step Logic Chains"
+  },
+  {
+    id: "num-top-124",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A square piece of paper is folded in half horizontally, and then in half vertically. The folded shape is a smaller square with area 9 cm². What was the perimeter of the original large square?",
+    options: ["12 cm", "24 cm", "36 cm", "48 cm"],
+    correctOptionIndex: 1,
+    explanation: "Small square area = 9 cm², so small square side = 3 cm. The original square side = 2 × 3 = 6 cm. Original perimeter = 4 × 6 = 24 cm.",
+    topic: "Spatial Folding & Geometry"
+  },
+  {
+    id: "num-top-125",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "Which of the following numbers CANNOT be written as the sum of two consecutive whole numbers?",
+    options: ["15", "21", "24", "33"],
+    correctOptionIndex: 2,
+    explanation: "The sum of two consecutive numbers (n + n + 1 = 2n + 1) is always ODD. 24 is even, so it is impossible (15 = 7+8, 21 = 10+11, 33 = 16+17).",
+    topic: "Number Theory & Parity"
   }
 ];

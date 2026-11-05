@@ -1669,5 +1669,293 @@ export const YEAR_3_READING_PASSAGES: ReadingPassage[] = [
         explanation: "The sun slipping down the ridge and the crescent moon rising depicts twilight/dusk."
       }
     ]
+  },
+  // =========================================================================
+  // PASSAGE 21: BAND 6+ TOP CENTILE NARRATIVE - THE DESERT OBSIDIAN
+  // High-level Grade 3 vocabulary, rich figurative language, subtle inference
+  // =========================================================================
+  {
+    id: "passage-band6-obsidian",
+    title: "The Desert Obsidian",
+    genre: "Narrative",
+    subtitle: "A silent riddle across the red clay gibber plains",
+    estimatedMinutes: 5,
+    introduction: "Read the story below. Pay close attention to figurative language and underlying motivations, then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "The midday mirage shimmered like liquid silver across the gibber plains of the Sturt Stony Desert. Rowan paused beneath the sparse shade of a gnarled mulga tree, wiping red dust from his temples. Beside him, Uncle Daniel surveyed the flat horizon, his weathered eyes narrowing against the incandescent glare."
+      },
+      {
+        id: 2,
+        text: "‘Patience reveals what haste trampling underfoot misses,’ Uncle Daniel murmured, handing Rowan the canteen. Rowan nodded, chastened by his earlier reckless rush over the scree. He dropped to one knee, letting his gaze scan horizontally across the millions of wind-polished ironstone pebbles."
+      },
+      {
+        id: 3,
+        text: "Unlike the porous, ochre gravel surrounding it, one fragment trapped sunlight with glassy defiance. It was a flake of jet-black obsidian, no thicker than a coin, its edges serrated with micro-scallops formed thousands of years ago. Rowan did not reach to touch it. He simply traced its silhouette with his breath."
+      },
+      {
+        id: 4,
+        text: "‘A trade point,’ Daniel confirmed quietly, resting a hand on Rowan’s shoulder. ‘Carried hundreds of miles along ancient songlines from distant volcanic ranges. Some treasures belong only in memory, leaving the soil undisturbed.’ Rowan stood up, leaving the stone resting in its ancient bed of sand, his mind echoing with quiet reverence."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-obs-01",
+        passageId: "passage-band6-obsidian",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 1,
+        evidenceQuote: "The midday mirage shimmered like liquid silver across the gibber plains",
+        prompt: "What does the simile 'shimmered like liquid silver' convey about the desert environment?",
+        options: [
+          "The desert was freezing cold and covered in frost",
+          "Intense heat was distorting the distant landscape into an illusion of water",
+          "There was a large silver lake in the middle of the desert",
+          "The ground was littered with metallic coins"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Heat mirages on arid ground create shimmering optical illusions resembling pools of silver liquid."
+      },
+      {
+        id: "rq-obs-02",
+        passageId: "passage-band6-obsidian",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 2,
+        evidenceQuote: "Rowan nodded, chastened by his earlier reckless rush over the scree.",
+        prompt: "In paragraph 2, what does the word 'chastened' reveal about Rowan's emotional state?",
+        options: [
+          "He felt amused and proud of his running speed",
+          "He felt subdued, humbled, and corrected by his uncle's wisdom",
+          "He was furious and refused to listen",
+          "He was completely exhausted and fell asleep"
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Chastened' means having a humbling realization after being corrected or reprimanded."
+      },
+      {
+        id: "rq-obs-03",
+        passageId: "passage-band6-obsidian",
+        cognitiveSkill: "Inference",
+        paragraphRef: 3,
+        evidenceQuote: "its edges serrated with micro-scallops formed thousands of years ago. Rowan did not reach to touch it.",
+        prompt: "Why was the obsidian flake distinct from the surrounding gravel pebbles?",
+        options: [
+          "It had been freshly dropped by a modern hiker",
+          "It was a glassy volcanic stone meticulously shaped by ancient human hands into a cutting tool",
+          "It was glowing with radioactive heat",
+          "It was the only stone made of rusted iron"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The serrated micro-scallops and glossy texture indicate it was knapped as an ancient trade tool."
+      },
+      {
+        id: "rq-obs-04",
+        passageId: "passage-band6-obsidian",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 4,
+        evidenceQuote: "Some treasures belong only in memory, leaving the soil undisturbed.",
+        prompt: "What cultural value does Uncle Daniel impart to Rowan in the final paragraph?",
+        options: [
+          "Valuable stones should always be sold to museums for profit",
+          "Ancient artifacts carry sacred history that should be respected and left undisturbed where they rest",
+          "Obsidian tools are fragile and will break if carried",
+          "Exploring the desert without maps is dangerous"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Uncle Daniel teaches cultural respect for Indigenous heritage, prioritizing conservation over collection."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 22: BAND 6+ TOP CENTILE INFORMATIONAL - BIONIC EYES & NEURAL RETINAS
+  // Scientific exposition with complex terminology and cause-and-effect reasoning
+  // =========================================================================
+  {
+    id: "passage-band6-bionics",
+    title: "Engineering the Bionic Eye",
+    genre: "Informational",
+    subtitle: "Australian biomedical innovation bridging light and the human brain",
+    estimatedMinutes: 5,
+    introduction: "Read the scientific report below about neural engineering, then answer the comprehension questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Human vision is a biological marvel: the retina at the back of the eye contains over 120 million photoreceptor cells that translate photons of light into electrical impulses. However, degenerative conditions such as retinitis pigmentosa cause these photoreceptors to gradually deteriorate, severing communication with the brain while leaving underlying optic nerve fibers intact."
+      },
+      {
+        id: 2,
+        text: "To restore visual perception, biomedical engineers in Melbourne designed a revolutionary retinal prosthesis commonly known as the 'bionic eye'. The device consists of three integrated components: miniature digital cameras mounted on ordinary eyeglass frames, an external pocket processor that converts video into radio frequencies, and a microscopic platinum electrode array implanted behind the retina."
+      },
+      {
+        id: 3,
+        text: "When the cameras capture a scene, the processor converts the visual landscape into coded electrical pulses. The implanted array bypasses dead photoreceptors entirely, firing tiny electrical charges directly into surviving ganglion cells. The optic nerve then relays these signals to the visual cortex, allowing the patient to perceive patterns of light called 'phosphenes'."
+      },
+      {
+        id: 4,
+        text: "While bionic vision does not yet replicate crystal-clear biological eyesight, it provides vital navigational landmarks—allowing previously sightless individuals to detect doorways, locate crosswalks, and recognize the silhouettes of loved ones."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-bio-01",
+        passageId: "passage-band6-bionics",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 1,
+        evidenceQuote: "severing communication with the brain while leaving underlying optic nerve fibers intact.",
+        prompt: "What crucial anatomical feature remains functional in patients with retinitis pigmentosa that allows a bionic eye to work?",
+        options: [
+          "The cornea and lens muscles",
+          "The underlying optic nerve and ganglion cells",
+          "The damaged photoreceptor cells",
+          "The tear ducts and eyelids"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Because optic nerve fibers remain intact, electrical pulses can still travel to the brain's visual cortex."
+      },
+      {
+        id: "rq-bio-02",
+        passageId: "passage-band6-bionics",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 3,
+        evidenceQuote: "The implanted array bypasses dead photoreceptors entirely, firing tiny electrical charges directly into surviving ganglion cells.",
+        prompt: "Which step best summarizes how the bionic eye circumvents damaged cells in the eye?",
+        options: [
+          "It injects medicine directly into the cornea",
+          "It uses camera data to directly stimulate surviving nerve cells, skipping non-functioning photoreceptors",
+          "It replaces the entire eyeball with glass lenses",
+          "It magnifies light so dead cells can see again"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The platinum electrode array directly electrifies surviving ganglion cells, bypassing dead receptors."
+      },
+      {
+        id: "rq-bio-03",
+        passageId: "passage-band6-bionics",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 3,
+        evidenceQuote: "allowing the patient to perceive patterns of light called 'phosphenes'.",
+        prompt: "What does the term 'phosphenes' refer to in the context of paragraph 3?",
+        options: [
+          "Dangerous eye infections caused by metal implants",
+          "Artificial sparks or visual dots of light perceived through electrical stimulation",
+          "The radio frequencies transmitted by the pocket computer",
+          "Special colored lenses worn by surgeons"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Phosphenes are the visual sensation of light flashes or glowing dots triggered non-optically by electrodes."
+      },
+      {
+        id: "rq-band-04",
+        passageId: "passage-band6-bionics",
+        cognitiveSkill: "Inference",
+        paragraphRef: 4,
+        evidenceQuote: "allows previously sightless individuals to detect doorways, locate crosswalks, and recognize the silhouettes of loved ones.",
+        prompt: "What is the primary practical benefit of the bionic eye for recipients today?",
+        options: [
+          "Reading fine print in books with microscope vision",
+          "Regaining independence in navigation and obstacle detection in daily life",
+          "Seeing in the dark like nocturnal predators",
+          "Replacing natural vision with photographic memory"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Detecting outlines, doorways, and crosswalks grants essential mobility and autonomy to visually impaired patients."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 23: BAND 6+ TOP CENTILE PERSUASIVE - SHOULD AI GENERATE ART?
+  // Philosophical debate, rhetorical evaluation, nuanced author perspective
+  // =========================================================================
+  {
+    id: "passage-band6-ai-art",
+    title: "Brushstrokes vs. Algorithms: The Soul of Human Art",
+    genre: "Persuasive",
+    subtitle: "Why artificial intelligence can never replace true human creativity",
+    estimatedMinutes: 5,
+    introduction: "Read the debate essay below, analyzing the author's arguments and rhetorical evidence.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "With a single typed text prompt, modern computer software can assemble an oil painting in the style of Rembrandt or synthesize a whimsical digital landscape in seconds. Enthusiasts trumpet this as the democratization of creativity. Yet to equate computer-generated output with genuine artistic creation is to mistake a statistical regurgitation for human soul."
+      },
+      {
+        id: 2,
+        text: "True art does not arise in a vacuum of silicon and mathematical weights; it is born from lived vulnerability. When Vincent van Gogh brushed thick cobalt swirls onto canvas in 'The Starry Night', he was not calculating pixel frequencies—he was externalizing profound loneliness, wonder, and human ache. Machines possess no childhood memories, no heartache, and no mortality. Without genuine experience, computer output remains merely decorative mimicry."
+      },
+      {
+        id: 3,
+        text: "Furthermore, algorithmic generation relies entirely on scraping billions of human creations without consent or attribution. Rewarding software with the title of 'artist' dishonors the years of agonizing practice, calloused hands, and personal sacrifices made by living illustrators and painters."
+      },
+      {
+        id: 4,
+        text: "Technology may serve as a formidable tool in an artist’s studio, but it must remain the chisel, never the sculptor. We must celebrate and safeguard the imperfect, passionate human spirit that makes art uniquely transcendent."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-ai-01",
+        passageId: "passage-band6-ai-art",
+        cognitiveSkill: "Main Idea",
+        paragraphRef: 1,
+        evidenceQuote: "to equate computer-generated output with genuine artistic creation is to mistake a statistical regurgitation for human soul.",
+        prompt: "What is the author’s primary contention regarding AI image generation?",
+        options: [
+          "Computers make painting faster and better than human artists",
+          "Automated software mimics visual styles through math but lacks real emotional depth and human soul",
+          "Paintbrushes should be banned in primary schools",
+          "Only oil paintings should be considered authentic art"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The author argues that while AI replicates patterns mathematically, it lacks authentic human emotional experience."
+      },
+      {
+        id: "rq-ai-02",
+        passageId: "passage-band6-ai-art",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 2,
+        evidenceQuote: "he was not calculating pixel frequencies—he was externalizing profound loneliness, wonder, and human ache.",
+        prompt: "Why does the author cite Vincent van Gogh’s 'The Starry Night' in paragraph 2?",
+        options: [
+          "To prove Van Gogh used computer algorithms to calculate color tones",
+          "To provide a vivid contrast showing that real masterpieces stem from human emotion rather than data calculation",
+          "To argue that Van Gogh was unappreciated in his own lifetime",
+          "To encourage readers to visit European art galleries"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Van Gogh serves as evidence that human vulnerability and feeling are the true catalysts for artistic masterpieces."
+      },
+      {
+        id: "rq-ai-03",
+        passageId: "passage-band6-ai-art",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 4,
+        evidenceQuote: "technology must remain the chisel, never the sculptor.",
+        prompt: "What does the metaphor 'it must remain the chisel, never the sculptor' mean?",
+        options: [
+          "Artists should only carve statues from marble",
+          "Technology is a helpful instrument controlled by humans, not the conscious creator itself",
+          "Chisels are sharper and more reliable than modern software",
+          "Sculptors do not need technology to create statues"
+        ],
+        correctOptionIndex: 1,
+        explanation: "A chisel is merely an inanimate tool; the human sculptor is the visionary agent directing it."
+      },
+      {
+        id: "rq-ai-04",
+        passageId: "passage-band6-ai-art",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 1,
+        evidenceQuote: "Enthusiasts trumpet this as the democratization of creativity.",
+        prompt: "What does the author imply by the word 'trumpet' in paragraph 1?",
+        options: [
+          "Enthusiasts play loud brass instruments in concert",
+          "Supporters proclaim and celebrate the technology loudly and proudly",
+          "Critics complain about excessive volume",
+          "Software makes horn noises when rendering images"
+        ],
+        correctOptionIndex: 1,
+        explanation: "To 'trumpet' something means to announce or celebrate it publicly and boastfully."
+      }
+    ]
   }
 ];
