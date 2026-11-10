@@ -290,19 +290,25 @@ export function ReadingHub({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-3 pt-2">
+        <div className="flex flex-col sm:flex-row gap-3 pt-2">
           <button
             onClick={() => handleStartPassage(completedSummary.passage)}
-            className="flex-1 py-3 px-4 rounded-xl font-bold text-sm bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center justify-center gap-2 transition"
+            className="flex-1 py-3 px-4 rounded-xl font-bold text-sm bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center justify-center gap-2 transition cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" /> Try Again for 3 Stars
           </button>
           <button
             onClick={() => setCompletedSummary(null)}
-            className="flex-1 py-3 px-4 rounded-xl font-bold text-sm bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2 transition"
+            className="flex-1 py-3 px-4 rounded-xl font-bold text-sm bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2 transition cursor-pointer"
           >
             <span>All Reading Quests</span>
             <ChevronRight className="w-4 h-4" />
+          </button>
+          <button
+            onClick={onBackToHome}
+            className="py-3 px-4 rounded-xl font-bold text-sm bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-2 transition cursor-pointer"
+          >
+            <span>Back to Home 🏠</span>
           </button>
         </div>
       </div>

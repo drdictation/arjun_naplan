@@ -75,6 +75,8 @@ export function loadAppState(): AppState {
         ...(parsed.stats || {}),
       },
       gamification: mergedGamification,
+      readingProgress: parsed.readingProgress || {},
+      readingSkillStats: parsed.readingSkillStats || {},
     };
   } catch (err) {
     console.error("Failed to load app state from localStorage:", err);
