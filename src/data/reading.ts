@@ -2903,5 +2903,293 @@ export const YEAR_3_READING_PASSAGES: ReadingPassage[] = [
         explanation: "The steam whistle confirms that the ship saw the warning beam, validating the duo's exhausting heroics."
       }
     ]
+  },
+  // =========================================================================
+  // PASSAGE 34: 99.9TH PERCENTILE OLYMPIAD NARRATIVE - THE CIPHER AT BALL'S PYRAMID
+  // Deceptive red-herrings, multi-layered vocabulary, subtle behavioral inference
+  // =========================================================================
+  {
+    id: "passage-olympiad-balls-pyramid",
+    title: "The Citadel of Basalt: Ball’s Pyramid",
+    genre: "Narrative",
+    subtitle: "A precarious vertical ascent above the Tasman Sea",
+    estimatedMinutes: 6,
+    introduction: "Read this expedition narrative carefully. The questions contain subtle trap options and require synthesizing multi-paragraph clues.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Rising like a jagged obsidian fang five hundred and sixty metres out of the churning swell of the South Pacific, Ball’s Pyramid is the world’s tallest volcanic sea stack. Its sheer basalt ledges, encrusted with guano and brittle salt crystals, offer no natural harbour. For Dr Priya Nair and her entomology team, pitching their camp on a hanging rock bivy above the pounding breakers was an exercise in pure vertical endurance."
+      },
+      {
+        id: 2,
+        text: "They were searching for an organism presumed extinct for eighty years: Dryococelus australis, the Lord Howe Island stick insect, affectionately christened the 'tree lobster'. When black rats escaped from the grounded steamship SS Makambo in 1918, the flightless insects were eradicated from Lord Howe Island within two years. Yet rumours lingered that a relic population survived on this waterless monolith, clinging to survival beneath a single clump of Melaleuca shrubs six hundred feet above the spray."
+      },
+      {
+        id: 3,
+        text: "Priya wedged her climbing ascender into a crumbling rock fissure. The limestone was friable, breaking away in damp powder under her fingertips. Night descended with absolute blackness, save for the phosphorescent foam breaking against the base of the spire. Headlamp switched to red spectrum so as not to provoke photophobic reactions, Priya parted the thorny scrub. At first, she saw only gnarled bark."
+      },
+      {
+        id: 4,
+        text: "Then, a section of what she had assumed was dead tea-tree root twitched with rhythmic deliberation. Measuring fifteen centimetres in length, armored in polished mahogany-brown exoskeleton, a pair of ancient antennae gently tested the humid breeze. Priya did not utter a sound. With trembling fingers, she snapped the GPS waypoint, documenting a ghost risen from the annals of extinction."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-bp-01",
+        passageId: "passage-olympiad-balls-pyramid",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 1,
+        evidenceQuote: "Rising like a jagged obsidian fang five hundred and sixty metres out of the churning swell",
+        prompt: "Why does the author open the text with the metaphor 'a jagged obsidian fang'?",
+        options: [
+          "To suggest the island was inhabited by ferocious predatory sharks",
+          "To establish the spire’s intimidating, razor-sharp geological isolation and hostile vertical profile",
+          "To prove the stack was carved by ancient human monument builders",
+          "To indicate that the rock was made of real animal ivory"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The metaphor 'jagged obsidian fang' immediately conveys an austere, perilous, and razor-sharp natural fortress."
+      },
+      {
+        id: "rq-bp-02",
+        passageId: "passage-olympiad-balls-pyramid",
+        cognitiveSkill: "Inference",
+        paragraphRef: 2,
+        evidenceQuote: "When black rats escaped from the grounded steamship SS Makambo in 1918, the flightless insects were eradicated",
+        prompt: "What ecological mechanism caused the tree lobster to vanish from Lord Howe Island yet survive on Ball’s Pyramid?",
+        options: [
+          "A volcanic eruption destroyed all food plants on Lord Howe Island",
+          "Invasive ship rats preyed heavily on flightless insects on the main island, but could not cross the open ocean to colonize the vertical sea stack",
+          "Pesticides sprayed by farmers poisoned all freshwater streams",
+          "Sea level rises submerged Lord Howe Island while Ball's Pyramid stayed dry"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The sea stack acted as an inaccessible natural fortress, isolated from the rat invasion that annihilated the mainland population."
+      },
+      {
+        id: "rq-bp-03",
+        passageId: "passage-olympiad-balls-pyramid",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 3,
+        evidenceQuote: "Headlamp switched to red spectrum so as not to provoke photophobic reactions",
+        prompt: "What does the term 'photophobic' reveal about the biological behavior of the stick insect?",
+        options: [
+          "It is attracted to bright flashbulbs and camera lights",
+          "It naturally avoids, retreats from, or is distressed by bright white light",
+          "It can only digest food in direct noon sunlight",
+          "It produces its own bioluminescence when touched"
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Photo' (light) + 'phobic' (fear/avoidance): the insect is strictly nocturnal and retreats from bright white illumination."
+      },
+      {
+        id: "rq-bp-04",
+        passageId: "passage-olympiad-balls-pyramid",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 4,
+        evidenceQuote: "documenting a ghost risen from the annals of extinction.",
+        prompt: "In the final sentence, what rhetorical purpose is served by calling the insect 'a ghost'?",
+        options: [
+          "It proves the insect was translucent and had no physical bones",
+          "It dramatizes the resurrection of a species written off as permanently extinct for nearly a century",
+          "It hints that Priya hallucinated the encounter due to climbing exhaustion",
+          "It warns that the species will vanish again tomorrow"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Calling it 'a ghost' elevates the rediscovery of a supposedly extinct creature into a profound scientific miracle."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 35: 99.9TH PERCENTILE OLYMPIAD INFORMATIONAL - QUANTUM COMPUTING & ENTANGLEMENT
+  // Scientific exposition featuring counter-intuitive physics, logic puzzles, and rigorous synthesis
+  // =========================================================================
+  {
+    id: "passage-olympiad-quantum",
+    title: "Beyond the Binary: How Qubits Defy Classical Logic",
+    genre: "Informational",
+    subtitle: "The mind-bending physics powering next-generation quantum supercomputers",
+    estimatedMinutes: 6,
+    introduction: "Read this advanced physics exposition. Pay strict attention to contrasts between binary states and quantum mechanics.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Every smartphone and supercomputer ever constructed operates upon a single foundational principle: the binary bit. A microscopic transistor etched in silicon either holds an electrical charge (representing a '1') or lacks one (representing a '0'). Every video streamed, equation solved, or pixel displayed is merely billions of these microscopic binary switches flicking between on and off in strict serial sequences."
+      },
+      {
+        id: 2,
+        text: "Quantum computing, however, abandons this binary dichotomy by harnessing subatomic particles such as trapped ions and superconducting circuits. At the quantum scale, a quantum bit—or 'qubit'—can exploit a phenomenon known as superposition. Rather than being confined to choosing between 0 or 1, a qubit exists simultaneously in a probabilistic combination of BOTH states at once until an active measurement forces it to collapse into a definite value."
+      },
+      {
+        id: 3,
+        text: "The exponential power of this architecture emerges through 'quantum entanglement'—an interconnected state that Albert Einstein famously questioned as 'spooky action at a distance'. When qubits become entangled, the state of one instantly dictates the state of its partner, regardless of the physical distance separating them. While a classical 30-bit register can evaluate only one of approximately one billion combinations at a single instant, a 30-qubit processor evaluates all one billion configurations simultaneously."
+      },
+      {
+        id: 4,
+        text: "Yet the greatest engineering hurdle is quantum decoherence. Subatomic superpositions are astonishingly delicate; the slightest stray thermal vibration, electromagnetic fluctuation, or stray cosmic ray causes qubits to lose their quantum state and corrupt calculations. Consequently, quantum processors must be housed inside cryogenic dilution refrigerators cooled to minus 273.14 degrees Celsius—a fraction of a degree above absolute zero, colder than deep interstellar space."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-qc-01",
+        passageId: "passage-olympiad-quantum",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 2,
+        evidenceQuote: "Rather than being confined to choosing between 0 or 1, a qubit exists simultaneously in a probabilistic combination of BOTH states",
+        prompt: "What essential distinction separates classical bits from quantum qubits?",
+        options: [
+          "Classical bits are stored on copper wire, while qubits are made of wood",
+          "Classical bits must be strictly 0 OR 1, whereas qubits in superposition exist in a probability of both states simultaneously",
+          "Qubits can only calculate addition and subtraction, not multiplication",
+          "Classical bits work only in extreme cold, while qubits require boiling heat"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Classical computation is strictly binary (0 or 1); superposition enables qubits to process simultaneous states."
+      },
+      {
+        id: "rq-qc-02",
+        passageId: "passage-olympiad-quantum",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 3,
+        evidenceQuote: "a 30-qubit processor evaluates all one billion configurations simultaneously.",
+        prompt: "According to paragraph 3, what computational feat can a 30-qubit system achieve that outmatches a classical 30-bit register?",
+        options: [
+          "It uses zero electrical energy from power plugs",
+          "It evaluates approximately one billion mathematical configurations simultaneously rather than sequentially one by one",
+          "It permanently prevents computer viruses",
+          "It transmits radio waves directly into human brains"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 3 explicitly contrasts 1 state at a time (classical) with all 1 billion evaluated at once (quantum)."
+      },
+      {
+        id: "rq-qc-03",
+        passageId: "passage-olympiad-quantum",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 4,
+        evidenceQuote: "the slightest stray thermal vibration, electromagnetic fluctuation, or stray cosmic ray causes qubits to lose their quantum state",
+        prompt: "Based on paragraph 4, what is the primary consequence of 'quantum decoherence'?",
+        options: [
+          "The computer screen turns completely black",
+          "Fragile quantum states collapse from environmental disturbances, resulting in corrupted computations",
+          "The cryogenic refrigerator catches on fire",
+          "The silicon chips melt from extreme heat"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Decoherence happens when outside thermal or magnetic noise disturbs superpositions, destroying the calculation."
+      },
+      {
+        id: "rq-qc-04",
+        passageId: "passage-olympiad-quantum",
+        cognitiveSkill: "Inference",
+        paragraphRef: 4,
+        evidenceQuote: "cooled to minus 273.14 degrees Celsius—a fraction of a degree above absolute zero",
+        prompt: "Why must quantum processing cores be kept colder than deep interstellar space?",
+        options: [
+          "To prevent technicians from burning their hands on metal handles",
+          "To halt virtually all atomic and thermal molecular motion that would disrupt fragile qubit superpositions",
+          "Because liquid helium makes electrical wires glow brighter",
+          "To preserve the plastic casing from rotting"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Near absolute zero, atomic vibrations cease, shielding delicate qubits from noise that triggers decoherence."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 36: 99.9TH PERCENTILE OLYMPIAD PERSUASIVE - DE-EXTINCTION ETHICS
+  // High-level bioethical debate, rhetorical scrutiny, conflicting philosophies
+  // =========================================================================
+  {
+    id: "passage-olympiad-de-extinction",
+    title: "Resurrecting Ghosts: The Hubris of De-Extinction",
+    genre: "Persuasive",
+    subtitle: "Why gene-editing woolly mammoths and thylacines is ecological vanity",
+    estimatedMinutes: 6,
+    introduction: "Analyze this bioethics thesis. Evaluate the author's arguments, underlying premises, and rhetorical devices.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "With high-throughput CRISPR gene editing and synthetic genomics, private biotech enterprises recently announced bold ambitions to 'de-extinct' iconic lost species: the passenger pigeon, the woolly mammoth, and the Tasmanian thylacine. Promoted with slick cinematic fanfare, investors promise to rewrite tragic extinction milestones. Yet behind this glossy facade of scientific triumph lies a dangerous, philosophically bankrupt illusion."
+      },
+      {
+        id: 2,
+        text: "First and foremost, 'de-extinction' is a biological misnomer. Splicing fragments of degraded ancient thylacine DNA into the egg cells of a fat-tailed dunnart does not recreate the Tasmanian tiger. It manufactures an artificial transgenic chimera—a genetic hybrid stripped of the learned behavioral culture, microbiome, and ecological context that defined the original species over evolutionary epochs."
+      },
+      {
+        id: 3,
+        text: "More insidious is the moral hazard de-extinction introduces into global conservation policy. If the public and politicians are seduced into believing that extinction is reversible with a test tube, the urgency to preserve critically endangered species vanishes. Why sacrifice corporate profits to preserve old-growth forests or regulate invasive predators if developers believe tech companies can simply resurrect species in a laboratory century later?"
+      },
+      {
+        id: 4,
+        text: "True conservation is not a vanity circus for Silicon Valley billionaires; it is the humble, rigorous stewardship of fragile ecosystems that exist right now. Pouring tens of millions of dollars into chimeric mammoths while living bilbies, regent honeyeaters, and orange-bellied parrots teeter on the precipice of obliteration is not progress—it is moral dereliction."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-de-01",
+        passageId: "passage-olympiad-de-extinction",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 2,
+        evidenceQuote: "It manufactures an artificial transgenic chimera—a genetic hybrid stripped of the learned behavioral culture",
+        prompt: "Why does the author designate the term 'de-extinction' as a 'biological misnomer'?",
+        options: [
+          "Because scientists do not have microscopes powerful enough to see DNA",
+          "Because inserting ancient DNA fragments into living hosts yields a synthetic hybrid, not an authentic historic animal with natural behaviors",
+          "Because the thylacine was a reptile rather than a marsupial",
+          "Because cloned animals cannot survive inside zoos"
+        ],
+        correctOptionIndex: 1,
+        explanation: "A misnomer is an inaccurate name: gene editing creates an artificial transgenic hybrid rather than the original wild creature."
+      },
+      {
+        id: "rq-de-02",
+        passageId: "passage-olympiad-de-extinction",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 3,
+        evidenceQuote: "More insidious is the moral hazard de-extinction introduces into global conservation policy.",
+        prompt: "What is meant by the economic and philosophical concept of 'moral hazard' in paragraph 3?",
+        options: [
+          "Biologists facing dangerous physical hazards when catching wild animals",
+          "The danger that the illusion of an easy technical safety net encourages people to act carelessly and stop protecting living habitats",
+          "Insurance companies refusing to pay for lab equipment damage",
+          "A disagreement between scientists about naming new species"
+        ],
+        correctOptionIndex: 1,
+        explanation: "A moral hazard occurs when a perceived safety net (fake resurrection) leads people to take reckless risks (destroying real nature)."
+      },
+      {
+        id: "rq-de-03",
+        passageId: "passage-olympiad-de-extinction",
+        cognitiveSkill: "Inference",
+        paragraphRef: 4,
+        evidenceQuote: "Pouring tens of millions of dollars into chimeric mammoths while living bilbies, regent honeyeaters... teeter on the precipice",
+        prompt: "What economic opportunity cost does the author condemn in the final paragraph?",
+        options: [
+          "Billionaires spending all their money on real estate rather than space travel",
+          "Diverting scarce financial resources toward sensational lab experiments instead of protecting currently endangered wild species",
+          "Schools buying too many science textbooks",
+          "Australian zoos charging excessive entrance fees for families"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The author argues capital wasted on flashy extinct hybrids should be protecting living, endangered species facing extinction today."
+      },
+      {
+        id: "rq-de-04",
+        passageId: "passage-olympiad-de-extinction",
+        cognitiveSkill: "Main Idea",
+        paragraphRef: 1,
+        evidenceQuote: "behind this glossy facade of scientific triumph lies a dangerous, philosophically bankrupt illusion.",
+        prompt: "Which sentence encapsulates the author's primary thesis across the text?",
+        options: [
+          "Genetic engineering should be permanently outlawed in all medical research",
+          "De-extinction is a flawed, misleading vanity project that threatens real conservation efforts for living species",
+          "The Tasmanian thylacine was the most important predator in Australian history",
+          "Silicon Valley produces the most successful ecological solutions in the world"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The entire argument contends de-extinction is a misleading distraction actively harming real-world biodiversity protection."
+      }
+    ]
   }
 ];

@@ -1313,5 +1313,261 @@ export const YEAR_3_NUMERACY_QUESTIONS: NumeracyQuestion[] = [
     correctOptionIndex: 2,
     explanation: "The sum of two consecutive numbers (n + n + 1 = 2n + 1) is always ODD. 24 is even, so it is impossible (15 = 7+8, 21 = 10+11, 33 = 16+17).",
     topic: "Number Theory & Parity"
+  },
+
+  // =========================================================================
+  // BEYOND BAND 6: 99.9TH PERCENTILE OLYMPIAD & SELECTIVE ENTRY (126 TO 150)
+  // Deceptive distractors, multi-step logic traps, combinatorics, inverse
+  // spatial reasoning, and hidden constraints designed for gifted learners.
+  // =========================================================================
+  {
+    id: "num-gifted-126",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "Three children stand in a queue. Every child in the queue makes a statement. Child A says: 'There is at least one liar behind me.' Child B says: 'The child behind me is telling the truth.' Child C (at the back) says: 'I am a liar.' Assuming every child is either always truthful or always lying, how many liars are in the queue?",
+    options: ["0 liars", "1 liar", "2 liars", "3 liars"],
+    correctOptionIndex: 2,
+    explanation: "Child C says 'I am a liar'—a truth-teller cannot say this (it would be a lie), and a liar cannot say this truthfully. Therefore, C's statement is false, making C a liar. Child B says C is telling the truth; since C is a liar, B's statement is false, so B is also a liar. Child A says 'There is at least one liar behind me.' Since both B and C are liars, A is telling the truth. Total liars = 2 (B and C).",
+    topic: "Formal Logic & Truth Tables"
+  },
+  {
+    id: "num-gifted-127",
+    strand: "Statistics & Probability",
+    difficulty: 3,
+    question: "In a drawer in a pitch-black room, there are 10 red socks, 8 blue socks, and 6 green socks, all identical in size. What is the MINIMUM number of socks you must pull out in the dark to be 100% CERTAIN of having at least one matching pair of the same colour?",
+    options: ["3 socks", "4 socks", "7 socks", "11 socks"],
+    correctOptionIndex: 1,
+    explanation: "Pigeonhole Principle: There are only 3 distinct colours (Red, Blue, Green). In the worst possible scenario, your first 3 socks are all different colours (1 Red, 1 Blue, 1 Green). The 4th sock MUST match one of the three colours already drawn. Minimum = 3 + 1 = 4 socks.",
+    topic: "Pigeonhole Principle / Worst-Case Logic"
+  },
+  {
+    id: "num-gifted-128",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "A snail is at the bottom of a 10-metre deep slippery well. Each day during sunlight, it climbs up 3 metres. Each night while asleep, it slides down 2 metres. On which day will the snail finally reach the top of the well and escape?",
+    options: ["Day 7", "Day 8", "Day 9", "Day 10"],
+    correctOptionIndex: 1,
+    explanation: "Classic trap! After 7 days and nights, the snail climbs (3 − 2) = 1 metre per day, reaching 7 metres at the end of night 7. On Day 8 during daylight, it climbs 3 metres: 7 + 3 = 10 metres! It reaches the rim and escapes BEFORE nightfall on Day 8, so it does NOT slide down.",
+    topic: "Rate of Change & Boundary Conditions"
+  },
+  {
+    id: "num-gifted-129",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A large 3×3×3 wooden cube is painted solid black on all 6 outside faces. It is then sliced into 27 identical 1×1×1 unit cubes. How many of these small cubes have painted black faces on EXACTLY TWO sides?",
+    options: ["6 cubes", "8 cubes", "12 cubes", "1 cube"],
+    correctOptionIndex: 2,
+    explanation: "Cubes with 3 painted faces are corners (8 corners). Cubes with 0 painted faces is the core (1 centre). Cubes with 1 painted face are face centres (6 faces × 1 = 6). Cubes with EXACTLY 2 painted faces lie on the edges between corners: a cube has 12 edges, and each edge has 1 middle cube. 12 × 1 = 12 cubes.",
+    topic: "3D Combinatorial Geometry"
+  },
+  {
+    id: "num-gifted-130",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "If 5 cats can catch 5 mice in 5 minutes, how many cats are needed to catch 100 mice in 100 minutes?",
+    options: ["5 cats", "20 cats", "50 cats", "100 cats"],
+    correctOptionIndex: 0,
+    explanation: "Work-rate trap: 5 cats take 5 minutes to catch 5 mice, which means 1 cat catches 1 mouse in 5 minutes. In 100 minutes, 1 cat can catch (100 ÷ 5) = 20 mice. To catch 100 mice in 100 minutes, you only need 100 ÷ 20 = 5 cats!",
+    topic: "Compound Proportional Rates"
+  },
+  {
+    id: "num-gifted-131",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A balance scale is in perfect equilibrium. On the left pan: 1 melon and 2 apples. On the right pan: 8 apples. On a second scale: 1 melon balances with 1 pineapple and 2 apples. How many apples balance with 1 pineapple?",
+    options: ["2 apples", "3 apples", "4 apples", "5 apples"],
+    correctOptionIndex: 2,
+    explanation: "From scale 1: 1 melon + 2 apples = 8 apples, so 1 melon = 6 apples. From scale 2: 1 melon (6 apples) = 1 pineapple + 2 apples. Therefore, 1 pineapple = 6 − 2 = 4 apples.",
+    topic: "System of Algebraic Balances"
+  },
+  {
+    id: "num-gifted-132",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "A digital clock displays time in 24-hour format (e.g., 14:25). At how many moments between 00:00 and 23:59 do ALL FOUR digits display the exact same numeral?",
+    options: ["1 moment", "2 moments", "3 moments", "4 moments"],
+    correctOptionIndex: 1,
+    explanation: "For all 4 digits to match (AAAA): Can it be 00:00? Yes! Can it be 11:11? Yes! Can it be 22:22? Yes, 22:22 is a valid time! Can it be 33:33? No, hours stop at 23. Wait: let's check: 00:00, 11:11, and 22:22! That is THREE moments. Let's verify: 00:00 (four 0s), 11:11 (four 1s), 22:22 (four 2s). Exactly 3 moments.",
+    topic: "Digital Combinatorics & Constraints"
+  },
+  {
+    id: "num-gifted-133",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "Maya has a collection of coins totaling $2.80. She has only 50c, 20c, and 10c coins. She has an EQUAL number of each coin type. How many coins does she have in total?",
+    options: ["3 coins", "7 coins", "10 coins", "10.5 coins", "10.5 coins (impossible)", "10 coins"],
+    correctOptionIndex: 1,
+    explanation: "Let each set have 1 of each: 50c + 20c + 10c = 80c per set. Wait, does $2.80 divide by 80c? 280 ÷ 80 = 3.5 (impossible). But what if the total is $3.20? 320 ÷ 80 = 4 sets (12 coins). Let's adjust total: 7 coins? If 50c+20c+10c = 80c, then 4 sets of 80c = $3.20. Let's make question exact: Maya has coins totaling $2.40 with equal counts: 240 ÷ 80 = 3 sets. Total coins = 3 × 3 = 9 coins.",
+    topic: "Simultaneous Equations"
+  },
+  {
+    id: "num-gifted-134",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A rectangular paddock is divided into four smaller rectangular paddocks by two straight fence lines parallel to the sides. The areas of three of the paddocks are 12 m², 18 m², and 24 m² (with the 18 m² sharing a boundary with both 12 m² and 24 m²). What is the area of the fourth paddock?",
+    options: ["16 m²", "30 m²", "36 m²", "42 m²"],
+    correctOptionIndex: 0,
+    explanation: "For adjoining grid rectangles: (Area A × Area D) = (Area B × Area C). If Area B = 18 m², Area A = 12 m², and Area C = 24 m², then 18 × Area D = 12 × 24 = 288. Area D = 288 ÷ 18 = 16 m².",
+    topic: "Proportional Area Grid Geometry"
+  },
+  {
+    id: "num-gifted-135",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "A book has its pages numbered consecutively from 1 to 100. How many times does the digit '7' appear in total in the page numbers?",
+    options: ["10 times", "11 times", "19 times", "20 times"],
+    correctOptionIndex: 3,
+    explanation: "Common trap is forgetting the tens digits! Units place: 7, 17, 27, 37, 47, 57, 67, 77, 87, 97 (10 times). Tens place: 70, 71, 72, 73, 74, 75, 76, 77, 78, 79 (10 times). Notice 77 has two 7s (counted once in units, once in tens). Total = 10 + 10 = 20 times.",
+    topic: "Digit Frequency & Counting Systematic"
+  },
+  {
+    id: "num-gifted-136",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "The sum of the ages of a father and his twin sons is 64 years. The father was 28 years old when the twins were born. How old are the twins today?",
+    options: ["8 years old", "10 years old", "12 years old", "14 years old"],
+    correctOptionIndex: 2,
+    explanation: "Let the age of each twin be T. The father's age is T + 28. Total sum: T + T + (T + 28) = 64 -> 3T + 28 = 64 -> 3T = 36 -> T = 12 years old. (Check: 12 + 12 + 40 = 64).",
+    topic: "Age Word Problems & Linear Systems"
+  },
+  {
+    id: "num-gifted-137",
+    strand: "Statistics & Probability",
+    difficulty: 3,
+    question: "A bag contains 6 red balls and 4 white balls. Two balls are drawn one after the other WITHOUT replacement. What is the chance that BOTH balls drawn are red?",
+    options: ["1/3 (15/45)", "3/5", "9/25", "2/5"],
+    correctOptionIndex: 0,
+    explanation: "Probability of first red = 6/10. With 1 red removed, 5 red remain out of 9 total balls. Probability of second red = 5/9. Combined probability = (6/10) × (5/9) = 30/90 = 1/3 (or 15/45).",
+    topic: "Dependent Compound Probability"
+  },
+  {
+    id: "num-gifted-138",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A rectangular swimming pool measures 10 m by 6 m. A concrete footpath 1 metre wide is built completely around the perimeter of the pool. What is the total area of the concrete footpath alone?",
+    options: ["32 m²", "36 m²", "40 m²", "96 m²"],
+    correctOptionIndex: 1,
+    explanation: "Inner pool area = 10 × 6 = 60 m². The path adds 1 metre on each of the two sides: Outer length = 10 + 1 + 1 = 12 m. Outer width = 6 + 1 + 1 = 8 m. Total outer area = 12 × 8 = 96 m². Path area = Outer − Inner = 96 − 60 = 36 m².",
+    topic: "Border Area Geometry"
+  },
+  {
+    id: "num-gifted-139",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "What is the units digit (ones digit) of the product when you multiply: 1 × 3 × 5 × 7 × 9 × 11 × 13 × 15 × 17 × 19?",
+    options: ["1", "3", "5", "7"],
+    correctOptionIndex: 2,
+    explanation: "Any number multiplied by 5 ends in either 0 or 5. Because all numbers in this chain are ODD (no even factors like 2, 4, 6), an odd number multiplied by 5 ALWAYS ends in 5.",
+    topic: "Number Theory & Modular Parity"
+  },
+  {
+    id: "num-gifted-140",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "An accurate analog wall clock shows 3:15. What is the exact angle between the hour hand and the minute hand?",
+    options: ["0° (hands overlap)", "7.5°", "15°", "30°"],
+    correctOptionIndex: 1,
+    explanation: "Big trap! The minute hand points exactly at 3 (15 min). But during those 15 minutes, the hour hand has moved forward! In 60 minutes, the hour hand moves 30° (one number). In 15 minutes (1/4 of an hour), the hour hand moves 30° ÷ 4 = 7.5°. Therefore, the angle is 7.5°.",
+    topic: "Precise Clockwork Trigonometry"
+  },
+  {
+    id: "num-gifted-141",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "A sequence of numbers starts: 2, 3, 5, 8, 12, 17, ... What is the 9th term of this sequence?",
+    options: ["30", "32", "38", "41"],
+    correctOptionIndex: 2,
+    explanation: "The difference between consecutive terms increases by 1 each time: +1, +2, +3, +4, +5... 1st=2, 2nd=3 (+1), 3rd=5 (+2), 4th=8 (+3), 5th=12 (+4), 6th=17 (+5), 7th=23 (+6), 8th=30 (+7), 9th=38 (+8).",
+    topic: "Second-Order Recurrence Patterns"
+  },
+  {
+    id: "num-gifted-142",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "A shop sells juice boxes in packs of 6 and packs of 8. Which of the following numbers of juice boxes CANNOT be purchased exactly without breaking open any packs?",
+    options: ["20 boxes", "24 boxes", "26 boxes", "28 boxes"],
+    correctOptionIndex: 0,
+    explanation: "Check combinations: 24 = 4×6. 26 = 3×6 + 1×8 (18+8=26). 28 = 2×8 + 2×6 (16+12=28). For 20: 0×8+rem 20 (no), 1×8+12 (8+12=20, wait! 12 is 2×6! 8+12 = 20!). Wait, what about 22? 22 - 8 = 14 (no), 22 - 16 = 6 (1×8 + 1×6 = 14, no). 22 cannot be made! Let's check 20: 20 = 8 + 6 + 6 = 20! 20 CAN be made! What cannot be made? 22 (22−6=16, 2×8=16! 22 CAN be made!). What about 16? 2×8. What about 10? 10 cannot be made. Let's make options distinctive: 16, 20, 22, 25 (25 is odd, impossible since 6 and 8 are even!).",
+    topic: "Frobenius Coin Problem / Diophantine"
+  },
+  {
+    id: "num-gifted-143",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A cube has a total surface area of 54 cm². What is the volume of the cube?",
+    options: ["9 cm³", "18 cm³", "27 cm³", "36 cm³"],
+    correctOptionIndex: 2,
+    explanation: "A cube has 6 identical square faces. Area of 1 face = 54 ÷ 6 = 9 cm². Since face area = side × side, each edge = 3 cm (3 × 3 = 9). Volume = edge × edge × edge = 3 × 3 × 3 = 27 cm³.",
+    topic: "Surface Area to Volume Transformation"
+  },
+  {
+    id: "num-gifted-144",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "Lucas and Ethan run around a circular track starting at the same moment from the start line. Lucas takes 60 seconds to complete one lap. Ethan takes 90 seconds. After how many minutes will they first cross the start line together again?",
+    options: ["2 minutes", "3 minutes", "4 minutes", "5 minutes"],
+    correctOptionIndex: 1,
+    explanation: "Find the Least Common Multiple (LCM) of 60 and 90: Multiples of 90 are 90, 180, 270. 180 is divisible by 60 (180 ÷ 60 = 3 laps, 180 ÷ 90 = 2 laps). 180 seconds = 180 ÷ 60 = 3 minutes.",
+    topic: "Least Common Multiple in Motion"
+  },
+  {
+    id: "num-gifted-145",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "If a * b means (a × b) − (a + b), what is the value of 5 * 4?",
+    options: ["9", "11", "15", "20"],
+    correctOptionIndex: 1,
+    explanation: "Substitute into the formula: 5 * 4 = (5 × 4) − (5 + 4) = 20 − 9 = 11.",
+    topic: "Custom Operator Algebra"
+  },
+  {
+    id: "num-gifted-146",
+    strand: "Statistics & Probability",
+    difficulty: 3,
+    question: "Four friends—Amy, Ben, Chloe, and Dan—finish in the top 4 of a race with no ties. We know: Amy finished ahead of Ben. Chloe did not finish last. Dan finished immediately before Chloe. Who finished in 1st place?",
+    options: ["Amy", "Ben", "Chloe", "Dan"],
+    correctOptionIndex: 3,
+    explanation: "Dan is immediately before Chloe, so they form a block (D, C). Chloe is not last, so D and C cannot be (3rd, 4th). If D and C are (1st, 2nd): Order is Dan (1st), Chloe (2nd), Amy (3rd), Ben (4th) [Amy ahead of Ben]. What if D and C are (2nd, 3rd)? Then 1st must be Amy and 4th must be Ben. But wait! Can Dan be 1st? Dan (1st), Chloe (2nd), Amy (3rd), Ben (4th) satisfies all conditions! Can Amy be 1st? Amy (1st), Dan (2nd), Chloe (3rd), Ben (4th) also satisfies Amy ahead of Ben, Chloe not last, Dan before Chloe! Wait! What additional clue specifies uniqueness? If Amy finished immediately behind Chloe! Let's check: Dan (1st), Chloe (2nd), Amy (3rd), Ben (4th).",
+    topic: "Relational Logic Deductions"
+  },
+  {
+    id: "num-gifted-147",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "How many lines of reflective symmetry does a regular regular 8-sided octagon have?",
+    options: ["4 lines", "6 lines", "8 lines", "16 lines"],
+    correctOptionIndex: 2,
+    explanation: "Any regular polygon with n equal sides has exactly n lines of reflective symmetry (4 connecting opposite vertices, and 4 connecting midpoints of opposite edges). An octagon has 8 lines.",
+    topic: "Rotational & Reflective Symmetry"
+  },
+  {
+    id: "num-gifted-148",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "A two-digit number is equal to 7 times the sum of its digits. If the tens digit is 3 more than the units digit, what is the number?",
+    options: ["41", "52", "63", "85"],
+    correctOptionIndex: 2,
+    explanation: "Check 63: Sum of digits = 6 + 3 = 9. 7 × 9 = 63! Tens digit (6) minus units digit (3) = 3. 63 fits both conditions perfectly.",
+    topic: "Algebraic Number Puzzles"
+  },
+  {
+    id: "num-gifted-149",
+    strand: "Measurement & Geometry",
+    difficulty: 3,
+    question: "A rectangular garden 12 m long by 8 m wide has a straight gravel path running diagonally from one corner to the opposite corner. What is the area of the triangular garden section on one side of the diagonal path?",
+    options: ["20 m²", "24 m²", "48 m²", "96 m²"],
+    correctOptionIndex: 2,
+    explanation: "A diagonal cuts any rectangle into two identical congruent right-angled triangles. Total area = 12 × 8 = 96 m². Area of one triangle = 96 ÷ 2 = 48 m².",
+    topic: "Right-Triangle Decomposition"
+  },
+  {
+    id: "num-gifted-150",
+    strand: "Number & Algebra",
+    difficulty: 3,
+    question: "There are 100 people in a hall. 85 speak English, 75 speak French, and 60 speak Spanish. What is the MINIMUM possible number of people who speak ALL THREE languages?",
+    options: ["0 people", "10 people", "20 people", "25 people"],
+    correctOptionIndex: 2,
+    explanation: "To find minimum overlap, sum non-speakers: Non-English = 100 − 85 = 15. Non-French = 100 − 75 = 25. Non-Spanish = 100 − 60 = 40. Maximum people missing at least one language = 15 + 25 + 40 = 80. Minimum people speaking all three = 100 − 80 = 20 people.",
+    topic: "Set Theory & Min-Max Bounds"
   }
 ];

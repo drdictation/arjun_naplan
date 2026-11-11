@@ -1002,7 +1002,7 @@ export default function Home() {
                     className="px-5 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-extrabold text-sm shadow-lg shadow-blue-950/20 transition flex items-center gap-2"
                   >
                     <Calculator className="w-4 h-4 text-blue-200" />
-                    <span>Numeracy Challenge (125 Qs - Band 6+)</span>
+                    <span>Numeracy Challenge (150 Qs - Olympiad / Band 6+)</span>
                   </button>
 
                   <button
