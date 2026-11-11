@@ -1957,5 +1957,951 @@ export const YEAR_3_READING_PASSAGES: ReadingPassage[] = [
         explanation: "To 'trumpet' something means to announce or celebrate it publicly and boastfully."
       }
     ]
+  },
+  // =========================================================================
+  // PASSAGE 24: INFORMATIONAL - SURVIVING THE ICE CONTINENT (Antarctic Research)
+  // =========================================================================
+  {
+    id: "passage-hard-antarctica",
+    title: "Mawson's Frozen Frontier: Life at Casey Station",
+    genre: "Informational",
+    subtitle: "The brutal science and ingenuity required to endure an Antarctic blizzard",
+    estimatedMinutes: 5,
+    introduction: "Read the scientific report below about Australia's research operations in Antarctica, then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Perched on the windswept edge of Vincennes Bay, Casey Station is one of Australia’s permanent outposts on the Antarctic ice cap. In midwinter, temperatures plummet past minus forty degrees Celsius, while katabatic winds—dense, cold air dragged downslope by gravity from the high polar plateau—howl at over two hundred kilometres per hour, blinding the station in scouring whiteouts."
+      },
+      {
+        id: 2,
+        text: "Under such extreme meteorological conditions, human tissue freezes within minutes. To move between sleeping quarters, laboratories, and the meteorological balloon shed, expeditioners clip carabiners onto heavy static guide ropes called 'blizz lines'. If someone loses contact with the line during a sudden whiteout, they can become disoriented only five paces from safety, unable to distinguish sky from ice."
+      },
+      {
+        id: 3,
+        text: "The main living facility, dubbed the 'Red Shed', is suspended on elevated steel stilts high above the rocky ground. This aerodynamic design allows fierce gale winds to funnel cleanly beneath the building rather than colliding against flat walls, preventing monumental snowdrifts from burying doorways and smothering air intake shafts."
+      },
+      {
+        id: 4,
+        text: "Despite the biting isolation, station scientists perform critical planetary health checks: drilling ice cores that trap ancient atmospheric bubbles from eight hundred thousand years ago, monitoring ozone depletion, and tracking emperor penguin colonies by satellite to assess changing sea ice patterns."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-ant-01",
+        passageId: "passage-hard-antarctica",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 1,
+        evidenceQuote: "katabatic winds—dense, cold air dragged downslope by gravity from the high polar plateau",
+        prompt: "According to paragraph 1, what physical force generates katabatic winds in Antarctica?",
+        options: [
+          "Ocean waves crashing against the ice shelves",
+          "Gravity pulling dense, frigid air down steep slopes from the polar plateau",
+          "Solar flares warming the upper atmosphere",
+          "Magnetic attraction around the South Pole"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The text explains that katabatic winds occur when gravity drags dense cold air downslope from the high polar plateau."
+      },
+      {
+        id: "rq-ant-02",
+        passageId: "passage-hard-antarctica",
+        cognitiveSkill: "Inference",
+        paragraphRef: 2,
+        evidenceQuote: "unable to distinguish sky from ice.",
+        prompt: "Why is a 'whiteout' described as so perilous for an expeditioner caught outside without a blizz line?",
+        options: [
+          "The static ropes attract dangerous lightning strikes",
+          "Extreme wind and snow erase all visual horizon and shadows, causing total spatial disorientation",
+          "Penguins attack humans who lose their footing",
+          "The ice instantly cracks into deep crevasses"
+        ],
+        correctOptionIndex: 1,
+        explanation: "In a whiteout, diffuse light and flying snow obliterate contrast, making it impossible to see where ground ends and sky begins."
+      },
+      {
+        id: "rq-ant-03",
+        passageId: "passage-hard-antarctica",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 3,
+        evidenceQuote: "This aerodynamic design allows fierce gale winds to funnel cleanly beneath the building",
+        prompt: "What primary architectural problem does elevating the Red Shed on steel stilts solve?",
+        options: [
+          "It keeps polar bears from climbing inside the windows",
+          "It prevents giant snowdrifts from accumulating and burying doors or choking air vents",
+          "It provides space underneath to park aeroplanes",
+          "It absorbs earthquakes caused by moving glaciers"
+        ],
+        correctOptionIndex: 1,
+        explanation: "By letting wind rush underneath the building, snow cannot pack against the walls to block exits or air shafts."
+      },
+      {
+        id: "rq-ant-04",
+        passageId: "passage-hard-antarctica",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 4,
+        evidenceQuote: "drilling ice cores that trap ancient atmospheric bubbles from eight hundred thousand years ago",
+        prompt: "What evidence trapped inside deep Antarctic ice cores allows scientists to study Earth's historical climate?",
+        options: [
+          "Fossilised penguin bones preserved in ice",
+          "Microscopic pockets of ancient atmospheric gas bubbles",
+          "Frozen volcanic ash from meteorite impacts",
+          "Ancient tree seeds buried under glaciers"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 4 explicitly notes that ice cores trap ancient atmospheric bubbles dating back 800,000 years."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 25: NARRATIVE - THE DEEP TRENCH GLIDER
+  // =========================================================================
+  {
+    id: "passage-hard-trench",
+    title: "Voyage into the Abyss",
+    genre: "Narrative",
+    subtitle: "A tense descent into the deepest trench of the Indian Ocean",
+    estimatedMinutes: 5,
+    introduction: "Read the suspenseful underwater story below, then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "The titanium pressure sphere of the submersible Deep Hunter groggily creaked as it passed four thousand metres below sea level. Outside the quartz viewing port, daylight had vanished kilometres above into an absolute, suffocating void. Ayla adjusted her oxygen regulators, monitoring the telemetry screens while Captain Tariq adjusted the buoyancy thrusters."
+      },
+      {
+        id: 2,
+        text: "At six thousand metres inside the Diamantina Fracture Zone, the pressure outside reached six hundred atmospheres—equivalent to the weight of fifty jumbo jets stacked onto a single person. Suddenly, the sonar beacon pinged erratically. A sharp alarm shrilled from the starboard ballast manifold: 'Hydraulic Pressure Drop 18%'."
+      },
+      {
+        id: 3,
+        text: "‘Secondary seals are warping under the cold,’ Tariq said, his voice clipped but remarkably level. ‘If the hydraulic fluid thickens to gel, the buoyancy weights won't release. We’ll be tethered to the sea floor forever.’ Ayla didn't panic. Recalling her engineering drills, she reached for the manual bypass lever located behind the primary pilot console, using a steel cheater bar to give her small hands leverage."
+      },
+      {
+        id: 4,
+        text: "With a grinding metallic thud that shuddered through the entire hull, the mechanical emergency pins severed. Three tons of iron drop-weights detached into the abyss. Deep Hunter immediately tilted upward, accelerating toward the warmth of the sunlit surface as both pilots released a long, trembling breath."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-tre-01",
+        passageId: "passage-hard-trench",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 1,
+        evidenceQuote: "daylight had vanished kilometres above into an absolute, suffocating void.",
+        prompt: "In paragraph 1, what does the phrase 'suffocating void' emphasize about the deep-ocean environment?",
+        options: [
+          "The air inside the submarine was polluted",
+          "The overwhelming, total blackness and terrifying emptiness of the deep water",
+          "The ocean had run out of liquid water",
+          "Fish were swarming against the porthole glass"
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Suffocating void' describes complete sensory darkness and the crushing, desolate nature of deep ocean trenches."
+      },
+      {
+        id: "rq-tre-02",
+        passageId: "passage-hard-trench",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 2,
+        evidenceQuote: "equivalent to the weight of fifty jumbo jets stacked onto a single person.",
+        prompt: "Why did the author use the comparison to 'fifty jumbo jets'?",
+        options: [
+          "To explain how airplanes are transported across oceans",
+          "To provide a dramatic, relatable comparison showing the immense physical water pressure",
+          "To suggest the submarine was built from aeroplane parts",
+          "To hint that an aircraft had crashed into the trench"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Comparing 600 atmospheres of pressure to 50 stacked jets helps young readers conceptualize extreme force."
+      },
+      {
+        id: "rq-tre-03",
+        passageId: "passage-hard-trench",
+        cognitiveSkill: "Inference",
+        paragraphRef: 3,
+        evidenceQuote: "using a steel cheater bar to give her small hands leverage.",
+        prompt: "Why did Ayla use a steel cheater bar on the manual bypass lever?",
+        options: [
+          "To break the viewing window",
+          "To multiply her physical strength so she could turn a frozen, high-resistance mechanical valve",
+          "To fend off deep-sea creatures",
+          "To test the electrical wiring for shorts"
+        ],
+        correctOptionIndex: 1,
+        explanation: "A cheater bar extends a lever arm, providing mechanical advantage (leverage) to overcome heavy resistance."
+      },
+      {
+        id: "rq-tre-04",
+        passageId: "passage-hard-trench",
+        cognitiveSkill: "Main Idea",
+        paragraphRef: 4,
+        evidenceQuote: "Three tons of iron drop-weights detached into the abyss. Deep Hunter immediately tilted upward",
+        prompt: "What fundamental scientific principle allowed the submarine to escape the sea floor?",
+        options: [
+          "Dropping heavy ballast reduced the sub's mass, making its overall density lower than the water and creating positive buoyancy",
+          "The engines burned rocket fuel to push against gravity",
+          "Magnetic fields pulled the titanium sphere to the surface",
+          "Warmer water pushed the sub like a bubble"
+        ],
+        correctOptionIndex: 0,
+        explanation: "Releasing drop-weights makes the vessel lighter than the displaced water, triggering positive buoyant rise."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 26: PERSUASIVE - CITIES OF SPONGE: BANISHING FLASH FLOODS
+  // =========================================================================
+  {
+    id: "passage-hard-sponge",
+    title: "Cities of Sponge: Transforming Concrete into Nature",
+    genre: "Persuasive",
+    subtitle: "Why paving our suburbs in concrete is a disastrous 19th-century mistake",
+    estimatedMinutes: 5,
+    introduction: "Read this urban planning opinion article, evaluating the author's logic and evidence.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Whenever a tropical thunderstorm breaks over our modern cities, millions of litres of rain strike impermeable bitumen roads, concrete driveways, and corrugated tin roofs. Unable to soak into the earth, this deluge rushes into storm drains like an express train, overwhelming gutters and triggering catastrophic flash floods across low-lying suburbs."
+      },
+      {
+        id: 2,
+        text: "For over a century, urban planners treated rainwater as a nuisance to be evacuated as fast as concrete tunnels would permit. This philosophy is backwards. By paving over every patch of topsoil, we starve groundwater aquifers, superheat our streets during summer heatwaves, and flush toxic tire pollutants directly into clean rivers."
+      },
+      {
+        id: 3,
+        text: "The solution is the 'Sponge City' model. Rather than funneling stormwater away, towns should be re-engineered to absorb, cleanse, and reuse rainfall. Permeable interlocking pavers allow water to trickle through footpaths. Sunken community rain gardens planted with native sedges filter road oils naturally while retaining flood surges."
+      },
+      {
+        id: 4,
+        text: "Critics complain that replacing asphalt with wetlands and porous pavement is financially burdensome. Yet the cost of retrofitting urban catchments is trivial compared to paying hundreds of millions in disaster recovery after every predictable flood. It is time we stopped fighting rain and invited it back into the soil."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-spg-01",
+        passageId: "passage-hard-sponge",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 1,
+        evidenceQuote: "millions of litres of rain strike impermeable bitumen roads",
+        prompt: "What does the word 'impermeable' mean as used in paragraph 1?",
+        options: [
+          "Cracked and full of holes",
+          "Not allowing liquid to pass through or soak in",
+          "Extremely expensive to build",
+          "Painted with reflective bright colors"
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Impermeable' describes substances (like concrete or bitumen) through which fluids cannot penetrate."
+      },
+      {
+        id: "rq-spg-02",
+        passageId: "passage-hard-sponge",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 2,
+        evidenceQuote: "urban planners treated rainwater as a nuisance to be evacuated as fast as concrete tunnels would permit.",
+        prompt: "How does the author critique historical drainage design in paragraph 2?",
+        options: [
+          "By praising the builders of underground drains",
+          "By showing that rushing stormwater into pipes creates worse downstream problems like aquifer depletion and river pollution",
+          "By proving that concrete tunnels never leak",
+          "By arguing that roads should never be built near rivers"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The author points out that traditional drainage dries out aquifers and flushes toxic runoff into rivers."
+      },
+      {
+        id: "rq-spg-03",
+        passageId: "passage-hard-sponge",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 3,
+        evidenceQuote: "Sunken community rain gardens planted with native sedges filter road oils naturally while retaining flood surges.",
+        prompt: "According to paragraph 3, what double benefit do sunken rain gardens provide?",
+        options: [
+          "They grow fruits for supermarkets and block wind",
+          "They filter harmful oils with native plants while storing excess flood water",
+          "They provide parking spaces during summer droughts",
+          "They replace electricity wires underground"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 3 explicitly states rain gardens filter road oils naturally and retain storm surges."
+      },
+      {
+        id: "rq-spg-04",
+        passageId: "passage-hard-sponge",
+        cognitiveSkill: "Main Idea",
+        paragraphRef: 4,
+        evidenceQuote: "the cost of retrofitting urban catchments is trivial compared to paying hundreds of millions in disaster recovery",
+        prompt: "How does the author rebut the financial argument against Sponge Cities?",
+        options: [
+          "By arguing that building sponge infrastructure is cheaper than repeatedly paying for catastrophic flood recovery",
+          "By asking residents to donate money directly",
+          "By suggesting that private insurance companies pay for road repairs",
+          "By recommending people move away from cities"
+        ],
+        correctOptionIndex: 0,
+        explanation: "The author demonstrates that preventative sponge infrastructure costs far less than perpetual disaster cleanup."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 27: POEM - THE BLACKSMITH'S SPARK
+  // =========================================================================
+  {
+    id: "passage-hard-blacksmith",
+    title: "The Song of the Anvil",
+    genre: "Poem",
+    subtitle: "Rhythm, heat, and metal craft in an old pioneer forge",
+    estimatedMinutes: 4,
+    introduction: "Read the rhythmic poem below about a historic forge. Note rhyme scheme and auditory imagery.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "The leather bellows wheeze and blow,\nTo nurse the slumbering hearth aglow;\nA serpent's breath of ember sparks,\nLeaps up against the rafters dark,\nWhere charcoal sighs and iron bleeds,\nTo answer humankind’s rough needs."
+      },
+      {
+        id: 2,
+        text: "Clutched in the tongs, a scarlet bar,\nAs fiery as a fallen star;\nIt meets the anvil’s polished cheek,\nWith ring and chiming, fierce and bleak!\nThe heavy sledge strikes stroke for stroke,\nAmid a swirling shroud of smoke."
+      },
+      {
+        id: 3,
+        text: "Then plunging in the quenching tub,\nWith angry hiss and boiling scrub,\nThe steam bursts forth in ghostly white,\nTo cool the metal from the night:\nA horseshoe curved, an axle true,\nForged from the flame and born anew."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-bs-01",
+        passageId: "passage-hard-blacksmith",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 1,
+        evidenceQuote: "Where charcoal sighs and iron bleeds,",
+        prompt: "What poetic device is used in the line 'Where charcoal sighs and iron bleeds'?",
+        options: [
+          "Personification",
+          "Hyperbole",
+          "Onomatopoeia",
+          "Limerick"
+        ],
+        correctOptionIndex: 0,
+        explanation: "Giving human traits (sighing, bleeding) to inanimate materials (charcoal, iron) is personification."
+      },
+      {
+        id: "rq-bs-02",
+        passageId: "passage-hard-blacksmith",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 2,
+        evidenceQuote: "A scarlet bar, / As fiery as a fallen star;",
+        prompt: "Why is the iron bar described as 'scarlet' and 'as fiery as a fallen star'?",
+        options: [
+          "It has been painted with bright red enamel",
+          "It has been heated white-hot and glowing red in the forge fire",
+          "It fell from an asteroid outside the shop",
+          "It was carved from red cedar timber"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Metals heated to forge temperatures glow bright cherry-red to yellow, radiating intense heat."
+      },
+      {
+        id: "rq-bs-03",
+        passageId: "passage-hard-blacksmith",
+        cognitiveSkill: "Inference",
+        paragraphRef: 3,
+        evidenceQuote: "Then plunging in the quenching tub, / With angry hiss and boiling scrub,",
+        prompt: "What is the purpose of plunging the hot iron into the 'quenching tub' filled with water?",
+        options: [
+          "To wash away dirty coal dust",
+          "To rapidly cool the glowing metal, locking its forged shape and hardening the steel",
+          "To extinguish an accidental floor fire",
+          "To test if the metal will float"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Quenching is a metallurgy process where rapid cooling in water hardens shaped iron."
+      },
+      {
+        id: "rq-bs-04",
+        passageId: "passage-hard-blacksmith",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 3,
+        evidenceQuote: "A horseshoe curved, an axle true, / Forged from the flame and born anew.",
+        prompt: "What two practical objects were created by the blacksmith in stanza 3?",
+        options: [
+          "A sword and a shield",
+          "A horseshoe and a wagon axle",
+          "A cooking pot and a door key",
+          "A ship anchor and a fishing hook"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Stanza 3 concludes by naming 'a horseshoe curved, an axle true'."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 28: INFORMATIONAL - MYCORRHIZAL NETWORKS: THE WOOD WIDE WEB
+  // =========================================================================
+  {
+    id: "passage-hard-fungi",
+    title: "The Wood Wide Web: Underground Fungal Networks",
+    genre: "Informational",
+    subtitle: "How microscopic forest fungi trade nutrients and transmit chemical warnings",
+    estimatedMinutes: 5,
+    introduction: "Read the biological study below detailing underground forest communication.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "When walking through a quiet eucalyptus forest, trees appear as solitary pillars competing against one another for sunlight and rain. Beneath the damp soil, however, lies an astonishing cooperative network. Thread-like fungal structures called hyphae intertwine with tree roots, forming symbiotic partnerships known as mycorrhizal networks."
+      },
+      {
+        id: 2,
+        text: "This biological highway is not charitable; it is a sophisticated trade marketplace. Trees cannot absorb phosphorus and nitrogen efficiently from rocky dirt, while fungi lack leaves to perform photosynthesis. Through this subterranean exchange, trees supply fungi with carbon sugars in return for vital minerals gathered by fungal filaments across vast forest floors."
+      },
+      {
+        id: 3,
+        text: "Even more extraordinary is the network’s communication capacity. When caterpillars attack a gum tree’s foliage, the wounded tree pulses biochemical warning signals through the fungal grid to neighboring trees. Warned in advance of the advancing pests, nearby trees immediately pump bitter tannins and protective toxins into their leaves before a single caterpillar crawls onto their branches."
+      },
+      {
+        id: 4,
+        text: "Old, mature trees—frequently called 'Mother Trees' by forest ecologists—act as central network hubs. If a young seedling germinates in deep understory shade without adequate sunlight, connected Mother Trees channel life-saving carbon directly into the sapling's root system, keeping it alive until a canopy gap opens."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-fun-01",
+        passageId: "passage-hard-fungi",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 1,
+        evidenceQuote: "forming symbiotic partnerships known as mycorrhizal networks.",
+        prompt: "What does the word 'symbiotic' mean in biological terms?",
+        options: [
+          "A relationship where one organism kills another for food",
+          "A mutually beneficial relationship where both organisms rely upon and aid each other",
+          "An artificial chemical added by human farmers",
+          "A disease that rots tree leaves"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Symbiosis describes cooperative ecological interactions where both species gain mutual advantage."
+      },
+      {
+        id: "rq-fun-02",
+        passageId: "passage-hard-fungi",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 2,
+        evidenceQuote: "trees supply fungi with carbon sugars in return for vital minerals gathered by fungal filaments",
+        prompt: "According to paragraph 2, what exact trade occurs between trees and fungi?",
+        options: [
+          "Trees give shade, while fungi provide water droplets",
+          "Trees provide carbon sugars from photosynthesis, while fungi provide phosphorus and nitrogen minerals",
+          "Trees provide seeds, while fungi provide flowers",
+          "Trees provide oxygen, while fungi provide carbon dioxide"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Trees manufacture sugars via photosynthesis to trade for minerals fungi extract from rock and soil."
+      },
+      {
+        id: "rq-fun-03",
+        passageId: "passage-hard-fungi",
+        cognitiveSkill: "Inference",
+        paragraphRef: 3,
+        evidenceQuote: "nearby trees immediately pump bitter tannins and protective toxins into their leaves before a single caterpillar crawls onto their branches.",
+        prompt: "What strategic advantage do neighboring trees gain from underground chemical warning signals?",
+        options: [
+          "They can drop their leaves to sleep through winter",
+          "They can preemptively produce defensive toxins so invading pests find their leaves unpalatable and toxic",
+          "They can grow taller than the infected tree",
+          "They can attract birds to eat the caterpillars"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Receiving advance warning allows trees to synthetically produce defensive chemicals before caterpillars arrive."
+      },
+      {
+        id: "rq-fun-04",
+        passageId: "passage-hard-fungi",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 4,
+        evidenceQuote: "connected Mother Trees channel life-saving carbon directly into the sapling's root system",
+        prompt: "Why does the author refer to mature trees as 'Mother Trees' in paragraph 4?",
+        options: [
+          "Because they are the only trees that produce fruit",
+          "To highlight their nurturing ecological role in sustaining young seedlings through shared resources",
+          "Because they are physically shaped like human mothers",
+          "To indicate that they will soon fall over"
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Mother Trees' metaphorically highlights their nurturing role supporting vulnerable saplings in the understory."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 29: NARRATIVE - THE AVALANCHE DOG OF MOUNT KOSCIUSZKO
+  // =========================================================================
+  {
+    id: "passage-hard-avalanche",
+    title: "Scent on the Snow: Blitz at Charlotte Pass",
+    genre: "Narrative",
+    subtitle: "A search-and-rescue team races against freezing seconds in the Snowy Mountains",
+    estimatedMinutes: 5,
+    introduction: "Read the dramatic alpine story below, then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "The siren atop the Mount Kosciuszko ranger station cut through the howling blizzard with shrill urgency. A massive snow cornice had collapsed above Club Lake, triggering a category-three avalanche that swept two backcountry snowboarders down the cirque. Ski Patrol Officer Elena strapped the GPS transponder collar around Blitz, an athletic German Shepherd with razor-sharp working instincts."
+      },
+      {
+        id: 2,
+        text: "At the debris zone, the snowfield resembled a violent ocean of shattered ice boulders frozen mid-churn. Wind screamed at sixty knots, whipping ice crystals into Elena’s goggles. Conventional avalanche beacons were returning garbled interference from the fractured granite cliffs. ‘Find them, Blitz! Search!’ Elena commanded, unhooking his harness."
+      },
+      {
+        id: 3,
+        text: "Blitz didn't rely on sight or technology; he pressed his black nose inches from the powdery crust, weaving in zigzag quadrants across the slope. His olfactory receptors—over two hundred million times more sensitive than a human's—could pinpoint faint human scent particles percolating through two metres of compressed snowpack."
+      },
+      {
+        id: 4,
+        text: "Four minutes into the search, Blitz halted on a down-slope wind-drift, his ears snapping forward. He let out a sharp, piercing bark, then began frantic, piston-like digging with his front paws. Elena skied over instantly, sinking an aluminium avalanche probe into the drift. At 1.4 metres, the tip struck soft nylon. ‘Strike!’ Elena shouted to the shoveling crew. Blitz's nose had found life in the freezing dark."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-ava-01",
+        passageId: "passage-hard-avalanche",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 2,
+        evidenceQuote: "the snowfield resembled a violent ocean of shattered ice boulders frozen mid-churn.",
+        prompt: "What does the metaphor 'a violent ocean of shattered ice boulders frozen mid-churn' illustrate?",
+        options: [
+          "The avalanche had dumped liquid salt water over the mountain",
+          "The chaotic, turbulent, and dangerous texture of compressed avalanche debris",
+          "A calm frozen lake suitable for ice skating",
+          "Snow that had completely melted away"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The vivid metaphor describes the violent, jumbled piles of compacted snow blocks following a slide."
+      },
+      {
+        id: "rq-ava-02",
+        passageId: "passage-hard-avalanche",
+        cognitiveSkill: "Inference",
+        paragraphRef: 2,
+        evidenceQuote: "Conventional avalanche beacons were returning garbled interference from the fractured granite cliffs.",
+        prompt: "Why was Blitz's role so essential during this rescue operation?",
+        options: [
+          "The rescue helicopters had run out of fuel",
+          "Electronic transceiver beacons were malfunctioning due to granite cliff interference, leaving scent tracking as the sole hope",
+          "Snowboarders do not carry backpacks",
+          "Dogs can run faster downhill than skis"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Because electronics suffered geological interference, Blitz's olfactory tracking was the only viable location method."
+      },
+      {
+        id: "rq-ava-03",
+        passageId: "passage-hard-avalanche",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 3,
+        evidenceQuote: "weaving in zigzag quadrants across the slope. His olfactory receptors—over two hundred million times more sensitive than a human's",
+        prompt: "How did Blitz search the slope to locate trapped humans under snowpack?",
+        options: [
+          "By digging holes randomly every ten metres",
+          "By running in circles around Elena's skis",
+          "By executing disciplined zigzag sweeps using powerful olfactory scent detection",
+          "By barking loudly to listen for human voices"
+        ],
+        correctOptionIndex: 2,
+        explanation: "Paragraph 3 explains Blitz systematically worked in zigzag quadrants using his 200-million olfactory receptors."
+      },
+      {
+        id: "rq-ava-04",
+        passageId: "passage-hard-avalanche",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 4,
+        evidenceQuote: "At 1.4 metres, the tip struck soft nylon. ‘Strike!’ Elena shouted to the shoveling crew.",
+        prompt: "In search-and-rescue terminology, what does shouting 'Strike!' signify?",
+        options: [
+          "A lightning bolt hit the mountain",
+          "The search probe made physical contact with a buried victim, confirming their exact location",
+          "The searchers are going on strike and stopping work",
+          "A clock chimed the hour"
+        ],
+        correctOptionIndex: 1,
+        explanation: "A 'strike' in avalanche rescue confirms the probe has touched a trapped person's gear under the snow."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 30: INFORMATIONAL - MARS ROVER SAMPLE DRILLING: JEZERO CRATER
+  // =========================================================================
+  {
+    id: "passage-hard-mars",
+    title: "Probing Ancient Lakes on Mars: The Perseverance Rover",
+    genre: "Informational",
+    subtitle: "How robotic geologists core rocks millions of kilometres from Earth",
+    estimatedMinutes: 5,
+    introduction: "Read this planetary science article about exploration on the Red Planet.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "More than two hundred million kilometres across interplanetary vacuum, a six-wheeled robotic scientist named Perseverance crawls across the rust-red gravel of Jezero Crater on Mars. Billions of years ago, when Mars maintained a dense atmosphere and warm climate, Jezero was a shimmering lake fed by a rushing river that deposited a sprawling sediment delta."
+      },
+      {
+        id: 2,
+        text: "Sedimentary mudstones and clay layers are prime targets for astrobiologists because on Earth, ancient lakebeds frequently preserve fossilized micro-organisms called biosignatures. To extract pristine samples, Perseverance wields a two-metre robotic arm tipped with a percussive rotary drill that hammers diamond-toothed bits into bedrock without lubricating water."
+      },
+      {
+        id: 3,
+        text: "Once a rock core the size of a stick of chalk is hollowed out, the rover inspects the core with microscopic cameras and spectroscopic lasers to ensure sample integrity. It then seals the specimen inside a hermetically welded titanium tube and drops it onto the Martian surface as part of a distributed sample depot for a future international return mission."
+      },
+      {
+        id: 4,
+        text: "Because radio signals take between five and twenty minutes to travel between Earth and Mars, human engineers in California cannot drive the rover with joysticks. Instead, Perseverance relies on autonomous navigation algorithms, calculating its own hazard-free pathways across boulder fields using dual stereo vision."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-mar-01",
+        passageId: "passage-hard-mars",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 1,
+        evidenceQuote: "Jezero was a shimmering lake fed by a rushing river that deposited a sprawling sediment delta.",
+        prompt: "Why was Jezero Crater chosen as the landing site for the Perseverance rover?",
+        options: [
+          "It contains the highest active volcano in the solar system",
+          "It is an ancient dried lakebed and river delta where water once flowed and sediments accumulated",
+          "It is the only flat landing area on Mars with liquid water today",
+          "Astronauts built a base there twenty years ago"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 1 states Jezero was an ancient lake fed by a river delta, making it ideal for finding fossil biosignatures."
+      },
+      {
+        id: "rq-mar-02",
+        passageId: "passage-hard-mars",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 2,
+        evidenceQuote: "ancient lakebeds frequently preserve fossilized micro-organisms called biosignatures.",
+        prompt: "What does the scientific term 'biosignature' mean?",
+        options: [
+          "The signature autograph of the mission commander",
+          "Any chemical or physical evidence providing proof of past or present microscopic life",
+          "The blueprint schematics of the rover's computer circuits",
+          "The brand name of the rover's titanium drill bits"
+        ],
+        correctOptionIndex: 1,
+        explanation: "A biosignature is definitive scientific evidence indicating the former presence of biological life."
+      },
+      {
+        id: "rq-mar-03",
+        passageId: "passage-hard-mars",
+        cognitiveSkill: "Inference",
+        paragraphRef: 4,
+        evidenceQuote: "Because radio signals take between five and twenty minutes to travel between Earth and Mars, human engineers in California cannot drive the rover with joysticks.",
+        prompt: "Why must Perseverance utilize autonomous self-driving algorithms rather than real-time remote control?",
+        options: [
+          "Mars gravity breaks joystick cables",
+          "The vast distance between planets creates a communications time lag of up to 20 minutes, making live steering impossible",
+          "NASA engineers do not know how to steer cars",
+          "The rover's wheels are controlled by Martian wind"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Speed-of-light delays (5-20 min each way) mean commands sent by human drivers would arrive too late to dodge hazards."
+      },
+      {
+        id: "rq-mar-04",
+        passageId: "passage-hard-mars",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 3,
+        evidenceQuote: "drops it onto the Martian surface as part of a distributed sample depot for a future international return mission.",
+        prompt: "What long-term plan justifies leaving sealed titanium sample tubes scattered across Jezero Crater?",
+        options: [
+          "To test whether Martian dust will rust titanium",
+          "To allow a future planned spacecraft mission to collect the tubes and fly them back to Earth laboratories",
+          "To lighten the rover so it can climb steeper hills",
+          "To mark territorial borders between nations"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The sealed tubes form a collection cache intended for retrieval by a future Mars Sample Return spacecraft."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 31: PERSUASIVE - BAN DIGITAL SMARTPHONES IN PRIMARY CLASSROOMS
+  // =========================================================================
+  {
+    id: "passage-hard-screens",
+    title: "Reclaiming the Classroom: The Case for Screen-Free Schools",
+    genre: "Persuasive",
+    subtitle: "Why smartphones are cognitive poison to eight-year-old attention spans",
+    estimatedMinutes: 5,
+    introduction: "Read this editorial regarding educational policy, noting rhetorical appeals and counter-evidence.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Walk through any playground where mobile devices are unregulated, and you will witness an eerie, silent tableaux: children huddled over illuminated screens, thumbing algorithmic dopamine loops instead of chasing handballs, climbing monkey bars, or inventing imaginative playground games. The evidence is now indisputable: personal smartphones must be prohibited in primary schools."
+      },
+      {
+        id: 2,
+        text: "Proponents of digital devices argue that early technology exposure prepares eight-year-olds for the modern workforce. This argument collapses under basic scrutiny. Learning to swipe a touchscreen requires zero engineering skill; it is passive consumption explicitly designed by Silicon Valley psychologists to be addictive and frictionless."
+      },
+      {
+        id: 3,
+        text: "Cognitive science reveals that deep reading and complex problem-solving require sustained, uninterrupted focus. Even when a phone sits silently inside a school bag, brain imaging proves that a child’s working memory is fractured as their subconscious mind anticipates notifications. Removing devices restores neural bandwidth for reading, empathy, and creative play."
+      },
+      {
+        id: 4,
+        text: "Schools should be sanctums of human connection, tactile exploration, and focused inquiry. By enforcing bell-to-bell phone bans, we liberate our children from continuous digital anxiety and return them to the joys of authentic childhood."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-scr-01",
+        passageId: "passage-hard-screens",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 1,
+        evidenceQuote: "you will witness an eerie, silent tableaux: children huddled over illuminated screens",
+        prompt: "What tone does the phrase 'eerie, silent tableaux' establish in the opening paragraph?",
+        options: [
+          "Joyful celebration of modern computers",
+          "Unsettling, ghostly concern about the unnatural loss of playful child energy",
+          "Scientific neutrality with numerical data",
+          "Boredom with playground games"
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Eerie, silent tableaux' conveys a spooky, abnormal atmosphere contrasting with lively normal schoolyard noises."
+      },
+      {
+        id: "rq-scr-02",
+        passageId: "passage-hard-screens",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 2,
+        evidenceQuote: "Learning to swipe a touchscreen requires zero engineering skill; it is passive consumption",
+        prompt: "How does the author counter the claim that early smartphone use trains kids for future tech careers?",
+        options: [
+          "By explaining that modern computers do not have screens",
+          "By distinguishing between consuming pre-packaged apps and actual computer engineering skills",
+          "By proving that tech companies do not hire people who owned phones",
+          "By arguing that books teach coding faster than laptops"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The author points out that swiping social feeds is passive consumption rather than learning coding or engineering."
+      },
+      {
+        id: "rq-scr-03",
+        passageId: "passage-hard-screens",
+        cognitiveSkill: "Inference",
+        paragraphRef: 3,
+        evidenceQuote: "Even when a phone sits silently inside a school bag, brain imaging proves that a child’s working memory is fractured",
+        prompt: "What scientific claim about working memory is highlighted in paragraph 3?",
+        options: [
+          "Silent phones emit poisonous radiation into school bags",
+          "The mere physical presence of a phone consumes subconscious attention and diminishes mental focus",
+          "Children forget their locker combinations when phones are off",
+          "Working memory only functions when looking at paper"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Research demonstrates that anticipating messages fractures cognitive capacity even when devices are muted."
+      },
+      {
+        id: "rq-scr-04",
+        passageId: "passage-hard-screens",
+        cognitiveSkill: "Main Idea",
+        paragraphRef: 4,
+        evidenceQuote: "Schools should be sanctums of human connection, tactile exploration, and focused inquiry.",
+        prompt: "What is the author's ultimate vision for primary school environments?",
+        options: [
+          "Replacing teachers with video tutorials",
+          "Spaces protected from digital noise where children engage in hands-on exploration and interpersonal connection",
+          "Schools where children only speak during lunch breaks",
+          "Classrooms where all writing is done on stone slates"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The conclusion argues schools should be protected spaces fostering tactile inquiry and deep human connections."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 32: INFORMATIONAL - BIOLUMINESCENT GLOW WORMS OF WAITOMO CAVES
+  // =========================================================================
+  {
+    id: "passage-hard-glowworm",
+    title: "Living Constellations in the Underworld",
+    genre: "Informational",
+    subtitle: "The carnivorous light traps of Arachnocampa luminosa",
+    estimatedMinutes: 5,
+    introduction: "Read this natural history account of cave-dwelling bioluminescence, then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Stepping inside the subterranean limestone caverns of Waitomo, New Zealand, visitors enter a pitch-black cathedral carved by subterranean rivers over millions of years. Glancing up at the cavern ceiling reveals what appears to be a starry night sky studded with thousands of celestial turquoise stars. These lights are not astronomical—they are the predatory lures of bioluminescent fly larvae."
+      },
+      {
+        id: 2,
+        text: "The fungus gnat larva (Arachnocampa luminosa) builds a horizontal mucus nest on the cave roof, from which it dangles up to seventy silk fishing lines. Each sticky silk filament, measuring up to forty centimetres long, is beaded with droplet beads of adhesive glue laced with mild sedative compounds."
+      },
+      {
+        id: 3,
+        text: "In its tail organ, the larva mixes an enzyme called luciferase with a molecule called luciferin in the presence of oxygen. This biochemical reaction produces 'cold light' with almost one hundred percent efficiency, converting all energy into blue-green illumination with zero waste heat. Plumed mayflies and river moths emerging from cave pools mistake the glowing constellation for open starlight, fly upward toward safety, and snare themselves hopelessly in the sticky silk lines."
+      },
+      {
+        id: 4,
+        text: "The hungrier a glowworm becomes, the brighter its tail organ glows to tempt prey faster. If gentle breezes or cave tourists create vibrations, larvae dim their lights synchronously to avoid attracting larger predatory cave spiders, demonstrating remarkable sensory awareness in the eternal dark."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-glo-01",
+        passageId: "passage-hard-glowworm",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 1,
+        evidenceQuote: "Glancing up at the cavern ceiling reveals what appears to be a starry night sky studded with thousands of celestial turquoise stars.",
+        prompt: "Why does the author open the text with the illusion of 'a starry night sky'?",
+        options: [
+          "To prove that the cave roof had collapsed open to the real night sky",
+          "To establish a captivating visual contrast between an astronomical appearance and biological reality",
+          "To suggest that tourists visit the caves at midnight",
+          "To explain why telescopes are stored inside limestone caverns"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The comparison vividly portrays how millions of glowing larvae create the optical illusion of a starry galaxy."
+      },
+      {
+        id: "rq-glo-02",
+        passageId: "passage-hard-glowworm",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 3,
+        evidenceQuote: "converts all energy into blue-green illumination with zero waste heat.",
+        prompt: "What makes the biochemical reaction of 'cold light' in glowworms scientifically remarkable?",
+        options: [
+          "It freezes the surrounding air into icicles",
+          "It produces light at almost 100% efficiency without wasting energy as thermal heat",
+          "It requires electricity from batteries",
+          "It only glows when bathed in salt water"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 3 notes luciferase reactions produce cold light with almost 100% efficiency without waste heat."
+      },
+      {
+        id: "rq-glo-03",
+        passageId: "passage-hard-glowworm",
+        cognitiveSkill: "Inference",
+        paragraphRef: 3,
+        evidenceQuote: "mistake the glowing constellation for open starlight, fly upward toward safety, and snare themselves",
+        prompt: "How does the glowworm exploit natural insect navigation instincts to catch food?",
+        options: [
+          "It produces a sweet floral perfume that smells like honey",
+          "Cave insects navigating toward what they think is an outdoor night exit fly into the trap lines",
+          "It shouts clicking soundwaves that stun prey",
+          "It mimics the appearance of a queen fly"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Moths instinctively fly toward light sources to find cave exits, leading them straight into dangling silk snares."
+      },
+      {
+        id: "rq-glo-04",
+        passageId: "passage-hard-glowworm",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 4,
+        evidenceQuote: "The hungrier a glowworm becomes, the brighter its tail organ glows to tempt prey faster.",
+        prompt: "What biological factor causes an individual glowworm to increase the intensity of its glow?",
+        options: [
+          "Feeling threatened by cave tourists",
+          "High levels of hunger, motivating it to lure food more urgently",
+          "Drinking mineral water dripping from stalactites",
+          "Mating season among adult flies"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 4 explains that increased hunger triggers the larva to glow brighter to draw prey quickly."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 33: NARRATIVE - THE LIGHTHOUSE OF GABO ISLAND
+  // =========================================================================
+  {
+    id: "passage-hard-gabo",
+    title: "Keepers of the Crimson Beam: Gabo Island",
+    genre: "Narrative",
+    subtitle: "A wild gale batters the pink granite sentinel of Bass Strait",
+    estimatedMinutes: 5,
+    introduction: "Read the historical maritime adventure below, focusing on character actions and atmospheric stakes.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Off the southeastern tip of Victoria, Gabo Island is a windswept slab of rose-pink granite besieged by the tempestuous cross-currents of Bass Strait and the Tasman Sea. For seventy years, the red-domed lighthouse had warned maritime vessels away from razor-sharp reef ledges. On an icy August evening in 1898, a barometric storm plunged the barometer down to unprecedented lows."
+      },
+      {
+        id: 2,
+        text: "Inside the stone tower, fourteen-year-old Callan hauled a brass jug of kerosene up the spiral iron stairs, his calf muscles screaming after ninety-six steps. Above in the lantern room, his father, Head Keeper Douglas, was frantically wiping condensation from the multi-ton revolving Fresnel lens. Suddenly, a deafening snap echoed through the tower: the counterweight rope driving the clockwork mechanism had frayed and sheared!"
+      },
+      {
+        id: 3,
+        text: "The monumental glass lens ground to an abrupt halt, fixing its piercing beam upon a single patch of ocean. ‘If the light stops rotating, approaching steamships will mistake us for a coastal fishing smudge!’ Douglas yelled over the gale. ‘Callan, grab the emergency crank lever!’"
+      },
+      {
+        id: 4,
+        text: "For four agonizing hours in the freezing lantern room, father and son took turns turning the manual bevel gears by hand, matching their cadence to the rhythmic ticking of a pocket watch to keep the lens spinning at exactly two revolutions per minute. Just past midnight, through the gale-lashed spray, the horn of the coastal freighter SS Ly-ee-Moon sounded three long blasts—acknowledging the spinning beacon that had steered them safely past the reefs."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-gab-01",
+        passageId: "passage-hard-gabo",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 1,
+        evidenceQuote: "a windswept slab of rose-pink granite besieged by the tempestuous cross-currents",
+        prompt: "What does the word 'besieged' indicate about Gabo Island's situation?",
+        options: [
+          "It was under military attack by enemy battleships",
+          "It was constantly attacked, pounded, and surrounded by violent ocean currents and rough seas",
+          "It was completely underwater during high tide",
+          "It was crowded with tourists"
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Besieged' metaphorically conveys how ferocious winds and ocean waves relentlessly hammer the isolated granite island."
+      },
+      {
+        id: "rq-gab-02",
+        passageId: "passage-hard-gabo",
+        cognitiveSkill: "Inference",
+        paragraphRef: 3,
+        evidenceQuote: "If the light stops rotating, approaching steamships will mistake us for a coastal fishing smudge!",
+        prompt: "Why was a stationary, non-rotating beam of light dangerous to passing steamships?",
+        options: [
+          "It would blind the lighthouse keepers",
+          "Ships relied on specific flash cadences to identify navigational hazard lights; a static light looks like an insignificant campsite or boat lantern",
+          "A stationary lens overheats and catches fire instantly",
+          "The glass would crack from sea salt"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Navigational charts assign unique rotation flash intervals; an unmoving glow fails to warn ships of rocky headlands."
+      },
+      {
+        id: "rq-gab-03",
+        passageId: "passage-hard-gabo",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 4,
+        evidenceQuote: "matching their cadence to the rhythmic ticking of a pocket watch to keep the lens spinning at exactly two revolutions per minute.",
+        prompt: "How did Callan and his father maintain the correct rotational speed while manually cranking the lens?",
+        options: [
+          "By singing sea shanties together",
+          "By synchronizing their manual cranking rhythm to the ticking seconds of a pocket watch",
+          "By counting ocean waves crashing against the rocks",
+          "By watching the speed of passing clouds"
+        ],
+        correctOptionIndex: 1,
+        explanation: "They calibrated their manual turning to a pocket watch to sustain exactly 2 revolutions per minute."
+      },
+      {
+        id: "rq-gab-04",
+        passageId: "passage-hard-gabo",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 4,
+        evidenceQuote: "the coastal freighter SS Ly-ee-Moon sounded three long blasts—acknowledging the spinning beacon",
+        prompt: "What function does the three-blast horn signal serve in the story's resolution?",
+        options: [
+          "It signals that the ship has run aground on the reefs",
+          "It provides emotional validation and proof that their grueling physical effort saved sailors from maritime disaster",
+          "It warns the lighthouse that pirates are approaching",
+          "It signals that the storm has completely cleared"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The steam whistle confirms that the ship saw the warning beam, validating the duo's exhausting heroics."
+      }
+    ]
   }
 ];
