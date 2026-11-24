@@ -3191,5 +3191,625 @@ export const YEAR_3_READING_PASSAGES: ReadingPassage[] = [
         explanation: "The entire argument contends de-extinction is a misleading distraction actively harming real-world biodiversity protection."
       }
     ]
+  },
+  // =========================================================================
+  // PASSAGE 37: GRANDMASTER NARRATIVE - THE CLOCKMAKER'S APPRENTICE
+  // Subtext, unreliable pride, subtle irony, nuanced emotional shift
+  // =========================================================================
+  {
+    id: "passage-grandmaster-clockmaker",
+    title: "The Second Hand’s Debt",
+    genre: "Narrative",
+    subtitle: "Precision, pride, and an unspoken correction in a 1920s horology workshop",
+    estimatedMinutes: 6,
+    introduction: "Read this short story closely. Pay attention to what is implied rather than stated directly, then answer the questions.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Master Vance never raised his voice; he merely laid his brass loupe beside a flawed movement and walked to the window. For six months, sixteen-year-old Julian had endured that silence. Today, however, Julian placed the repaired carriage clock on the green baize mat with a brisk, unmistakable tap. Every jewel bearing had been burnished, every gear tooth cleared of dried oil. He waited for the rare nod that separated an apprentice from a journeyman."
+      },
+      {
+        id: 2,
+        text: "Vance did not pick up the loupe. Instead, he drew a silver pocket watch from his waistcoat, set it beside the carriage clock, and watched both sweep hands cross the twelve. For four minutes the two timepieces marched in apparent unison. Julian’s shoulders slackened with premature relief. Then Vance lifted the carriage clock’s brass casing and tilted it gently onto its left flank."
+      },
+      {
+        id: 3,
+        text: "Inside, the escapement’s crisp tick faltered—a fractional stutter, scarcely audible over the rain tapping the leaded panes. ‘On a flat bench, even mediocre work flatters its maker,’ Vance remarked without looking up. ‘A gentleman carries his watch in his pocket, and a traveller sets his clock on an uneven berth. Gravity is an impartial examiner.’"
+      },
+      {
+        id: 4,
+        text: "Heat rose into Julian’s collar, though not from anger alone. He had polished the visible plates until they shone like mirrors while leaving the balance staff’s lower pivot microscopically worn. Reaching out, Julian slid the clock back across the baize, lifted the loupe himself, and unscrewed the bezel. At the window, Master Vance allowed the faintest crease beside his eye to soften before turning back to the rain."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-clk-01",
+        passageId: "passage-grandmaster-clockmaker",
+        cognitiveSkill: "Inference",
+        paragraphRef: 1,
+        evidenceQuote: "Julian placed the repaired carriage clock on the green baize mat with a brisk, unmistakable tap.",
+        prompt: "What does the manner in which Julian sets the clock down reveal about his mindset at the start of the scene?",
+        options: [
+          "He is exhausted and carelessly drops the fragile timepiece",
+          "He is quietly confident and eager to have his finished work formally acknowledged",
+          "He is trying to wake Master Vance who has fallen asleep by the window",
+          "He is frustrated with Master Vance and intends to quit his apprenticeship"
+        ],
+        correctOptionIndex: 1,
+        explanation: "A 'brisk, unmistakable tap' paired with waiting for 'the rare nod that separated an apprentice from a journeyman' signals proud assurance and anticipation of praise."
+      },
+      {
+        id: "rq-clk-02",
+        passageId: "passage-grandmaster-clockmaker",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 3,
+        evidenceQuote: "‘On a flat bench, even mediocre work flatters its maker,’ Vance remarked without looking up.",
+        prompt: "What does Vance mean by saying mediocre work 'flatters its maker' on a flat bench?",
+        options: [
+          "Flat surfaces make brass plates shine more brightly under workshop lamps",
+          "Ideal, controlled conditions can disguise hidden flaws, creating an undeserved sense of success",
+          "Apprentices only learn properly when they build workbenches themselves",
+          "Clocks keep better time when placed next to a pocket watch"
+        ],
+        correctOptionIndex: 1,
+        explanation: "On a level bench, the worn pivot was not stressed; tilting the clock exposed a defect hidden by easy test conditions."
+      },
+      {
+        id: "rq-clk-03",
+        passageId: "passage-grandmaster-clockmaker",
+        cognitiveSkill: "Inference",
+        paragraphRef: 4,
+        evidenceQuote: "He had polished the visible plates until they shone like mirrors while leaving the balance staff’s lower pivot microscopically worn.",
+        prompt: "Why does heat rise into Julian’s collar in paragraph 4?",
+        options: [
+          "The workshop stove beside the window has been stoked too high",
+          "He feels ashamed because he prioritized outward appearance over hidden mechanical integrity",
+          "He believes Vance tilted the clock unfairly to break the escapement",
+          "He realizes he forgot to wind the clock before the four-minute test"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Julian’s embarrassment stems from recognizing his shortcut—making the visible parts gleam while neglecting an unseen structural flaw."
+      },
+      {
+        id: "rq-clk-04",
+        passageId: "passage-grandmaster-clockmaker",
+        cognitiveSkill: "Inference",
+        paragraphRef: 4,
+        evidenceQuote: "Master Vance allowed the faintest crease beside his eye to soften before turning back to the rain.",
+        prompt: "Why does Vance’s expression soften at the very end of the story?",
+        options: [
+          "He finally notices that the storm outside is clearing",
+          "He sees Julian accept the flaw without excuses and immediately begin fixing it",
+          "He realizes his own silver pocket watch was actually running fast",
+          "He decides to forgive the defect because the brass plates are shiny"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Julian picking up the loupe himself shows maturity and humility—the exact character Vance values more than instant perfection."
+      },
+      {
+        id: "rq-clk-05",
+        passageId: "passage-grandmaster-clockmaker",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 3,
+        evidenceQuote: "Gravity is an impartial examiner.",
+        prompt: "In this context, why is gravity described as 'impartial'?",
+        options: [
+          "It pulls heavier clocks down faster than lighter pocket watches",
+          "It tests every mechanism strictly according to physical truth, without bias or mercy",
+          "It only affects timepieces built in the 1920s",
+          "It prevents apprentices from hearing the ticking of an escapement"
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Impartial' means fair and unbiased; gravity exposes defects regardless of how hard the maker tried or how polished the outside looks."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 38: GRANDMASTER INFORMATIONAL - THE ANTIKYTHERA MECHANISM
+  // Complex mechanical synthesis, counterfactual reasoning, evidence limits
+  // =========================================================================
+  {
+    id: "passage-grandmaster-antikythera",
+    title: "Bronze Gears Beneath the Aegean: The Antikythera Enigma",
+    genre: "Informational",
+    subtitle: "How a lump of corroded bronze upended our timeline of ancient engineering",
+    estimatedMinutes: 6,
+    introduction: "Read this archaeological and scientific passage carefully. Many answer options are partially true—select the one that matches the text most precisely.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "In 1901, sponge divers sheltering from a Mediterranean gale off the Greek island of Antikythera stumbled upon a Roman-era shipwreck littered with marble statues. Among the haul lay an unremarkable, barnacle-encrusted lump of green bronze roughly the size of a shoebox. For months it sat neglected in a museum storeroom until a dry crack split the casing, revealing precision-cut triangular gear teeth inside—an artefact historians initially dismissed as an impossible anachronism."
+      },
+      {
+        id: 2,
+        text: "For decades, scholars assumed mechanical clockwork of that sophistication did not emerge until fourteenth-century European cathedral clocks. Yet three-dimensional X-ray tomography eventually penetrated the calcified crust of the Antikythera Mechanism, mapping thirty surviving bronze gears dating to roughly 100 BCE. Far from keeping daily hours, the device functioned as a hand-cranked analog astronomical computer."
+      },
+      {
+        id: 3,
+        text: "By turning a single side handle, an operator could dial any date and read off the positions of the Sun and Moon, predict lunar and solar eclipses, and even track the four-year cycle of the ancient Olympic Games. Most astonishingly, a miniature pin-and-slot gear train reproduced the Moon’s irregular apparent speed across the sky—accelerating and decelerating in an elliptical orbit centuries before Johannes Kepler formally described elliptical planetary motion."
+      },
+      {
+        id: 4,
+        text: "Paradoxically, no comparable geared instrument survives from the following millennium. Whether the knowledge required to machine such epicyclic gears vanished in political upheaval, or whether countless similar bronze devices were simply melted down into weapons and coins by later empires, remains one of archaeology’s most tantalizing silences."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-antk-01",
+        passageId: "passage-grandmaster-antikythera",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 1,
+        evidenceQuote: "an artefact historians initially dismissed as an impossible anachronism.",
+        prompt: "Why did historians initially call the geared bronze lump an 'impossible anachronism'?",
+        options: [
+          "Bronze corrodes too quickly in seawater to survive from Roman times",
+          "Its precision gears appeared to belong to a much later historical era than the ancient shipwreck",
+          "Greek sponge divers had fabricated the gears to sell to museums",
+          "The shoebox-sized case contained modern cathedral clock hands"
+        ],
+        correctOptionIndex: 1,
+        explanation: "An anachronism is something placed outside its proper historical time; scholars believed such complex gearing didn't exist until the 1300s."
+      },
+      {
+        id: "rq-antk-02",
+        passageId: "passage-grandmaster-antikythera",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 2,
+        evidenceQuote: "Far from keeping daily hours, the device functioned as a hand-cranked analog astronomical computer.",
+        prompt: "Which statement accurately contrasts the Antikythera Mechanism with fourteenth-century cathedral clocks?",
+        options: [
+          "The Antikythera Mechanism used X-ray tomography, whereas cathedral clocks used bronze",
+          "Cathedral clocks measured daily time, whereas the Antikythera Mechanism modelled celestial cycles and dates",
+          "Cathedral clocks had thirty surviving gears, whereas the Antikythera Mechanism had only one handle",
+          "Both devices were built primarily to time the ancient Olympic Games"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 2 explicitly notes the device did not keep daily hours—it computed astronomical positions and cycles."
+      },
+      {
+        id: "rq-antk-03",
+        passageId: "passage-grandmaster-antikythera",
+        cognitiveSkill: "Inference",
+        paragraphRef: 3,
+        evidenceQuote: "reproduced the Moon’s irregular apparent speed across the sky—accelerating and decelerating in an elliptical orbit",
+        prompt: "What does the pin-and-slot gear train prove about the ancient Greek makers of the mechanism?",
+        options: [
+          "They read Johannes Kepler's books before designing the bronze gears",
+          "They could mathematically observe and mechanically mimic complex celestial irregularities long before modern orbital laws were written",
+          "They believed the Moon travelled at a perfectly constant speed around Earth",
+          "They powered the device using water wheels aboard Roman ships"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Even without Kepler's formal laws, ancient engineers tracked the Moon's varying speed and engineered a mechanical variable-speed gear to match it."
+      },
+      {
+        id: "rq-antk-04",
+        passageId: "passage-grandmaster-antikythera",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 4,
+        evidenceQuote: "remains one of archaeology’s most tantalizing silences.",
+        prompt: "Why does the author offer two competing explanations in paragraph 4 without choosing one?",
+        options: [
+          "Because X-ray scanners broke before inspecting the remaining gears",
+          "To acknowledge honestly that surviving physical evidence cannot yet settle why such devices disappear from the record",
+          "To prove that later empires hated astronomy and destroyed all books",
+          "To argue that the Antikythera Mechanism was actually built by aliens"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Scientific honesty requires distinguishing between two plausible hypotheses (lost knowledge vs. melted metal) when evidence is absent."
+      },
+      {
+        id: "rq-antk-05",
+        passageId: "passage-grandmaster-antikythera",
+        cognitiveSkill: "Main Idea",
+        paragraphRef: 1,
+        evidenceQuote: "Among the haul lay an unremarkable, barnacle-encrusted lump of green bronze",
+        prompt: "Which title best captures the central irony running through the entire passage?",
+        options: [
+          "How Sponge Divers Became Famous Museum Curators",
+          "Why Roman Marble Statues Are Worth More Than Bronze",
+          "An Overlooked Scrap of Wreckage That Rewrote Engineering History",
+          "The Invention of Cathedral Clocks in Ancient Greece"
+        ],
+        correctOptionIndex: 2,
+        explanation: "The passage contrasts how the device was ignored as an unremarkable green lump yet proved to be a revolutionary ancient computer."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 39: GRANDMASTER PERSUASIVE - THE ILLUSION OF THE "CLEAN" DESK
+  // Subtle argument, qualified concessions, distinguishing correlation vs causation
+  // =========================================================================
+  {
+    id: "passage-grandmaster-messy-desk",
+    title: "In Defence of Creative Clutter",
+    genre: "Persuasive",
+    subtitle: "Why obsessing over spotless workspaces can quietly suffocate original thought",
+    estimatedMinutes: 6,
+    introduction: "Analyze this essay carefully. Look closely at how the author handles counterarguments and avoids extreme claims.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Productivity gurus routinely photograph minimalist desks: a bare slab of oak, a single fountain pen aligned parallel to a closed notebook, and not a stray sticky note in sight. Neatness is preached as a moral virtue, as though straightening paperclips automatically straightens one’s mind. Yet there is a quiet tyranny in demanding sterile order from work that is inherently exploratory."
+      },
+      {
+        id: 2,
+        text: "To be clear, no sensible thinker defends rotting apple cores or lost invoices; genuine chaos wastes time. Productive clutter is something altogether different—an externalized map of active curiosity. When an architect spreads sketches beside mineral samples and dog-eared history books, those overlapping objects trigger unexpected mental collisions. Putting every reference neatly away inside a drawer does not merely tidy the room; it severs visual links before an original idea can spark."
+      },
+      {
+        id: 3,
+        text: "Controlled psychology experiments support this distinction. When participants were assigned problem-solving tasks in either an immaculate room or a moderately disordered one, both groups generated equal numbers of ideas. However, independent judges rated the ideas from the cluttered room as markedly more inventive and willing to break convention, while the spotless room nudged thinkers toward safe, traditional choices."
+      },
+      {
+        id: 4,
+        text: "Efficiency experts confuse tidiness with depth because an empty desk looks photogenic and finished. Real discovery rarely begins finished. If a child’s bedroom table is buried under half-built Lego bridges, folded paper gliders, and open encyclopaedias, adults should hesitate before issuing an ultimatum to clear it away—they might be sweeping up tomorrow’s breakthrough."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-dsk-01",
+        passageId: "passage-grandmaster-messy-desk",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 2,
+        evidenceQuote: "To be clear, no sensible thinker defends rotting apple cores or lost invoices; genuine chaos wastes time.",
+        prompt: "What rhetorical purpose does this sentence serve at the start of paragraph 2?",
+        options: [
+          "It changes the author's mind and agrees with minimalist productivity gurus",
+          "It establishes a reasonable boundary so readers do not dismiss the argument as an excuse for laziness or filth",
+          "It criticizes architects for eating lunch while working with mineral samples",
+          "It proves that lost invoices are the main cause of poor school grades"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Making a qualified concession (distinguishing productive clutter from unhygienic chaos) makes the main argument much harder to attack."
+      },
+      {
+        id: "rq-dsk-02",
+        passageId: "passage-grandmaster-messy-desk",
+        cognitiveSkill: "Inference",
+        paragraphRef: 3,
+        evidenceQuote: "both groups generated equal numbers of ideas. However, independent judges rated the ideas from the cluttered room as markedly more inventive",
+        prompt: "What subtle nuance does the psychology experiment in paragraph 3 reveal?",
+        options: [
+          "Cluttered rooms make people work twice as fast and produce double the ideas",
+          "Neat rooms prevent people from thinking of any ideas at all",
+          "Clutter did not increase the quantity of ideas, but shifted their quality toward originality over convention",
+          "Judges preferred cluttered rooms because they contained better fountain pens"
+        ],
+        correctOptionIndex: 2,
+        explanation: "Both rooms produced the SAME number of ideas (quantity), so the difference was purely in originality and convention-breaking (quality)."
+      },
+      {
+        id: "rq-dsk-03",
+        passageId: "passage-grandmaster-messy-desk",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 1,
+        evidenceQuote: "there is a quiet tyranny in demanding sterile order from work that is inherently exploratory.",
+        prompt: "Why does the author use the strong phrase 'quiet tyranny' in paragraph 1?",
+        options: [
+          "To compare messy desks to violent ancient kings",
+          "To criticize how rigid expectations of neatness unfairly control and restrict creative thinking",
+          "To complain that productivity gurus speak too softly in videos",
+          "To show that fountain pens are dangerous if left uncapped"
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Quiet tyranny' captures an oppressive, unspoken rule that forces creative work into rigid uniformity."
+      },
+      {
+        id: "rq-dsk-04",
+        passageId: "passage-grandmaster-messy-desk",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 4,
+        evidenceQuote: "Efficiency experts confuse tidiness with depth because an empty desk looks photogenic and finished.",
+        prompt: "According to paragraph 4, what mistake do efficiency experts make?",
+        options: [
+          "They mistake the neat appearance of completion for actual intellectual progress",
+          "They spend too much money buying oak desks and notebooks",
+          "They believe Lego bridges are better than paper gliders",
+          "They refuse to let children read encyclopaedias"
+        ],
+        correctOptionIndex: 0,
+        explanation: "The author contrasts superficial visual neatness ('photogenic and finished') with genuine messy exploration ('depth')."
+      },
+      {
+        id: "rq-dsk-05",
+        passageId: "passage-grandmaster-messy-desk",
+        cognitiveSkill: "Main Idea",
+        paragraphRef: 2,
+        evidenceQuote: "Productive clutter is something altogether different—an externalized map of active curiosity.",
+        prompt: "Which statement best summarizes the author’s central claim?",
+        options: [
+          "All schools and offices should ban drawers and filing cabinets immediately",
+          "Visible collections of active work materials can stimulate creative connections that forced tidiness suppresses",
+          "Only architects and children benefit from leaving objects on their desks",
+          "Minimalist desks always cause people to lose important invoices"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The essay defends visible, active work materials as creative catalysts rather than endorsing total mess."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 40: GRANDMASTER POEM - THE CARTOGRAPHER'S MARGIN
+  // Extended metaphor, enjambment, shifting tone from certainty to humility
+  // =========================================================================
+  {
+    id: "passage-grandmaster-cartographer",
+    title: "The Cartographer’s Margin",
+    genre: "Poem",
+    subtitle: "Where inked coastlines end and uncharted sea begins",
+    estimatedMinutes: 5,
+    introduction: "Read this poem carefully, paying attention to how the speaker's attitude toward maps changes from stanza 1 to stanza 3.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "With dividers of brass and ink dark as gall,\nI caged the wild capes on a parchment wall,\nTurned breakers to stipples, and reefs into line,\nTill half of the hemisphere answered as mine."
+      },
+      {
+        id: 2,
+        text: "Yet out past the compass rose, cleanly ruled,\nThe vellum stayed blank where the currents pooled—\nNo sea-beast with scales, as the elders drew,\nJust white space admitting how little I knew."
+      },
+      {
+        id: 3,
+        text: "A line cannot anchor a shifting shoal,\nNor gridlines imprison the ocean’s roll;\nMy proudest achievement, I learn tonight,\nIs leaving the edge of the paper white."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-crt-01",
+        passageId: "passage-grandmaster-cartographer",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 1,
+        evidenceQuote: "I caged the wild capes on a parchment wall,",
+        prompt: "What does the verb 'caged' suggest about how the cartographer initially viewed mapmaking?",
+        options: [
+          "He trapped wild birds along coastal cliffs",
+          "He felt drawing boundaries gave him mastery and control over untamed nature",
+          "He locked his parchment maps inside an iron box",
+          "He thought oceans were smaller than prison cells"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paired with 'answered as mine', 'caged' conveys hubris—the illusion of capturing and taming the wild world through ink."
+      },
+      {
+        id: "rq-crt-02",
+        passageId: "passage-grandmaster-cartographer",
+        cognitiveSkill: "Inference",
+        paragraphRef: 2,
+        evidenceQuote: "No sea-beast with scales, as the elders drew, / Just white space admitting how little I knew.",
+        prompt: "How does the speaker contrast himself with 'the elders' who drew sea-beasts on old maps?",
+        options: [
+          "The elders were better artists who saw real sea monsters",
+          "Earlier mapmakers filled their ignorance with mythical creatures, whereas the speaker leaves blank space as an honest confession of limits",
+          "The speaker ran out of ink before he could finish drawing the sea-beasts",
+          "The elders refused to use brass dividers or compass roses"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Old maps hid unknown waters behind imagined monsters; leaving the margin blank represents intellectual honesty."
+      },
+      {
+        id: "rq-crt-03",
+        passageId: "passage-grandmaster-cartographer",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 3,
+        evidenceQuote: "A line cannot anchor a shifting shoal,",
+        prompt: "What truth about the physical world does the line 'A line cannot anchor a shifting shoal' express?",
+        options: [
+          "Rope lines on ships break easily in shallow water",
+          "A static drawing on paper cannot freeze or permanently control a living, ever-changing landscape",
+          "Mapmakers should use heavier anchors when sailing near sandbars",
+          "Shoals of fish always swim outside map gridlines"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Sandbars ('shoals') shift with tides; ink lines on parchment only represent a temporary snapshot, not permanent mastery."
+      },
+      {
+        id: "rq-crt-04",
+        passageId: "passage-grandmaster-cartographer",
+        cognitiveSkill: "Main Idea",
+        paragraphRef: 3,
+        evidenceQuote: "My proudest achievement, I learn tonight, / Is leaving the edge of the paper white.",
+        prompt: "How does the speaker’s attitude shift by the final two lines of the poem?",
+        options: [
+          "From careful patience to bitter regret about wasting parchment",
+          "From boastful certainty about owning the globe to humble pride in acknowledging the unknown",
+          "From fear of sea monsters to anger at older mapmakers",
+          "From boredom with geometry to excitement about sailing away"
+        ],
+        correctOptionIndex: 1,
+        explanation: "In stanza 1, half the hemisphere 'answered as mine'; by stanza 3, true wisdom lies in honesty about what remains unmapped."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 41: GRANDMASTER INFORMATIONAL - THE GREAT EMU WAR OF 1932
+  // Satirical/dry tone, nuanced historical cause-and-effect, avoiding exaggeration
+  // =========================================================================
+  {
+    id: "passage-grandmaster-emu",
+    title: "Feathers Against Field Guns: Western Australia, 1932",
+    genre: "Informational",
+    subtitle: "When a disciplined army detachment met an unexpectedly agile foe",
+    estimatedMinutes: 6,
+    introduction: "Read this historical account closely, noticing both the practical military challenges and the dry humour in the narration.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "Following the First World War, thousands of Australian veterans were settled on marginal wheat farms in Western Australia’s Campion district. By October 1932, a severe drought coincided with the annual inland migration of roughly twenty thousand emus. Drawn by newly cleared paddocks and standing farm dams, the flightless birds flattened rabbit-proof fences, trampled ripening grain, and inadvertently invited rabbits through the breached wire."
+      },
+      {
+        id: 2,
+        text: "Desperate farmers petitioned the Minister of Defence—rather than the Minister for Agriculture—requesting machine-gun support. Major G.P.W. Meredith of the Seventh Heavy Battery was duly dispatched with two soldiers, two Lewis automatic guns, and ten thousand rounds of ammunition. On paper, the mismatch appeared comedic; in practice, the emus proved vexingly uncooperative."
+      },
+      {
+        id: 3,
+        text: "On the first major ambush, the soldiers waited near a dam hoping to herd a flock of roughly a thousand birds into point-blank range. Just as the gunners opened fire, the Lewis gun jammed, and the flock instantaneously fractured into dozens of erratic, sprinting subgroups that vanished into thick scrub at fifty kilometres per hour. Even when struck, thick plumage and heavy muscle allowed many birds to sprint out of range before collapsing."
+      },
+      {
+        id: 4,
+        text: "Mounting a gun onto a swaying flatbed truck proved equally futile when rough paddock furrows pitched the gunner off balance faster than the truck could match an emu’s stride. After six weeks, Meredith’s detachment withdrew having expended nearly ten thousand rounds for fewer than a thousand confirmed birds. Parliamentarians wryly noted that if awards were distributed, the emus had won every round—yet the episode quietly forced authorities to invest instead in sturdier, higher exclusion fencing, which ultimately solved what artillery could not."
+      }
+    ],
+    questions: [
+      {
+        id: "rq-emu-01",
+        passageId: "passage-grandmaster-emu",
+        cognitiveSkill: "Direct Retrieval",
+        paragraphRef: 1,
+        evidenceQuote: "the flightless birds flattened rabbit-proof fences, trampled ripening grain, and inadvertently invited rabbits through the breached wire.",
+        prompt: "Why did the emu migration create a double agricultural crisis for Campion wheat farmers?",
+        options: [
+          "Emus ate all the farm dams dry and chased away veteran soldiers",
+          "The birds crushed crops directly and knocked down fences, allowing rabbits to invade as well",
+          "Emus taught rabbits how to jump over rabbit-proof fences",
+          "The drought killed the emus before farmers could harvest their feathers"
+        ],
+        correctOptionIndex: 1,
+        explanation: "In addition to trampling wheat, breaking the fences created gaps that let rabbits into the paddocks."
+      },
+      {
+        id: "rq-emu-02",
+        passageId: "passage-grandmaster-emu",
+        cognitiveSkill: "Vocabulary in Context",
+        paragraphRef: 2,
+        evidenceQuote: "On paper, the mismatch appeared comedic; in practice, the emus proved vexingly uncooperative.",
+        prompt: "What contrast does the author draw with the phrase 'On paper, the mismatch appeared comedic'?",
+        options: [
+          "Newspaper cartoons made fun of the farmers' handwriting",
+          "Soldiers with automatic weapons seemed guaranteed an absurdly easy victory, yet field conditions turned the tables",
+          "Major Meredith forgot to bring the written instructions for his Lewis guns",
+          "Emus looked funny on posters, though they were actually dangerous predators"
+        ],
+        correctOptionIndex: 1,
+        explanation: "'On paper' means theoretically; armed soldiers versus birds looked one-sided, yet in reality the birds outmanoeuvred them."
+      },
+      {
+        id: "rq-emu-03",
+        passageId: "passage-grandmaster-emu",
+        cognitiveSkill: "Inference",
+        paragraphRef: 3,
+        evidenceQuote: "the flock instantaneously fractured into dozens of erratic, sprinting subgroups",
+        prompt: "Why did splitting into small, erratic subgroups defeat the advantage of the Lewis automatic guns?",
+        options: [
+          "Automatic guns can only fire effectively at tightly packed targets, not scattered fast-moving individuals in dense scrub",
+          "The soldiers refused to shoot when emus ran in small groups",
+          "Splitting up caused the Lewis guns to run out of water cooling",
+          "Small groups of emus were able to fly over the scrub"
+        ],
+        correctOptionIndex: 0,
+        explanation: "Rapid-fire area weapons lose efficiency when a dense flock scatters unpredictably at 50 km/h into cover."
+      },
+      {
+        id: "rq-emu-04",
+        passageId: "passage-grandmaster-emu",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 4,
+        evidenceQuote: "yet the episode quietly forced authorities to invest instead in sturdier, higher exclusion fencing, which ultimately solved what artillery could not.",
+        prompt: "What is the deeper historical takeaway presented in the closing sentence?",
+        options: [
+          "Armies should train gunners on smoother trucks before fighting wildlife",
+          "Practical infrastructure and engineering succeeded where blunt military force failed",
+          "Parliamentarians awarded medals to Major Meredith after six weeks",
+          "Western Australian wheat farms were permanently abandoned after 1932"
+        ],
+        correctOptionIndex: 1,
+        explanation: "The final contrast ('solved what artillery could not') highlights how engineered exclusion fencing worked where gunfire failed."
+      }
+    ]
+  },
+  // =========================================================================
+  // PASSAGE 42: GRANDMASTER NARRATIVE - THE PAPER LANTERN'S WEIGHT
+  // Subtle moral dilemma, unspoken social pressure, inferential resolution
+  // =========================================================================
+  {
+    id: "passage-grandmaster-lantern",
+    title: "The Unclaimed Signature",
+    genre: "Narrative",
+    subtitle: "A quiet choice after the regional science fair judging ends",
+    estimatedMinutes: 6,
+    introduction: "Read this story carefully. None of the characters shout or argue, so pay close attention to small gestures and unspoken motives.",
+    paragraphs: [
+      {
+        id: 1,
+        text: "By five o’clock, the gymnasium smelled of poster glue and damp wool. Most tri-fold boards had already been packed into station wagons, leaving only the finalist table gleaming beneath the fluorescent hum. Beside Tariq’s solar-distillation model sat a glossy crimson ribbon stamped 'First Place — Engineering'. Across the aisle, Clara was carefully wrapping her cracked clay water-filter in newspaper, her movements economical and unhurried."
+      },
+      {
+        id: 2,
+        text: "Three days earlier, when Tariq’s condenser coil had split during final testing, it was Clara who had stayed past the library bell to lend him copper tubing from her spare kit—and pointed out the exact angle that stopped steam from escaping. On the entry card beneath his model, however, only Tariq’s name appeared. Neither of them had discussed credit; at the time, there had seemed nothing to win."
+      },
+      {
+        id: 3,
+        text: "Now Mrs Patel, the regional coordinator, approached with a clipboard and a silver fountain pen. ‘Splendid efficiency on the condenser slope, Tariq,’ she beamed, ticking a box beside the state finals slot. ‘One signature on the solo-entrant line, and we’ll register your kit for Melbourne.’ Clara did not glance up from her newspaper knots, though her thumb paused briefly over the string."
+      },
+      {
+        id: 4,
+        text: "Tariq looked at the blank solo-entrant line, then at the slight crease in Clara’s shoulders. Taking the silver pen, he uncapped it, set it gently back onto the clipboard without writing, and cleared his throat. ‘Actually, Mrs Patel,’ he said, his voice steadier than his pulse, ‘the solo line won’t fit both our names. Could we use a team form instead?’"
+      }
+    ],
+    questions: [
+      {
+        id: "rq-lnt-01",
+        passageId: "passage-grandmaster-lantern",
+        cognitiveSkill: "Inference",
+        paragraphRef: 2,
+        evidenceQuote: "Neither of them had discussed credit; at the time, there had seemed nothing to win.",
+        prompt: "Why does the narrator mention that 'there had seemed nothing to win' three days earlier?",
+        options: [
+          "To show that Clara only helped Tariq because she expected half of a cash prize",
+          "To explain how the omission of Clara's name happened innocently during troubleshooting, rather than through deliberate theft",
+          "To prove that the science fair judges had cancelled the Melbourne finals",
+          "To show that Tariq's model did not actually work until after the fair"
+        ],
+        correctOptionIndex: 1,
+        explanation: "When Tariq's project was broken, they were simply solving a problem together; winning first place later turned that casual omission into an ethical test."
+      },
+      {
+        id: "rq-lnt-02",
+        passageId: "passage-grandmaster-lantern",
+        cognitiveSkill: "Author Craft",
+        paragraphRef: 3,
+        evidenceQuote: "Clara did not glance up from her newspaper knots, though her thumb paused briefly over the string.",
+        prompt: "What does Clara’s tiny pause over the string reveal to the reader?",
+        options: [
+          "She has forgotten how to tie a knot in the newspaper",
+          "She heard Mrs Patel praise the exact condenser design she helped fix, and feels a quiet sting even though she stays dignified",
+          "She is waiting to ask Mrs Patel for a spare silver fountain pen",
+          "She is angry at Tariq and is about to interrupt Mrs Patel"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Her outward composure ('did not glance up') contrasted with the involuntary pause of her thumb shows she noticed the unfairness without making a scene."
+      },
+      {
+        id: "rq-lnt-03",
+        passageId: "passage-grandmaster-lantern",
+        cognitiveSkill: "Inference",
+        paragraphRef: 4,
+        evidenceQuote: "his voice steadier than his pulse",
+        prompt: "What does the phrase 'his voice steadier than his pulse' indicate about Tariq’s decision?",
+        options: [
+          "He is physically ill from breathing poster glue fumes all afternoon",
+          "Giving up solo recognition makes him nervous, yet he chooses integrity calmly and deliberately",
+          "He is confident Mrs Patel will refuse his request and let him go alone",
+          "He has been running around the gymnasium before Mrs Patel arrived"
+        ],
+        correctOptionIndex: 1,
+        explanation: "His racing pulse shows the real emotional cost of speaking up, while his steady voice shows resolve."
+      },
+      {
+        id: "rq-lnt-04",
+        passageId: "passage-grandmaster-lantern",
+        cognitiveSkill: "Main Idea",
+        paragraphRef: 4,
+        evidenceQuote: "the solo line won’t fit both our names. Could we use a team form instead?",
+        prompt: "Which statement best captures the central conflict resolved in the story?",
+        options: [
+          "Deciding whether solar distillation is better than clay water filtration",
+          "Choosing between effortless personal glory and honest recognition of shared effort",
+          "Convincing a regional coordinator to extend the library closing bell",
+          "Repairing a broken condenser coil minutes before judging starts"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Tariq faces no external accusation—his struggle is internal: whether to accept unearned solo credit or speak up for Clara."
+      }
+    ]
   }
 ];
